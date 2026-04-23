@@ -347,6 +347,41 @@
         "input_text_color": ""
       }
     },
+    "media_with_text_RYGNwi": {
+      "type": "media-with-text",
+      "blocks": {
+        "image_Ni4b93": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/image_18.webp",
+            "media_width": 50,
+            "media_position": "start",
+            "text_position": "place-self-center text-center",
+            "icon": "none",
+            "icon_width": 48,
+            "subheading": "",
+            "title": "30-DAY MONEY-BACK GUARANTEE",
+            "content": "<p>We love our products and are confident that you will too! That’s why we offer a <strong>30-day money-back guarantee</strong>. If the product doesn’t meet your expectations, simply return it for a full refund.</p>",
+            "link_text": "",
+            "link_url": "",
+            "background": "#ffffff",
+            "background_gradient": "",
+            "text_color": "#000000",
+            "text_gradient": "",
+            "button_background": "",
+            "button_text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_Ni4b93"
+      ],
+      "name": "Media with text",
+      "settings": {
+        "full_width": false,
+        "spacing": "small"
+      }
+    },
     "media_with_text_wX88YF": {
       "type": "media-with-text",
       "blocks": {
@@ -375,6 +410,7 @@
       "block_order": [
         "image_dL4Wxg"
       ],
+      "disabled": true,
       "name": "Media with text",
       "settings": {
         "full_width": false,
@@ -1086,6 +1122,7 @@
   "order": [
     "breadcrumbs_7CDig8",
     "main",
+    "media_with_text_RYGNwi",
     "media_with_text_wX88YF",
     "testimonials_EgzxQ6",
     "ss_social_proof_ey83pt",
