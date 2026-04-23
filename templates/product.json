@@ -111,7 +111,7 @@
             "width_height": 24,
             "gap": 7,
             "font_weight": 400,
-            "margin_top": 13,
+            "margin_top": 0,
             "margin_bottom": 8,
             "add_bottom_line": false
           }
@@ -229,7 +229,7 @@
         "liquid_GrNtdk": {
           "type": "liquid",
           "settings": {
-            "liquid": "<div class=\"sale-banner\">\n    <p><strong>CLEARANCE SALE  ENDS TODAY</strong>\n    Now is the time to shop your favorite items at irresistible prices. As long as stocks last!\n \n</p>\n  </div>"
+            "liquid": "<div class=\"sale-banner\">\n  <h2 class=\"sale-title\">CLEARANCE SALE ENDS TODAY</h2>\n  <p class=\"sale-subtitle\">UP TO 80% OFF</p>\n  <p class=\"sale-body\">Now is the time to shop your favorite items at irresistible prices. As long as stocks last!</p>\n</div>\n\n<style>\n  .sale-banner {\n    border: 1px solid #ddd;\n    border-radius: 6px;\n    padding: 24px 20px;\n    text-align: center;\n    background: #f5f5f5;\n  }\n  .sale-title {\n    font-size: 22px;\n    font-weight: 800;\n    color: #c0392b;\n    text-transform: uppercase;\n    margin: 0 0 10px 0;\n    line-height: 1.2;\n  }\n  .sale-subtitle {\n    font-size: 20px;\n    font-weight: 700;\n    color: #222;\n    text-transform: uppercase;\n    margin: 0 0 18px 0;\n  }\n  .sale-body {\n    font-size: 18px;\n    font-weight: 400;\n    color: #555;\n    margin: 0;\n    line-height: 1.6;\n  }\n</style>"
           }
         },
         "offer_Kr4LKL": {
