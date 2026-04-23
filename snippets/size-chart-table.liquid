@@ -1,0 +1,103 @@
+{%- liquid
+  assign size_chart = product.metafields.custom.size_chart.value
+  
+  if size_chart == blank
+    assign size_chart = product.metafields.custom.size_chart
+  endif
+-%}
+
+{%- if size_chart == blank or size_chart.sizes == blank -%}
+  <p style="padding: 2rem; text-align: center;">No size chart available for this product.</p>
+{%- else -%}
+
+<div class="size-chart-container">
+  <div class="size-chart-toggle">
+    <button class="size-chart-btn active" data-unit="cm">CM</button>
+    <div class="size-divider"></div>
+    <button class="size-chart-btn" data-unit="inch">INCHES</button>
+  </div>
+
+  <div class="size-chart-scroll">
+    <table class="size-chart">
+      <thead>
+        <tr>
+          <th>SIZE</th>
+          {%- for measurement in size_chart.measurements -%}
+            {%- comment -%} Check if measurement has any non-null values {%- endcomment -%}
+            {%- assign has_values = false -%}
+            {%- for value in measurement.cm -%}
+              {%- if value != null and value != blank -%}
+                {%- assign has_values = true -%}
+                {%- break -%}
+              {%- endif -%}
+            {%- endfor -%}
+            
+            {%- if has_values -%}
+              <th>{{ measurement.name | replace: '_', ' ' }}</th>
+            {%- endif -%}
+          {%- endfor -%}
+        </tr>
+      </thead>
+      <tbody>
+        {%- for size in size_chart.sizes -%}
+          {%- assign size_index = forloop.index0 -%}
+          
+          {%- comment -%} Check if this size has any non-null values {%- endcomment -%}
+          {%- assign row_has_values = false -%}
+          {%- for measurement in size_chart.measurements -%}
+            {%- assign cm_val = measurement.cm[size_index] -%}
+            {%- if cm_val != null and cm_val != blank -%}
+              {%- assign row_has_values = true -%}
+              {%- break -%}
+            {%- endif -%}
+          {%- endfor -%}
+          
+          {%- if row_has_values -%}
+            <tr>
+              <td class="size-col">{{ size }}</td>
+              {%- for measurement in size_chart.measurements -%}
+                {%- comment -%} Only show cell if measurement column is valid {%- endcomment -%}
+                {%- assign col_has_values = false -%}
+                {%- for value in measurement.cm -%}
+                  {%- if value != null and value != blank -%}
+                    {%- assign col_has_values = true -%}
+                    {%- break -%}
+                  {%- endif -%}
+                {%- endfor -%}
+                
+                {%- if col_has_values -%}
+                  {%- assign cm_val = measurement.cm[size_index] -%}
+                  {%- assign inch_val = measurement.inch[size_index] -%}
+                  
+                  <td data-cm="{{ cm_val }}" data-inch="{{ inch_val }}">
+                    {%- if cm_val != null and cm_val != blank -%}
+                      <span class="val-cm">{{ cm_val }}</span>
+                    {%- else -%}
+                      <span class="val-cm">-</span>
+                    {%- endif -%}
+                    {%- if inch_val != null and inch_val != blank -%}
+                      <span class="val-inch" style="display:none;">{{ inch_val }}</span>
+                    {%- else -%}
+                      <span class="val-inch" style="display:none;">-</span>
+                    {%- endif -%}
+                  </td>
+                {%- endif -%}
+              {%- endfor -%}
+            </tr>
+          {%- endif -%}
+        {%- endfor -%}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="custom-size-chart-assurance">
+    <div class="custom-size-chart-icon">
+      {{ icon }}
+    </div>
+    <div>
+      {{ text }}
+    </div>
+  </div>
+</div>
+
+{%- endif -%}

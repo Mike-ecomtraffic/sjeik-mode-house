@@ -1,0 +1,16 @@
+<div class="custom-shipping-container" {% if settings.show_inner_padding %}style="padding: 0px 0px; background-color: {{ settings.urgency_bg_color }};"{% else %}style="background-color: {{ settings.urgency_bg_color }};"{% endif %}>
+  <div class="custom-shipping-item">
+    <span class="green-dot" style="background: {{ settings.urgency_flash_color }};"></span>
+    <div class="text-block-shipping">
+      {{ settings.ships_by_text }}
+      <span id="shipping-date" class="shipping-date"></span>
+    </div>
+  </div>
+  {% if settings.show_dynamic_country %}
+  <div class="custom-shipping-item">
+    <p id="locationinfop">
+      <span style=" color: black;font-weight:bold;"></span>
+    </p>
+  </div>
+  {% endif %}
+</div>

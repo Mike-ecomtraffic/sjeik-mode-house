@@ -1,0 +1,339 @@
+{%- comment -%}
+  ----------------------------------------------------------------------------------------------------------------------
+  PRODUCT CARD COMPONENT
+  ----------------------------------------------------------------------------------------------------------------------
+
+  This component is used in collection and featured collection to render a single product as a card
+
+  ********************************************
+  Supported variables
+  ********************************************
+
+  * product: the product to render
+  * show_rating: show or not the rating. If nothing is set, the theme uses the default product card setting
+  * show_vendor: show or not the vendor. If nothing is set, the theme uses the default product card setting
+  * show_quick_buy: show or not the quick buy. If nothing is set, the theme uses the default product card setting
+  * show_secondary_image: show or not the secondary image. If nothing is set, the theme uses the default product card setting
+  * show_swatches: allow to force hiding swatches. If nothing is set, it will default to the default card strategy
+  * stacked: indicate if the product is in stack mode
+  * reveal: if set to true the item will be revealed in a stacked mode
+  * background: the background to use for the product card (if none is passed then the one from the global setting is used)
+  * text_color: the text color to use for the product card (if none is passed then the one from the global setting is used)
+  * text_alignment: can be "center". If nothing is set, the theme uses the default product card setting
+{%- endcomment -%}
+
+{%- assign show_rating = show_rating | default: settings.show_product_rating, allow_false: true -%}
+{%- assign show_vendor = show_vendor | default: settings.show_vendor, allow_false: true -%}
+{%- assign show_quick_buy = show_quick_buy | default: settings.show_quick_buy, allow_false: true -%}
+{%- assign show_secondary_image = show_secondary_image | default: settings.show_secondary_image, allow_false: true -%}
+{%- assign text_alignment = text_alignment | default: settings.product_info_alignment -%}
+
+{%- if stacked and section.settings.products_per_row_mobile == '2' -%}
+  {%- assign mobile_reduced = true -%}
+{%- endif -%}
+
+{%- assign section_background = section.settings.background_gradient
+  | default: section.settings.background
+  | default: settings.background
+-%}
+{%- assign card_background = background | default: settings.product_card_background -%}
+{%- assign card_text_color = text_color | default: settings.product_card_text_color -%}
+
+{%- if section_background != 'rgba(0,0,0,0)'
+  and card_background != 'rgba(0,0,0,0)'
+  and section_background != card_background
+-%}
+  {%- assign card_class = 'product-card ' -%}
+{%- else -%}
+  {%- assign card_class = 'product-card product-card--blends ' -%}
+{%- endif -%}
+
+{%- if show_secondary_image and product.media.size > 1 -%}
+  {%- assign card_class = card_class | append: 'product-card--show-secondary-media' -%}
+{%- endif -%}
+
+{%- comment -%}
+  --------------------------------------------------------------------------------------------------------------------
+  MODIFY PRODUCT URL TO INCLUDE COLLECTION CONTEXT
+  --------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+
+{%- if collection %}
+  {%- assign product_url = product.url | within: collection -%}
+{%- else %}
+  {%- assign product_url = product.url -%}
+{%- endif %}
+
+<product-card
+  handle="{{ product.handle | escape }}"
+  {% if reveal %}
+    reveal-js
+  {% endif %}
+  {% render 'surface', class: card_class, background: card_background, text_color: card_text_color %}
+>
+  {%- comment -%}
+    --------------------------------------------------------------------------------------------------------------------
+    PRODUCT BADGES
+    --------------------------------------------------------------------------------------------------------------------
+  {%- endcomment -%}
+
+  {%- if show_badges and product.media.size > 0 -%}
+    {%- render 'product-badges', product: product, class: 'product-card__badge-list' -%}
+  {%- endif -%}
+
+  {%- comment -%}
+    --------------------------------------------------------------------------------------------------------------------
+    PRODUCT MEDIA
+    --------------------------------------------------------------------------------------------------------------------
+  {%- endcomment -%}
+
+  {%- if product.media.size > 0 -%}
+    <div class="product-card__figure">
+      <a href="{{ product_url }}" data-instant>
+        {%- capture sizes -%}
+          {%- if stacked -%}
+            (max-width: 699px) calc(100vw / {{ section.settings.products_per_row_mobile }} - 40px), (max-width: 1200px) calc(100vw / {{ 3 | at_most: section.settings.products_per_row_desktop }} - 64px), calc(min(100vw - 96px, {{ settings.page_width }}px) / {{ section.settings.products_per_row_desktop }} - (24px / {{ section.settings.products_per_row_desktop }} * {{ section.settings.products_per_row_desktop | minus: 1 }}))
+          {%- else -%}
+            (max-width: 699px) 74vw, (max-width: 999px) 38vw, calc(min(100vw - 96px, {{ settings.page_width }}px) / {{ section.settings.products_per_row_desktop }} - (24px / {{ section.settings.products_per_row_desktop }} * {{ section.settings.products_per_row_desktop | minus: 1 }}))
+          {%- endif -%}
+        {%- endcapture -%}
+
+        {%- capture main_image_classes -%}product-card__image product-card__image--primary {% if settings.product_image_aspect_ratio contains 'crop' %}object-fill-safe{% endif %} aspect-{{ settings.product_image_aspect_ratio | split: '_' | first }}{%- endcapture -%}
+        {{-
+          product.featured_media
+          | image_url: width: product.featured_media.width
+          | image_tag:
+            loading: 'lazy',
+            sizes: sizes,
+            widths: '200,300,400,500,600,700,800,1000,1200,1400,1600,1800',
+            class: main_image_classes
+        -}}
+
+        {%- if show_secondary_image and product.media.size > 1 -%}
+          {%- assign next_media = product.media[product.featured_media.position] | default: product.media[1] -%}
+          {{-
+            next_media
+            | image_url: width: next_media.width
+            | image_tag:
+              class: 'product-card__image product-card__image--secondary object-fill',
+              loading: 'lazy',
+              fetchpriority: 'low',
+              sizes: sizes,
+              widths: '200,300,400,500,600,700,800,1000,1200,1400,1600,1800'
+          -}}
+        {%- endif -%}
+      </a>
+
+      {%- if show_quick_buy and product.available -%}
+        <div class="product-card__quick-buy">
+          {%- assign quick_add_label = 'product.general.quick_add' | t -%}
+
+          {%- if product.variants.size == 1 and product.selling_plan_groups.size == 0 -%}
+            {%- form 'product', product, action:'/cart', is: 'product-form' -%}
+              <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+              <div class="pointer-fine:hidden">
+                <button
+                  type="submit"
+                  is="custom-button"
+                  class="product-card__mobile-quick-buy-button"
+                  aria-label="{{ quick_add_label | escape }}"
+                >
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10.7132 13.2888H3.41518C3.00916 13.2887 2.60852 13.1959 2.24383 13.0175C1.87914 12.839 1.56001 12.5796 1.31081 12.2591C1.06161 11.9385 0.888898 11.5653 0.805864 11.1679C0.722829 10.7704 0.73166 10.3593 0.831682 9.96578L2.31074 3.92789C2.33738 3.81994 2.40019 3.72437 2.48872 3.65709C2.57724 3.58982 2.68614 3.55489 2.79728 3.55813H10.9467C11.054 3.55321 11.16 3.58396 11.248 3.64557C11.336 3.70718 11.4011 3.79618 11.4332 3.8987L13.2723 9.81495C13.3981 10.2168 13.427 10.6427 13.3569 11.0578C13.2867 11.473 13.1194 11.8657 12.8685 12.2038C12.6218 12.5434 12.2974 12.8191 11.9225 13.0079C11.5476 13.1966 11.1329 13.2929 10.7132 13.2888ZM3.16218 4.53119L1.7561 10.1993C1.69348 10.4494 1.68846 10.7104 1.74142 10.9627C1.79438 11.215 1.90393 11.452 2.06181 11.6558C2.2197 11.8596 2.42179 12.0249 2.65285 12.1392C2.88392 12.2535 3.13792 12.3139 3.39571 12.3157H10.6937C10.9585 12.3162 11.2196 12.2538 11.4556 12.1337C11.6916 12.0136 11.8957 11.8392 12.0511 11.6249C12.2111 11.4093 12.3178 11.159 12.3627 10.8943C12.4075 10.6297 12.3891 10.3582 12.309 10.102L10.5964 4.53119H3.16218Z" fill="white"></path>
+                  <path d="M9.00038 7.45014C8.87135 7.45014 8.7476 7.39888 8.65635 7.30764C8.56511 7.2164 8.51385 7.09265 8.51385 6.96361V3.07134C8.51385 2.68423 8.36007 2.31297 8.08634 2.03925C7.81262 1.76552 7.44136 1.61174 7.05425 1.61174C6.66714 1.61174 6.29588 1.76552 6.02216 2.03925C5.74843 2.31297 5.59465 2.68423 5.59465 3.07134V6.96361C5.59465 7.09265 5.54339 7.2164 5.45215 7.30764C5.3609 7.39888 5.23715 7.45014 5.10812 7.45014C4.97908 7.45014 4.85533 7.39888 4.76408 7.30764C4.67284 7.2164 4.62158 7.09265 4.62158 6.96361V3.07134C4.62158 2.42616 4.87788 1.8074 5.33409 1.35118C5.79031 0.89497 6.40907 0.638672 7.05425 0.638672C7.69943 0.638672 8.31819 0.89497 8.77441 1.35118C9.23062 1.8074 9.48692 2.42616 9.48692 3.07134V6.96361C9.48692 7.09265 9.43566 7.2164 9.34442 7.30764C9.25317 7.39888 9.12942 7.45014 9.00038 7.45014Z" fill="white"></path>
+                </svg>
+                </button>
+              </div>
+
+              <div class="pointer-coarse:hidden">
+                {%- render 'button', type: 'submit', content: quick_add_label -%}
+              </div>
+            {%- endform -%}
+          {%- else -%}
+            {%- capture quick_buy_id -%}quick-buy-{{ section.id }}-{{ product.id }}{%- endcapture -%}
+
+            <div class="pointer-fine:hidden">
+              <button
+                type="button"
+                aria-controls="{{ quick_buy_id }}"
+                aria-expanded="false"
+                aria-label="{{ quick_add_label | escape }}"
+                is="custom-button"
+                class="product-card__mobile-quick-buy-button"
+              >
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10.7132 13.2888H3.41518C3.00916 13.2887 2.60852 13.1959 2.24383 13.0175C1.87914 12.839 1.56001 12.5796 1.31081 12.2591C1.06161 11.9385 0.888898 11.5653 0.805864 11.1679C0.722829 10.7704 0.73166 10.3593 0.831682 9.96578L2.31074 3.92789C2.33738 3.81994 2.40019 3.72437 2.48872 3.65709C2.57724 3.58982 2.68614 3.55489 2.79728 3.55813H10.9467C11.054 3.55321 11.16 3.58396 11.248 3.64557C11.336 3.70718 11.4011 3.79618 11.4332 3.8987L13.2723 9.81495C13.3981 10.2168 13.427 10.6427 13.3569 11.0578C13.2867 11.473 13.1194 11.8657 12.8685 12.2038C12.6218 12.5434 12.2974 12.8191 11.9225 13.0079C11.5476 13.1966 11.1329 13.2929 10.7132 13.2888ZM3.16218 4.53119L1.7561 10.1993C1.69348 10.4494 1.68846 10.7104 1.74142 10.9627C1.79438 11.215 1.90393 11.452 2.06181 11.6558C2.2197 11.8596 2.42179 12.0249 2.65285 12.1392C2.88392 12.2535 3.13792 12.3139 3.39571 12.3157H10.6937C10.9585 12.3162 11.2196 12.2538 11.4556 12.1337C11.6916 12.0136 11.8957 11.8392 12.0511 11.6249C12.2111 11.4093 12.3178 11.159 12.3627 10.8943C12.4075 10.6297 12.3891 10.3582 12.309 10.102L10.5964 4.53119H3.16218Z" fill="white"></path>
+                  <path d="M9.00038 7.45014C8.87135 7.45014 8.7476 7.39888 8.65635 7.30764C8.56511 7.2164 8.51385 7.09265 8.51385 6.96361V3.07134C8.51385 2.68423 8.36007 2.31297 8.08634 2.03925C7.81262 1.76552 7.44136 1.61174 7.05425 1.61174C6.66714 1.61174 6.29588 1.76552 6.02216 2.03925C5.74843 2.31297 5.59465 2.68423 5.59465 3.07134V6.96361C5.59465 7.09265 5.54339 7.2164 5.45215 7.30764C5.3609 7.39888 5.23715 7.45014 5.10812 7.45014C4.97908 7.45014 4.85533 7.39888 4.76408 7.30764C4.67284 7.2164 4.62158 7.09265 4.62158 6.96361V3.07134C4.62158 2.42616 4.87788 1.8074 5.33409 1.35118C5.79031 0.89497 6.40907 0.638672 7.05425 0.638672C7.69943 0.638672 8.31819 0.89497 8.77441 1.35118C9.23062 1.8074 9.48692 2.42616 9.48692 3.07134V6.96361C9.48692 7.09265 9.43566 7.2164 9.34442 7.30764C9.25317 7.39888 9.12942 7.45014 9.00038 7.45014Z" fill="white"></path>
+                </svg>
+              </button>
+            </div>
+
+            <div class="pointer-coarse:hidden">
+              {%- render 'button', content: quick_add_label, aria_controls: quick_buy_id -%}
+            </div>
+
+            <quick-buy-drawer
+              id="{{ quick_buy_id }}"
+              header-bordered
+              open-from="bottom"
+              handle="{{ product.handle }}"
+              role="region"
+              aria-live="polite"
+              class="quick-buy-drawer drawer"
+            >
+              {%- comment -%}Quick buy content is filled on demand for performance reasons{%- endcomment -%}
+            </quick-buy-drawer>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  {%- comment -%}
+    --------------------------------------------------------------------------------------------------------------------
+    PRODUCT INFO
+    --------------------------------------------------------------------------------------------------------------------
+  {%- endcomment -%}
+
+  <div class="product-card__info {% if text_alignment == 'center' %}product-card__info--center{% endif %}">
+    {%- if show_vendor and product.vendor != blank -%}
+      {%- if show_rating and text_alignment != 'center' -%}
+        <div class="rating-with-text w-full">
+          {%- render 'vendor' with product.vendor, class: 'text-xs' -%}
+
+          {%- capture rating_class -%}{% if mobile_reduced %}hidden sm:flex{% endif %}{%- endcapture -%}
+          {%- render 'product-rating',
+            product: product,
+            class: rating_class,
+            display_mode: settings.product_rating_mode
+          -%}
+        </div>
+      {%- else -%}
+        {%- render 'vendor' with product.vendor, class: 'text-xs' -%}
+      {%- endif -%}
+    {%- endif -%}
+
+    <div class="v-stack gap-2 w-full {% if text_alignment == 'center' %}justify-items-center{% endif %}">
+      <div
+        class="loox-rating"
+        data-id="{{ product.id }}"
+        data-rating="{{ product.metafields.loox.avg_rating }}"
+        data-raters="{{ product.metafields.loox.num_reviews }}"
+      ></div>
+      {%- if show_rating and show_vendor == false or product.vendor == blank -%}
+        <div class="rating-with-text">
+          <span class="product-card__title">
+            <a href="{{ product_url }}" class="bold" data-instant>{{ product.title }}</a>
+          </span>
+
+          {%- if text_alignment != 'center' -%}
+            {%- capture rating_class -%}{% if mobile_reduced %}hidden sm:flex{% endif %}{%- endcapture -%}
+            {%- render 'product-rating',
+              product: product,
+              class: rating_class,
+              display_mode: settings.product_rating_mode
+            -%}
+          {%- endif -%}
+        </div>
+      {%- else -%}
+        <span class="product-card__title">
+          <a href="{{ product_url }}" class="bold" data-instant>{{ product.title }}</a>
+        </span>
+      {%- endif -%}
+
+      {%- render 'price-list', product: product, text_alignment: text_alignment -%}
+    </div>
+
+    {%- if show_rating and mobile_reduced or text_alignment == 'center' -%}
+      {%- capture rating_class -%}{% unless text_alignment == 'center' %}sm:hidden{% endunless %}{%- endcapture -%}
+      {%- render 'product-rating', product: product, class: rating_class, display_mode: settings.product_rating_mode -%}
+    {%- endif -%}
+
+    {%- if settings.product_color_display != 'hide' and show_swatches != false -%}
+      {%- assign color_label_list = 'general.label.color' | t | replace: ', ', ',' | downcase | split: ',' -%}
+
+      {%- for color_label in color_label_list -%}
+        {%- if product.options_by_name[color_label] != blank -%}
+          {%- assign product_option = product.options_by_name[color_label] -%}
+          {%- capture name -%}swatch-{{ section.id }}-{{ product.id }}-{{ product_option.position }}{%- endcapture -%}
+
+          <div class="product-card__aside">
+            {%- case settings.product_color_display -%}
+              {%- when 'count' -%}
+                <p class="product-card__color-count text-sm text-subdued">
+                  {{- 'product.general.available_colors_count' | t: count: product_option.values.size -}}
+                </p>
+
+              {%- when 'swatch' -%}
+                <fieldset
+                  class="product-card__swatch-list h-stack {% if settings.color_swatch_style == 'rectangle' %}gap-2.5{% else %}gap-0.5{% endif %}"
+                  data-option-position="{{ product_option.position }}"
+                >
+                  {%- for option_value in product_option.values limit: 4 -%}
+                    {%- if forloop.first
+                      or product.selected_or_first_available_variant.matched
+                      and option_value == product_option.selected_value
+                    -%}
+                      {%- assign selected = true -%}
+                    {%- else -%}
+                      {% assign selected = false %}
+                    {%- endif -%}
+
+                    {%- render 'swatch' with 'color',
+                      value: option_value,
+                      name: name,
+                      size: 'sm',
+                      selected: selected
+                    -%}
+                  {%- endfor -%}
+
+                  {% if product_option.values.size > 4 %}
+                    <a
+                      href="{{ product_url }}"
+                      data-instant
+                      class="color-swatch__view-more {% if settings.color_swatch_style == 'round' %}rounded-full{% endif %} text-xxs text-subdued"
+                      >+{{ product_option.values.size | minus: 4 -}}
+                    </a>
+                  {% endif %}
+                </fieldset>
+
+              {%- when 'variant' -%}
+                <fieldset class="product-card__variant-list" data-option-position="{{ product_option.position }}">
+                  {%- for option_value in product_option.values limit: 3 -%}
+                    {%- assign variant_option = 'option' | append: product_option.position -%}
+                    {%- assign variant_for_value = product.variants | where: variant_option, option_value | first -%}
+
+                    {%- if forloop.first
+                      or variant_for_value.matched
+                      and option_value == product_option.selected_value
+                    -%}
+                      {%- assign selected = true -%}
+                    {%- else -%}
+                      {% assign selected = false %}
+                    {%- endif -%}
+
+                    {%- render 'swatch' with 'media',
+                      media: variant_for_value.featured_media,
+                      value: option_value,
+                      name: name,
+                      size: 'sm',
+                      selected: selected
+                    -%}
+                  {%- endfor -%}
+
+                  {%- if product_option.values.size > 3 -%}
+                    <a href="{{ product_url }}" data-instant class="media-swatch__view-more text-xs text-subdued"
+                      >+{{ product_option.values.size | minus: 3 -}}
+                    </a>
+                  {%- endif -%}
+                </fieldset>
+            {%- endcase -%}
+          </div>
+
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</product-card>

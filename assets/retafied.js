@@ -1,0 +1,392 @@
+  document.addEventListener("DOMContentLoaded", function() {
+      var daysAfterToday = 2; // Set this to the number of days after today that the item will ship
+      var today = new Date();
+      var shipDate = new Date(today);
+      var options = { weekday: 'short', month: 'short', day: 'numeric' };
+
+      // Function to skip Sundays
+      function calculateShippingDate(date, daysToAdd) {
+          date.setDate(date.getDate() + daysToAdd);
+
+          // If the calculated shipping date is a Sunday, add one more day
+          if (date.getDay() === 0) {
+              date.setDate(date.getDate() + 1);
+          }
+
+          return date;
+      }
+
+      // Calculate the shipping date
+      shipDate = calculateShippingDate(shipDate, daysAfterToday);
+      var formattedDate = shipDate.toLocaleDateString('en-GB', options);
+
+      // Update the shipping date in the HTML
+      document.getElementById('shipping-date').textContent = formattedDate;
+  });
+
+  // A mapping of country codes to flag emojis
+const countryFlags = {
+  'US': '🇺🇸',
+  'CA': '🇨🇦',
+  'FR': '🇫🇷',
+  'NL': '🇳🇱',
+  'DE': '🇩🇪',
+  'GB': '🇬🇧',
+  'IT': '🇮🇹',
+  'ES': '🇪🇸',
+  'CN': '🇨🇳',
+  'JP': '🇯🇵',
+  'BR': '🇧🇷',
+  'IN': '🇮🇳',
+  'RU': '🇷🇺',
+  'ZA': '🇿🇦',
+  'AU': '🇦🇺',
+  'NZ': '🇳🇿',
+  'MX': '🇲🇽',
+  'AR': '🇦🇷',
+  'CL': '🇨🇱',
+  'CO': '🇨🇴',
+  'PE': '🇵🇪',
+  'VE': '🇻🇪',
+  'EC': '🇪🇨',
+  'GT': '🇬🇹',
+  'HN': '🇭🇳',
+  'SA': '🇸🇦',
+  'AE': '🇦🇪',
+  'TR': '🇹🇷',
+  'TH': '🇹🇭',
+  'MY': '🇲🇾',
+  'SG': '🇸🇬',
+  'ID': '🇮🇩',
+  'PH': '🇵🇭',
+  'VN': '🇻🇳',
+  'KR': '🇰🇷',
+  'SE': '🇸🇪',
+  'NO': '🇳🇴',
+  'FI': '🇫🇮',
+  'DK': '🇩🇰',
+  'IS': '🇮🇸',
+  'IE': '🇮🇪',
+  'CH': '🇨🇭',
+  'PT': '🇵🇹',
+  'BE': '🇧🇪',
+  'LU': '🇱🇺',
+  'PL': '🇵🇱',
+  'CZ': '🇨🇿',
+  'SK': '🇸🇰',
+  'HU': '🇭🇺',
+  'AT': '🇦🇹',
+  'LI': '🇱🇮',
+  'GR': '🇬🇷',
+  'BG': '🇧🇬',
+  'RO': '🇷🇴',
+  'UA': '🇺🇦',
+  'BY': '🇧🇾',
+  'LT': '🇱🇹',
+  'LV': '🇱🇻',
+  'EE': '🇪🇪',
+  'MD': '🇲🇩',
+  'AM': '🇦🇲',
+  'GE': '🇬🇪',
+  'AZ': '🇦🇿',
+  'IR': '🇮🇷',
+  'IQ': '🇮🇶',
+  'SY': '🇸🇾',
+  'LB': '🇱🇧',
+  'JO': '🇯🇴',
+  'IL': '🇮🇱',
+  'EG': '🇪🇬',
+  'MA': '🇲🇦',
+  'DZ': '🇩🇿',
+  'TN': '🇹🇳',
+  'LY': '🇱🇾',
+  'GM': '🇬🇲',
+  'SN': '🇸🇳',
+  'MR': '🇲🇷',
+  'ML': '🇲🇱',
+  'GN': '🇬🇳',
+  'CI': '🇨🇮',
+  'BF': '🇧🇫',
+  'NE': '🇳🇪',
+  'TG': '🇹🇬',
+  'BJ': '🇧🇯',
+  'NG': '🇳🇬',
+  'CM': '🇨🇲',
+  'GA': '🇬🇦',
+  'CG': '🇨🇬',
+  'CD': '🇨🇩',
+  'AO': '🇦🇴',
+  'GW': '🇬🇼',
+  'SC': '🇸🇨',
+  'SD': '🇸🇩',
+  'RW': '🇷🇼',
+  'ET': '🇪🇹',
+  'SO': '🇸🇴',
+  'DJ': '🇩🇯',
+  'KE': '🇰🇪',
+  'TZ': '🇹🇿',
+  'UG': '🇺🇬',
+  'BI': '🇧🇮',
+  'MZ': '🇲🇿',
+  'ZM': '🇿🇲',
+  'MW': '🇲🇼',
+  'LS': '🇱🇸',
+  'BW': '🇧🇼',
+  'NA': '🇳🇦',
+  'SZ': '🇸🇿',
+  // Add more mappings as necessary
+};
+
+// Mapping of country codes to their primary language codes
+const countryLanguages = {
+  'US': 'en',
+  'CA': 'en',
+  'FR': 'fr',
+  'NL': 'nl',
+  'DE': 'de',
+  'GB': 'en',
+  'IT': 'it',
+  'ES': 'es',
+  'CN': 'zh',
+  'JP': 'ja',
+  'BR': 'pt',
+  'IN': 'hi',
+  'RU': 'ru',
+  'ZA': 'en',
+  'AU': 'en',
+  'NZ': 'en',
+  'MX': 'es',
+  'AR': 'es',
+  'CL': 'es',
+  'CO': 'es',
+  'PE': 'es',
+  'VE': 'es',
+  'EC': 'es',
+  'GT': 'es',
+  'HN': 'es',
+  'SA': 'ar',
+  'AE': 'ar',
+  'TR': 'tr',
+  'TH': 'th',
+  'MY': 'ms',
+  'SG': 'en',
+  'ID': 'id',
+  'PH': 'fil',
+  'VN': 'vi',
+  'KR': 'ko',
+  'SE': 'sv',
+  'NO': 'no',
+  'FI': 'fi',
+  'DK': 'da',
+  'IS': 'is',
+  'IE': 'en',
+  'CH': 'de',
+  'PT': 'pt',
+  'BE': 'nl',
+  'LU': 'lb',
+  'PL': 'pl',
+  'CZ': 'cs',
+  'SK': 'sk',
+  'HU': 'hu',
+  'AT': 'de',
+  'GR': 'el',
+  'BG': 'bg',
+  'RO': 'ro',
+  'UA': 'uk',
+  'BY': 'be',
+  'LT': 'lt',
+  'LV': 'lv',
+  'EE': 'et',
+  'MD': 'ro',
+  'AM': 'hy',
+  'GE': 'ka',
+  'AZ': 'az',
+  'IR': 'fa',
+  'IQ': 'ar',
+  'SY': 'ar',
+  'LB': 'ar',
+  'JO': 'ar',
+  'IL': 'he',
+  'EG': 'ar',
+  'MA': 'ar',
+  'DZ': 'ar',
+  'TN': 'ar',
+  'LY': 'ar',
+  'KE': 'sw',
+  'TZ': 'sw',
+  'UG': 'en',
+  'BI': 'fr',
+  'MZ': 'pt',
+  'ZM': 'en',
+  'MW': 'en',
+  'LS': 'en',
+  'BW': 'en',
+  'NA': 'en',
+  'SZ': 'en',
+  // Add more mappings as necessary
+};
+
+// This function will be called to update the content of the #locationinfop and #locationinfop2 elements
+function setLocationInfo(countryCode, countryName) {
+  const flagEmoji = countryFlags[countryCode]; // Get the flag emoji using the country code
+
+  const locationInfoP = document.getElementById('locationinfop');
+  if (locationInfoP) {
+    // Existing code to update locationinfop
+    const shippingMessage = flagEmoji
+      ? `${flagEmoji} <span style="color: black; font-weight: bold;">Fast </span>${countryCode} Shipping`
+      : `📦 <span style="color: black; font-weight: bold;">Fast </span>${countryCode} Shipping`; // Use a default package emoji if no flag is available
+
+    locationInfoP.innerHTML = shippingMessage;
+  }
+
+  const locationInfoP2 = document.getElementById('locationinfop2');
+  if (locationInfoP2) {
+    // Get the language code for the country
+    const languageCode = countryLanguages[countryCode] || 'en'; // Default to 'en' if not found
+
+    let countryNameNative = countryName; // Default to the countryName we have
+    if (typeof Intl.DisplayNames === 'function') {
+      // Use Intl.DisplayNames to get the country name in the native language
+      const displayNames = new Intl.DisplayNames([languageCode], { type: 'region' });
+      countryNameNative = displayNames.of(countryCode);
+    }
+
+    // Construct the message with "shipping to" in front of the country name and flag
+    const message = `Shipping to ${countryNameNative} ${flagEmoji ? flagEmoji : ''}`;
+
+    // Update the content of locationInfoP2
+    locationInfoP2.textContent = message;
+  }
+}
+
+// This function fetches the browsing context suggestions and updates the p tags
+async function fetchLocationInfo() {
+  try {
+    const response = await fetch('/browsing_context_suggestions.json');
+    const data = await response.json();
+    // Use the detected country code and country name from the response
+    const countryCode = data.detected_values.country.handle;
+    const countryName = data.detected_values.country.name;
+
+    console.log(countryCode);
+
+    // Update the location info p tags with the country name and flag emoji
+    setLocationInfo(countryCode, countryName);
+  } catch (error) {
+    console.error('Error fetching location info:', error);
+  }
+}
+
+// Call the function to fetch location info on DOM content load
+document.addEventListener('DOMContentLoaded', (event) => {
+  fetchLocationInfo();
+});
+
+  document.addEventListener("DOMContentLoaded", function () {
+    // Function to set max-height for the thumbnail list
+    function setMaxHeight() {
+      // Get the first image with class 'rounded'
+      const imgElement = document.querySelector('img.rounded');
+
+      if (imgElement) {
+        // Get the computed height of the image
+        const imgHeight = imgElement.clientHeight;
+
+        if (imgHeight > 0) {
+          // Apply the height to the CSS class
+          const thumbnailList = document.querySelector('.product-gallery__thumbnail-list.scroll-area');
+          if (thumbnailList) {
+            thumbnailList.style.maxHeight = imgHeight + 'px';
+          }
+        }
+      }
+    }
+
+    // Initialize the observer
+    const observer = new MutationObserver(setMaxHeight);
+
+    // Observe changes in the body of the document
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+
+    // Initial check to set max-height on page load
+    setMaxHeight();
+  });
+
+  (function() {
+    function getCartTotal() {
+      const cartTotalElement = document.querySelector('.cartTotal');
+      if (!cartTotalElement) return 0;
+
+      // Extract the number from the text content
+      const text = cartTotalElement.textContent;
+
+      // Remove non-numeric characters, replace comma with dot
+      const numberString = text.replace(/[^\d,.-]/g, '').replace(',', '.');
+
+      const total = parseFloat(numberString);
+
+      return isNaN(total) ? 0 : total;
+    }
+
+    function getThreshold() {
+      const freeShippingBar = document.getElementById('shipping_price_cart');
+      if (!freeShippingBar) return 0;
+
+      const thresholdString = freeShippingBar.getAttribute('threshold');
+
+      // Convert threshold to a decimal number
+      const threshold = parseFloat(thresholdString) / 100;
+
+      return isNaN(threshold) ? 0 : threshold;
+    }
+
+    function getMessages() {
+      const freeShippingBar = document.getElementById('shipping_price_cart');
+      if (!freeShippingBar) return { reachedMessage: '', unreachedMessage: '' };
+
+      const reachedMessage = freeShippingBar.getAttribute('reached-message') || '';
+      const unreachedMessage = freeShippingBar.getAttribute('unreached-message') || '';
+
+      return { reachedMessage, unreachedMessage };
+    }
+
+    function updateMessage() {
+      const total = getCartTotal();
+      const threshold = getThreshold();
+      const messages = getMessages();
+
+      const message = total >= threshold ? messages.reachedMessage : messages.unreachedMessage;
+
+      // Create or update a span with the message
+      let messageSpan = document.getElementById('shipping-message');
+      if (!messageSpan) {
+        messageSpan = document.createElement('span');
+        messageSpan.id = 'shipping-message';
+        const freeShippingBar = document.getElementById('shipping_price_cart');
+        if (freeShippingBar) {
+          freeShippingBar.parentNode.insertBefore(messageSpan, freeShippingBar.nextSibling);
+        }
+      }
+      messageSpan.textContent = message;
+    }
+
+    // Initial update
+    updateMessage();
+
+    // Set up a MutationObserver to watch for changes in the cart total
+    const cartTotalElement = document.querySelector('.cartTotal');
+    if (cartTotalElement) {
+      const observer = new MutationObserver(function(mutations) {
+        updateMessage();
+      });
+
+      observer.observe(cartTotalElement, { characterData: true, childList: true, subtree: true });
+    } else {
+      // Fallback to periodically checking if cartTotal is not present
+      setInterval(updateMessage, 1000);
+    }
+  })();

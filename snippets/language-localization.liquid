@@ -1,0 +1,416 @@
+<!-- Popup HTML Code -->
+<div id="mp2" class="mp2 visible">
+  <div class="mp2_wrapper">
+    <!-- Close Button SVG -->
+    <svg class="close_mp2" xmlns="http://www.w3.org/2000/svg" height="16" width="12" viewBox="0 0 384 512">
+      <path d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z"></path>
+    </svg>
+
+    <!-- Localization Form -->
+    <localization-form>
+      <h5>COUNTRY / REGION</h5>
+      <!-- Country Form -->
+      <!-- ... (Include all of the HTML code you provided for the country selector) -->
+    </localization-form>
+
+    <!-- Language Form -->
+    <localization-form style="margin-top:10px;">
+      <h5>LANGUAGE</h5>
+      <!-- Language Form -->
+      <!-- ... (Include all of the HTML code you provided for the language selector) -->
+    </localization-form>
+
+    <!-- Close Button -->
+    <div class="mp2_button">
+      <a style="width: 100%;" class="btn btn--long uppercase close_mp2_button">
+        CLOSE
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+
+.trigger_button_1 {
+      display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+        border: 1px solid #e4e4e4;
+    background: #f3f3f3;
+    border-radius: 5px;
+    padding: 5px 10px!important;
+    margin-top: 5px;
+}
+.trigger_button_2 {
+      display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+        border: 1px solid #e4e4e4;
+    background: #f3f3f3;
+    border-radius: 5px;
+    padding: 5px 10px!important;
+    margin-top: 5px;
+
+}
+
+.close_mp2_button {
+  opacity: 1;
+  transition: all .5s cubic-bezier(.215,.61,.355,1);
+}
+.close_mp2_button:hover {
+  opacity: .75;
+  transition: all .5s cubic-bezier(.215,.61,.355,1);
+}
+  
+.mp2 {
+  display: none;
+}
+.animated-icon {
+transition: transform 0.3s ease; /* Smooth transition for the animation */
+}
+
+.rotate {
+transform: rotate(180deg); /* Rotate the SVG by 90 degrees */
+}
+#mp2 .disclosure__list {
+background: white;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    max-height: 225px;
+    gap: 5px;
+    overflow: auto;
+    border: 1px solid #e4e4e4;
+    position: absolute;
+    z-index: 99999;
+    top: 45px;
+    width: 100%;
+
+}
+#mp2 .disclosure__list li {
+margin: 0px!important;line-height: 1;
+  padding: 10px;
+  border-radius: 5px;transition: all .3s cubic-bezier(.215,.61,.355,1);
+}
+
+#mp2 .disclosure__list li:hover {
+margin: 0px!important;line-height: 1;
+      padding: 10px;
+    background: #f2f2f2;transition: all .3s cubic-bezier(.215,.61,.355,1);
+}
+
+  
+#mp2 .disclosure {
+text-align: left;position: relative;
+}
+#mp2 .disclosure__button {
+
+}
+.close_mp2 {
+position: absolute;
+    width: 50px;
+    height: 50px;
+    padding: 17px;
+z-index: 99999999;
+cursor: pointer;
+  top: 0px!important;
+  right: 0px!important;
+}
+.mp2 ul {
+
+}
+.mp2 h4 {
+margin-bottom: 5px;
+text-transform: uppercase;
+font-size: 21px!important;
+}
+.mp2 h5 {
+text-align: left;
+font-size: 14px;
+text-transform: uppercase;
+margin: 0px;
+margin-bottom: 3px!important;
+}
+.mp2 form {
+margin: 0px!important;
+}
+.mp2_button {
+margin-top: 10px;
+}
+  .mp2_open_mp1 {
+margin-top: 5px;
+    line-height: 1;
+}
+.mp2 {
+position: fixed;
+width: 100%;
+height: 100%;
+z-index: 999999;
+background: rgb(64 64 64 / 70%);
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+
+.mp2_wrapper {
+background: white;
+padding: 40px 40px;
+position: relative;
+display: flex;
+flex-direction: column;
+gap: 10px;
+text-align: center;
+border-radius: 8px;
+width: 500px;
+box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+}
+.mp2_button a {
+font-weight: bold;
+margin-bottom: 0px;
+}
+.mp2_open_mp2 {
+margin-top: 0px;
+}
+.text_button {
+text-transform: uppercase;
+font-family: "Avenir Next", serif;
+font-size: 12px;
+font-weight: 500;
+color: black;
+cursor: pointer;
+}
+#mp2 {
+opacity: 0;
+display: none;
+transition: all 0.5s ease-in-out; /* Smooth transition for opacity change */
+}
+
+#mp2.visible {
+display: flex;
+opacity: 1;
+}
+
+
+@media only screen and (max-width: 767px) {
+.mp2_wrapper {
+background: white;
+padding: 40px 40px;
+position: relative;
+display: flex;
+flex-direction: column;
+gap: 10px;
+text-align: center;
+border-radius: 8px;
+width: 90%;
+box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+}
+.mp2 h4 {
+margin-bottom: 5px;
+text-transform: uppercase;
+margin-bottom: 0px;
+font-size: 18px!important;
+display: inline;
+}
+.mp2_header img {
+border-radius: 500px;
+width: 15px; 
+object-fit: cover; 
+height: 15px;
+}
+}
+
+
+.mp1_content {
+margin: 5px 0px;
+}
+.mp1_header img {
+border-radius: 500px;
+    width: 20px;
+    object-fit: cover;
+    height: 20px;
+    top: -3px;
+    margin-right: 5px;
+    position: relative;
+}
+.mp1_header {
+
+}
+.close_mp1_button {
+  opacity: 1;
+  transition: all .5s cubic-bezier(.215,.61,.355,1);
+}
+.close_mp1_button:hover {
+  opacity: .75;
+  transition: all .5s cubic-bezier(.215,.61,.355,1);
+}
+  
+.close_mp1 {
+position: absolute;
+    width: 50px;
+    height: 50px;
+    padding: 17px;
+z-index: 99999999;
+cursor: pointer;
+   top: 0px!important;
+  right: 0px!important;
+}
+.mp1 ul {
+text-align: left;
+margin-left: 20px;
+list-style: disc;
+margin-bottom: 0px;
+display: flex;
+flex-direction: column;
+gap: 0px;
+}
+.mp1 h4 {
+margin-bottom: 5px;
+text-transform: uppercase;
+margin-bottom: 0px;
+font-size: 21px!important;
+display: inline;
+}
+.mp1 {
+position: fixed;
+width: 100%;
+height: 100%;
+z-index: 999999;
+background: rgb(64 64 64 / 70%);
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+
+.mp1_wrapper {
+background: white;
+padding: 40px 40px;
+position: relative;
+display: flex;
+flex-direction: column;
+gap: 15px;
+text-align: center;
+border-radius: 8px;
+width: 500px;
+box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+}
+.mp1_button a {
+font-weight: bold;
+margin-bottom: 0px;
+}
+.mp1_open_mp2 {
+margin-top: 0px;
+  line-height: 1;
+}
+.text_button {
+text-transform: uppercase;
+font-family: "Avenir Next", serif;
+font-size: 12px;
+font-weight: 500;
+color: black;
+cursor: pointer;
+  
+}
+#mp1 {
+opacity: 0;
+display: none;
+transition: all 0.5s ease-in-out; /* Smooth transition for opacity change */
+}
+
+#mp1.visible {
+display: flex;
+opacity: 1;
+}
+
+@media only screen and (max-width: 767px) {
+.mp1_wrapper {
+background: white;
+padding: 40px 40px;
+position: relative;
+display: flex;
+flex-direction: column;
+gap: 15px;
+text-align: center;
+border-radius: 8px;
+width: 90%;
+box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+}
+.mp1 h4 {
+margin-bottom: 5px;
+text-transform: uppercase;
+margin-bottom: 0px;
+font-size: 18px!important;
+display: inline;
+}
+.mp1_header img {
+border-radius: 500px;
+width: 15px; 
+object-fit: cover; 
+height: 15px;
+}
+}
+
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+  // Localization Form Script
+class LocalizationForm extends HTMLElement {
+  constructor() {
+    super();
+    this.elements = {
+      input: this.querySelector('input[name="language_code"], input[name="country_code"]'),
+      button: this.querySelector('button'),
+      panel: this.querySelector('ul'),
+    };
+    this.elements.button.addEventListener('click', this.openSelector.bind(this));
+    this.elements.button.addEventListener('focusout', this.closeSelector.bind(this));
+    this.addEventListener('keyup', this.onContainerKeyUp.bind(this));
+
+    this.querySelectorAll('a').forEach(item => item.addEventListener('click', this.onItemClick.bind(this)));
+  }
+
+  hidePanel() {
+    this.elements.button.setAttribute('aria-expanded', 'false');
+    this.elements.panel.setAttribute('hidden', true);
+  }
+
+  onContainerKeyUp(event) {
+    if (event.code.toUpperCase() !== 'ESCAPE') return;
+
+    this.hidePanel();
+    this.elements.button.focus();
+  }
+
+  onItemClick(event) {
+    event.preventDefault();
+    const form = this.querySelector('form');
+    this.elements.input.value = event.currentTarget.dataset.value;
+    if (form) form.submit();
+  }
+
+  openSelector() {
+    this.elements.button.focus();
+    this.elements.panel.toggleAttribute('hidden');
+    const expanded = this.elements.button.getAttribute('aria-expanded') === 'true';
+    this.elements.button.setAttribute('aria-expanded', (!expanded).toString());
+  }
+
+  closeSelector(event) {
+    const shouldClose = event.relatedTarget && event.relatedTarget.nodeName === 'BUTTON';
+    if (event.relatedTarget === null || shouldClose) {
+      this.hidePanel();
+    }
+  }
+}
+customElements.define('localization-form', LocalizationForm);
+});
+</script>

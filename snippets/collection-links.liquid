@@ -1,0 +1,118 @@
+{% assign collection_handles = section.settings.collection_handles | split: "," %}
+
+{%- assign current_collection = collection.handle -%}
+<section class="collection-links splide" aria-label="Collections links">
+  <div class="splide__track">
+    <ul class="splide__list">
+    {% for handle in collection_handles %}
+      {% assign collection = collections[handle] %}
+        <li class="splide__slide {% if collection.handle == current_collection  %}current{% endif %}">
+          <a href="{{ collection.url }}">{{ collection.title | capitalize }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+  </div>
+</section>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js" defer></script> 
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    initSplide();
+  
+    // Step 1: Select the facet-filters-form element to observe
+    const filterFormElement = document.querySelector('facet-filters-form');
+  
+    // Check if the facet-filters-form element exists before observing
+    if (filterFormElement) {
+      // Step 2: Create a MutationObserver instance
+      const observer = new MutationObserver((mutationsList) => {
+        let shouldInitSplide = false;
+        
+        for (const mutation of mutationsList) {
+          if (mutation.type === 'childList') {
+            // Check if nodes were added or removed
+            if (mutation.addedNodes.length || mutation.removedNodes.length) {
+              shouldInitSplide = true;
+              break; // No need to check further if already decided
+            }
+          } else if (mutation.type === 'attributes') {
+            // Observe specific attributes changes
+            if (mutation.attributeName === 'data-update-needed') {
+              shouldInitSplide = true;
+              break;
+            }
+          }
+        }
+  
+        if (shouldInitSplide) {
+          debouncedInitSplide();
+        }
+      });
+  
+      // Step 3: Specify the configuration for the observer
+      const config = {
+        attributes: true, // Observe attribute changes
+        attributeFilter: ['class', 'style', 'data-update-needed'], // Specify attributes to observe
+        childList: true, // Observe changes to child nodes
+        subtree: true // Observe changes in the subtree
+      };
+  
+      // Step 4: Start observing the facet-filters-form element
+      observer.observe(filterFormElement, config);
+    } 
+    
+  });
+  
+  // Debounce function
+  function debounce(func, wait) {
+    let timeout;
+    return function (...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+  
+  // Debounced initSplide function
+  const debouncedInitSplide = debounce(initSplide, 100); // Adjust delay as needed
+  
+  function initSplide() {
+    console.log('initSplide');
+    const splideElements = document.querySelectorAll('.splide');
+    splideElements.forEach((element) => {
+      // Avoid re-initializing if already initialized
+      if (!element.splide) {
+        const splide = new Splide(element, {
+          pagination: false,
+          loop: true,
+          arrows: false,
+          drag: 'free',
+          autoWidth: true,
+          breakpoints: {
+            768: {
+              arrows: true,
+            },
+            1024: {
+              arrows: true,
+            },
+            1280: {
+              arrows: false,
+            },
+            1400: {
+              arrows: false,
+            },
+          },
+        });
+        splide.mount();
+        element.splide = splide;
+      }
+    });
+  }
+  </script>

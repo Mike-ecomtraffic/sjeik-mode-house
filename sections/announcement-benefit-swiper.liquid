@@ -1,0 +1,167 @@
+{%- liquid
+  assign desktop_text = section.settings.desktop_bar_text
+  assign icon = section.settings.icon
+  assign bg_color = section.settings.background_color
+  assign text_color = section.settings.text_color
+-%}
+
+<style>
+    .reknak-announcement-bar {
+        background-color: {{ bg_color }};
+        color: {{ text_color }};
+        height: 40px;
+    }
+
+    .reknak-swiper-button {
+      color: {{ text_color }};
+    }
+</style>
+
+<div class="reknak-announcement-bar">
+  <button class="reknak-swiper-button reknak-swiper-button-prev" aria-label="Previous benefit">
+    <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M9.85355 4.64645C10.0488 4.84171 10.0488 5.15829 9.85355 5.35355L6.70711 8.5L9.85355 11.6464C10.0488 11.8417 10.0488 12.1583 9.85355 12.3536C9.65829 12.5488 9.34171 12.5488 9.14645 12.3536L5.64645 8.85355C5.45119 8.65829 5.45119 8.34171 5.64645 8.14645L9.14645 4.64645C9.34171 4.45118 9.65829 4.45118 9.85355 4.64645Z" fill="black" fill-opacity="0.24"/>
+    </svg>
+  </button>
+  <div class="reknak-benefits-container">
+    <div class="reknak-swiper-container swiper">
+      <div class="reknak-swiper-wrapper swiper-wrapper">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'benefit' -%}
+            <div class="reknak-swiper-slide swiper-slide" {{ block.shopify_attributes }}>
+              <div class="reknak-benefit-item">
+                <div class="reknak-benefit-icon">
+                  {{ block.settings.icon }}
+                </div>
+                <div class="reknak-benefit-text">
+                  {{ block.settings.text }}
+                </div>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+
+  <button class="reknak-swiper-button reknak-swiper-button-next" aria-label="Next benefit">
+    <svg width="100%" height="100%" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6.14645 12.3536C5.95118 12.1583 5.95118 11.8417 6.14645 11.6464L9.29289 8.5L6.14645 5.35355C5.95118 5.15829 5.95118 4.84171 6.14645 4.64645C6.34171 4.45119 6.65829 4.45119 6.85355 4.64645L10.3536 8.14645C10.5488 8.34171 10.5488 8.65829 10.3536 8.85355L6.85355 12.3536C6.65829 12.5488 6.34171 12.5488 6.14645 12.3536Z" fill="black" fill-opacity="0.24"/>
+    </svg>
+  </button>
+
+  {%- if desktop_text != blank -%}
+    <div class="reknak-desktop-rating">
+      <div class="reknak-star-icon">
+        {{ icon }}
+      </div>
+      <div class="reknak-benefit-text">
+        {{ desktop_text }}
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.innerWidth < 1000) {
+      const swiper = new Swiper('.reknak-swiper-container', {
+        slidesPerView: 1,
+        spaceBetween: 0,
+        loop: true,
+        navigation: {
+          nextEl: '.reknak-swiper-button-next',
+          prevEl: '.reknak-swiper-button.reknak-swiper-button-prev',
+        },
+        autoplay: {
+          delay: 9000,
+          disableOnInteraction: false,
+        },
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Announcement Benefits",
+  "tag": "section",
+  "class": "reknak-announcement-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "desktop_bar_text",
+      "label": "Desktop Bar Text",
+      "default": "Rated 4.7/5 out of 1230+ reviews",
+      "info": "Only visible on desktop"
+    },
+    {
+      "type": "html",
+      "id": "icon",
+      "label": "Icon (SVG)",
+      "info": "Paste SVG code here. Use 'currentColor' for fill/stroke to inherit text color"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#f6eef0"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#000000"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "html",
+          "id": "icon",
+          "label": "Icon (SVG)",
+          "default": "<svg viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M13.5 5.5L8 14L2.5 5.5H13.5Z' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M8 2V5.5' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M2.5 5.5L5 3' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M13.5 5.5L11 3' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M8 14V10' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>",
+          "info": "Paste SVG code here. Use 'currentColor' for fill/stroke to inherit text color"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Free Shipping"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement Benefit Swiper",
+      "blocks": [
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "<svg viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M13.5 5.5L8 14L2.5 5.5H13.5Z' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M8 2V5.5' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M2.5 5.5L5 3' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M13.5 5.5L11 3' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M8 14V10' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>",
+            "text": "Free Shipping"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "<svg viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M11 7.5V3.5L3 11.5V8.5H11V7.5Z' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>",
+            "text": "30 Days Return"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "<svg viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M8 13.5C8 13.5 13.5 10.5 13.5 6.5C13.5 3.5 11 2.5 8 5C5 2.5 2.5 3.5 2.5 6.5C2.5 10.5 8 13.5 8 13.5Z' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>",
+            "text": "Customer Support"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,74 @@
+.breadcrumbs {
+  padding: 0 15px;
+  max-width: 1380px;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media only screen and (min-width: 768px) {
+  .breadcrumbs {
+    padding: 0 50px;
+  }
+}
+
+.breadcrumbs-section + .product-section .thb-product-detail {
+  margin-top: 0;
+}
+
+.breadcrumbs-section + .section-template-header .template-header {
+  padding-top: 15px;
+}
+
+.breadcrumbs-section {
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.breadcrumbs-section scroll-shadow {
+  width: 100%;
+}
+
+.breadcrumbs {
+  font-size: 12px;
+  overflow-x: scroll;
+  padding: 10px 0;
+  display: inline-flex;
+  width: 100%;
+  white-space: nowrap;
+  max-width: 100vw;
+  text-align: left;
+  scrollbar-width: none;
+  font-weight: 500 !Important;
+}
+@media only screen and (min-width: 768px) {
+  .breadcrumbs {
+    padding: 12px 0;
+    overflow-x: hidden;
+  }
+}
+.breadcrumbs::-webkit-scrollbar {
+  display: none;
+}
+.breadcrumbs i {
+  display: inline-block;
+  margin: 0 12px;
+}
+.breadcrumbs a {
+  align-content: center;
+  display: inline-flex;
+  font-size: 12px;
+  font-height: 100%;
+  font-color: black;
+}
+
+.custom-page-padding {
+  padding: 16px 0px;
+}
+
+.custom-page-padding {
+  padding: 0px 16px;
+}
+
+.container-v1 {
+  max-width: var(--container-max-width);
+  width: 100%;
+  margin: 0px auto;
+}

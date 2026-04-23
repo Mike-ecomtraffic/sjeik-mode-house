@@ -1,0 +1,283 @@
+<!-- Include Swiper CSS in the head -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+>
+
+<!-- Your HTML structure -->
+<div
+  class="reasons-why-slider"
+  style="
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  "
+>
+  <div
+    class="custom-page-padding"
+    style="
+      padding-left: {{ section.settings.padding_left }}px;
+      padding-right: {{ section.settings.padding_right }}px;
+    "
+  >
+    <div class="custom-container">
+      <div id="ReasonsSwiper" class="reasons-slider">
+        <div class="swiper">
+          <div class="swiper-wrapper">
+            {% for block in section.blocks %}
+              {% if block.type == 'slide' %}
+                <div class="swiper-slide">
+                  <div class="reasons-outer-wrapper">
+                    <div class="steps-reasons" style="background-color: {{ section.settings.steps_reasons_bg_color }};">
+                      <div class="text-block">{{ block.settings.step_number }}</div>
+                    </div>
+                    <div class="reasons-swipe-inner">
+                      {% if block.settings.media_type == 'image' %}
+                        {% if block.settings.slide_image != blank %}
+                          <img
+                            src="{{ block.settings.slide_image | img_url: 'medium' }}"
+                            loading="lazy"
+                            alt=""
+                            class="image"
+                            style="aspect-ratio: {{ section.settings.aspect_ratio }};"
+                          >
+                        {% endif %}
+                      {% elsif block.settings.media_type == 'video' %}
+                        {% if block.settings.video_url != blank %}
+                          <video
+                            src="{{ block.settings.video_url }}"
+                            loop
+                            muted
+                            autoplay
+                            playsinline
+                            class="image"
+                            style="aspect-ratio: {{ section.settings.aspect_ratio }};"
+                            controlslist="nodownload nofullscreen noremoteplayback"
+                            disablepictureinpicture
+                          ></video>
+                        {% endif %}
+                      {% endif %}
+                      <div class="reasons-why-inner">
+                        <h4 class="custom-h4">{{ block.settings.slide_heading }}</h4>
+                        <div>{{ block.settings.slide_text }}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        <div class="navigation-block">
+          <div class="swiper-prev" style="border-color: {{ section.settings.arrow_border_color }};">
+            <div class="arrow-icon w-embed">
+              <!-- Left Arrow SVG Icon -->
+              <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19.375 8.00004C19.375 8.29841 19.2565 8.58455 19.0455 8.79553C18.8345 9.00651 18.5484 9.12504 18.25 9.12504H4.46878L9.29878 13.9541C9.51013 14.1654 9.62886 14.4521 9.62886 14.751C9.62886 15.0499 9.51013 15.3365 9.29878 15.5478C9.08744 15.7592 8.80079 15.8779 8.50191 15.8779C8.20302 15.8779 7.91638 15.7592 7.70503 15.5478L0.955033 8.79785C0.850153 8.69333 0.766936 8.56914 0.710155 8.4324C0.653374 8.29565 0.624146 8.14904 0.624146 8.00097C0.624146 7.85291 0.653374 7.7063 0.710155 7.56955C0.766936 7.43281 0.850153 7.30862 0.955033 7.2041L7.70503 0.4541C7.80968 0.349453 7.93391 0.266442 8.07064 0.209807C8.20737 0.153173 8.35391 0.124023 8.50191 0.124023C8.6499 0.124023 8.79645 0.153173 8.93317 0.209807C9.0699 0.266442 9.19413 0.349453 9.29878 0.4541C9.40343 0.558747 9.48644 0.682981 9.54307 0.819709C9.59971 0.956437 9.62886 1.10298 9.62886 1.25097C9.62886 1.39897 9.59971 1.54551 9.54307 1.68224C9.48644 1.81897 9.40343 1.9432 9.29878 2.04785L4.46878 6.87504H18.25C18.5484 6.87504 18.8345 6.99356 19.0455 7.20454C19.2565 7.41552 19.375 7.70167 19.375 8.00004Z" fill="{{ section.settings.arrow_fill_color }}"></path>
+              </svg>
+            </div>
+          </div>
+          <div id="TestimonialPagination" class="swiper-bullet-wrapper"></div>
+          <div class="swiper-next" style="border-color: {{ section.settings.arrow_border_color }};">
+            <div class="arrow-icon w-embed">
+              <!-- Right Arrow SVG Icon -->
+              <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19.0459 8.79598L12.2959 15.546C12.0846 15.7573 11.7979 15.8761 11.4991 15.8761C11.2002 15.8761 10.9135 15.7573 10.7022 15.546C10.4908 15.3346 10.3721 15.048 10.3721 14.7491C10.3721 14.4502 10.3721 14.1636 10.7022 13.9522L15.5312 9.12504H1.75C1.45163 9.12504 1.16548 9.00652 0.954505 8.79554C0.743526 8.58456 0.625 8.29841 0.625 8.00004C0.625 7.70167 0.743526 7.41552 0.954505 7.20455C1.16548 6.99357 1.45163 6.87504 1.75 6.87504H15.5312L10.7041 2.04504C10.4927 1.8337 10.374 1.54705 10.374 1.24817C10.374 0.949281 10.374 0.662636 10.7041 0.451292C10.9154 0.239948 11.2021 0.121216 11.5009 0.121216C11.7998 0.121216 12.0865 0.239948 12.2978 0.451292L19.0478 7.20129C19.1527 7.30595 19.2359 7.4303 19.2926 7.5672C19.3493 7.7041 19.3784 7.85085 19.3782 7.99903C19.3781 8.1472 19.3486 8.29389 19.2916 8.43065C19.2346 8.56742 19.1511 8.69157 19.0459 8.79598Z" fill="{{ section.settings.arrow_fill_color }}"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Swiper JS initialization script -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var swiper = new Swiper('#ReasonsSwiper .swiper', {
+      slidesPerView: 3,
+      centeredSlides: false,
+      loop: true,
+      spaceBetween: 16,
+      pagination: {
+        el: '#TestimonialPagination',
+        clickable: true,
+        dynamicBullets: true,
+      },
+      navigation: {
+        nextEl: '#ReasonsSwiper .swiper-next',
+        prevEl: '#ReasonsSwiper .swiper-prev',
+      },
+      breakpoints: {
+        320: {
+          slidesPerView: 1.1,
+          centeredSlides: true,
+          slidesPerGroup: 1, // Slides per group for mobile
+        },
+        768: {
+          slidesPerView: 1.1,
+          centeredSlides: true,
+          slidesPerGroup: 1, // Slides per group for tablet
+        },
+        1024: {
+          slidesPerView: 3,
+          centeredSlides: false,
+          slidesPerGroup: 1, // Group 3 slides together on desktop
+        }
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Reasons Swiper Section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "arrow_border_color",
+      "label": "Arrow Border Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "arrow_fill_color",
+      "label": "Arrow SVG Fill Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "steps_reasons_bg_color",
+      "label": "Steps-Reasons Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Media Settings"
+    },
+    {
+      "type": "header",
+      "content": "Used for image sizes"
+    },
+    {
+      "type": "text",
+      "id": "aspect_ratio",
+      "label": "Aspect Ratio",
+      "default": "9 / 10",
+      "info": "Important: always use a / when setting up a custom aspect ratio. For example: 9 / 10."
+    },
+    {
+      "type": "header",
+      "content": "Used for spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "min": 0,
+      "max": 32,
+      "step": 4,
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "min": 0,
+      "max": 32,
+      "step": 4,
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_left",
+      "label": "Padding Left",
+      "min": 0,
+      "max": 32,
+      "step": 1,
+      "default": 32,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_Right",
+      "label": "Padding Right",
+      "min": 0,
+      "max": 32,
+      "step": 1,
+      "default": 32,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "text",
+          "id": "step_number",
+          "label": "Step Number",
+          "default": "1"
+        },
+        {
+          "type": "select",
+          "id": "media_type",
+          "label": "Media Type",
+          "options": [
+            {
+              "value": "image",
+              "label": "Image"
+            },
+            {
+              "value": "video",
+              "label": "Video"
+            }
+          ],
+          "default": "image"
+        },
+        {
+          "type": "header",
+          "content": "Image Settings"
+        },
+        {
+          "type": "image_picker",
+          "id": "slide_image",
+          "label": "Slide Image (used when Media Type is set to 'Image')"
+        },
+        {
+          "type": "header",
+          "content": "Video Settings"
+        },
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "Video URL (used when Media Type is set to 'Video')",
+          "info": "Enter the URL of the video you want to display. This should be a direct link to a video file (e.g., .mp4)."
+        },
+        {
+          "type": "text",
+          "id": "slide_heading",
+          "label": "Slide Heading",
+          "default": "ELEVATES YOUR STYLE"
+        },
+        {
+          "type": "textarea",
+          "id": "slide_text",
+          "label": "Slide Text",
+          "default": "Adds a touch of sophistication to your wardrobe. Effortlessly versatile for any occasion, ensuring you're always on-trend and chic."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "Reasons Swiper",
+      "category": "Slideshow"
+    }
+  ]
+}
+{% endschema %}

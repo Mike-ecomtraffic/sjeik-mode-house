@@ -1,0 +1,204 @@
+<div class="collection-container section">
+  <div class="swiper collection-top-slider swiper-initialized swiper-horizontal swiper-free-mode">
+    <div class="swiper-wrapper" id="swiper-wrapper-f8647863466e106b4">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'Collection' %} 
+            <div class="swiper-slide swiper-slide-active" style="margin-right: 32px;">
+              <div class="main-wrapper">
+                <a href="{{ block.settings.url }}">
+                  <div class="crispy-image-wrapper">
+                    <img src="{% if block.settings.image %}{{ block.settings.image | img_url: "500x500" }}{% else %}https://cdn.shopify.com/s/files/1/0719/3680/3129/files/Ontwerp_zonder_titel_19.jpg?v=1702746587{% endif %}" height="100px" width="100px">
+                  </div>
+                  <div class="title-wrapper">
+                    <p>
+                      {{ block.settings.title }}
+                    </p>
+                  </div>
+                </a>
+              </div>
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  <span class="swiper-notification"></span></div>
+  <div class="swiper-button-nextcollection">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M1.875 7.438 12 17.563 22.125 7.438" stroke="currentColor" stroke-width="2"></path>
+    </svg>
+  </div>
+  <div class="swiper-button-prevcollection">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M1.875 7.438 12 17.563 22.125 7.438" stroke="currentColor" stroke-width="2"></path>
+    </svg>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var swiper = new Swiper(".collection-top-slider", {
+    slidesPerView: "auto",
+    freeMode: true,
+    spaceBetween: 12,
+    navigation: {
+      nextEl: ".swiper-button-nextcollection",
+      prevEl: ".swiper-button-prevcollection",
+    },
+    breakpoints: {
+      640: { slidesPerView: "auto", spaceBetween: 12 },
+      768: { slidesPerView: "auto", spaceBetween: 12 },
+      1024: { slidesPerView: "auto", spaceBetween: 24 },
+      1200: { slidesPerView: "auto", spaceBetween: 32 },
+    },
+  });
+});
+</script>
+
+
+
+<style>
+  .swiper {
+    padding: 
+      {{ section.settings.padding-top-desktop | default: '20px' }} 
+      {{ section.settings.padding-right-desktop | default: '20px' }} 
+      {{ section.settings.padding-bottom-desktop | default: '20px' }} 
+      {{ section.settings.padding-left-desktop | default: '0px' }} 
+      !important;
+  }
+
+  .collection-container.section {
+    padding-top: {{ section.settings.padding-top-desktop | default: '20px' }}px;
+    padding-bottom: {{ section.settings.padding-bottom-desktop | default: '20px' }}px;
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+
+  @media (max-width: 450px) {
+    .collection-container.section {
+      padding-top: {{ section.settings.padding-top-mobile | default: '20px' }}px;
+      padding-bottom: {{ section.settings.padding-bottom-mobile | default: '20px' }}px;
+      margin-left: 0px;
+      margin-right: 0px;
+    }
+  }
+
+  .swiper.collection-top-slider {
+    padding: 0px 0px !important;
+  }
+  
+</style>
+
+{% if section.settings.activor_checkbox %}
+  <style>
+    .collection-container.section {
+      max-width: 1440px;
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+    
+    @media (max-width: 450px) {
+      .collection-container.section {
+        margin-left: 16px !important;
+        margin-right: 16px !important;
+        width: unset !important;
+        padding-left: 0px;
+        padding-right: 0px;
+      }
+    }
+  </style>
+{% endif %}
+  
+{% schema %}
+{
+"name": "Categoy slider",
+"settings": [
+{
+"type": "text",
+"id": "title",
+"label": "Title",
+"default": "Collections"
+},
+{
+"type": "checkbox",
+"id": "activor_checkbox",
+"label": "Don't activate fullwidth on desktop?",
+"default": true
+},
+{
+"type": "range",
+"id": "padding-top-desktop",
+"min": 0,
+"max": 100,
+"step": 5,
+"unit": "px",
+"label": "Spacing top desktop",
+"default": 20
+},
+{
+"type": "range",
+"id": "padding-bottom-desktop",
+"min": 0,
+"max": 100,
+"step": 4,
+"unit": "px",
+"label": "Spacing bottom desktop",
+"default": 20
+},
+{
+"type": "range",
+"id": "padding-top-mobile",
+"min": 0,
+"max": 100,
+"step": 5,
+"unit": "px",
+"label": "Spacing top mobile",
+"default": 40
+},
+{
+"type": "range",
+"id": "padding-bottom-mobile",
+"min": 0,
+"max": 100,
+"step": 5,
+"unit": "px",
+"label": "Spacing bottom mobile",
+"default": 50
+}
+
+],
+"blocks": [
+{
+"name": "Collection",
+"type": "Collection",
+"settings": [
+
+{
+"type": "image_picker",
+"id": "image",
+"label": "Image"
+},
+{
+"type": "url",
+"id": "url",
+"label": "Link"
+},
+
+{
+"type": "text",
+"id": "title",
+"label": "Title",
+"default": "Best sellers"
+}
+]
+}
+],
+"presets": [
+{
+"name": "Categoy slider"
+}
+]
+}
+{% endschema %}

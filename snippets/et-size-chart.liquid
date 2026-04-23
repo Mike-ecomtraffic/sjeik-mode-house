@@ -1,0 +1,419 @@
+{% comment %}
+  ==========================================================================
+  BLITZTRAFFIC SIZE CHART SNIPPET — v2.0.0
+  
+  This snippet renders a product size chart from the "blitztraffic.size_chart"
+  metafield. It is designed to work universally across all Shopify themes.
+  
+  USAGE:
+  1. Create this file as snippets/et-size-chart.liquid
+  2. Include in your product template:
+     {% render 'et-size-chart', product: product %}
+  
+  REQUIREMENTS:
+  - Product must have metafield namespace: "blitztraffic", key: "size_chart"
+  - Metafield type: json
+  ==========================================================================
+{% endcomment %}
+
+{%- liquid
+  assign size_chart_data = product.metafields.blitztraffic.size_chart.value
+  unless size_chart_data
+    assign size_chart_data = blank
+  endunless
+-%}
+
+{%- if size_chart_data != blank -%}
+  <!-- BlitzTraffic Size Chart Trigger (hidden, moved by JS to SIZE label) -->
+  <a
+    href="#"
+    class="bt-sc-trigger"
+    aria-label="Open size chart"
+    aria-haspopup="dialog"
+    data-bt-sc-open
+    onclick="event.preventDefault()"
+    style="display:none"
+  >
+    <svg class="bt-sc-trigger__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+      <path d="m15 5 4 4"/>
+    </svg>
+    <span>Size Chart</span>
+  </a>
+
+  <!-- BlitzTraffic Size Chart Modal -->
+  <div
+    class="bt-sc-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Size chart for {{ product.title | escape }}"
+    data-bt-sc-modal
+    hidden
+  >
+    <div class="bt-sc-backdrop" data-bt-sc-close></div>
+    <div class="bt-sc-modal" role="document">
+      
+      <!-- Header -->
+      <div class="bt-sc-header">
+        <div class="bt-sc-header__info">
+          <h2 class="bt-sc-header__title">{{ product.title | escape }}</h2>
+          <p class="bt-sc-header__subtitle">Size Charts</p>
+        </div>
+        <button
+          type="button"
+          class="bt-sc-close"
+          aria-label="Close size chart"
+          data-bt-sc-close
+        >
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M5 5l10 10M15 5l-10 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Chart Tables Container -->
+      <div class="bt-sc-body" data-bt-sc-tables></div>
+
+      <!-- Fit Notes -->
+      <div class="bt-sc-fit-notes" data-bt-sc-fit-notes hidden></div>
+    </div>
+  </div>
+
+  <!-- Inline JSON data for JS to consume -->
+  <script type="application/json" data-bt-sc-json>
+    {{ size_chart_data | json }}
+  </script>
+
+  <!-- Size Chart Styles -->
+  <style>
+    /* ── Trigger ── */
+    .bt-sc-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: inherit;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 400;
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity .15s ease;
+      border: none;
+      background: none;
+      padding: 0;
+      margin: 0 0 0 12px;
+      line-height: 1;
+      vertical-align: middle;
+    }
+    .bt-sc-trigger:hover { opacity: .6; }
+    .bt-sc-trigger__icon {
+      flex-shrink: 0;
+      opacity: .7;
+    }
+    .bt-sc-trigger span {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* ── Overlay ── */
+    .bt-sc-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 999999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .bt-sc-overlay[hidden] { display: none !important; }
+
+    /* ── Backdrop ── */
+    .bt-sc-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+    }
+
+    /* ── Modal ── */
+    .bt-sc-modal {
+      position: relative;
+      width: 100%;
+      max-width: 720px;
+      max-height: 85vh;
+      overflow-y: auto;
+      background: #fff;
+      color: #1a1a1a;
+      border-radius: 6px;
+      box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.3);
+      padding: 28px 32px 24px;
+    }
+
+    /* ── Header ── */
+    .bt-sc-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .bt-sc-header__info {
+      text-align: center;
+      flex: 1;
+      padding-right: 30px;
+    }
+    .bt-sc-header__title {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+      font-family: inherit;
+      color: #1a1a1a;
+      line-height: 1.3;
+    }
+    .bt-sc-header__subtitle {
+      margin: 4px 0 0;
+      font-size: 14px;
+      color: #777;
+      font-weight: 400;
+    }
+    .bt-sc-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border: none;
+      border-radius: 50%;
+      background: transparent;
+      color: #1a1a1a;
+      cursor: pointer;
+      transition: background .15s ease;
+      -webkit-appearance: none;
+      appearance: none;
+      padding: 0;
+    }
+    .bt-sc-close:hover { background: rgba(0,0,0,0.06); }
+
+    /* ── Table ── */
+    .bt-sc-table-wrapper { margin-bottom: 16px; }
+    .bt-sc-table-scroll {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+    }
+    .bt-sc-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      line-height: 1.4;
+      font-family: inherit;
+      text-align: center;
+    }
+    .bt-sc-table th {
+      padding: 14px 18px;
+      background: #fff;
+      font-weight: 700;
+      text-align: center;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: #1a1a1a;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .bt-sc-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid #f0f0f0;
+      text-align: center;
+      font-size: 14px;
+      color: #333;
+    }
+    .bt-sc-table tr:last-child td { border-bottom: none; }
+    .bt-sc-table .bt-size-label {
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+
+    /* ── Fit Notes ── */
+    .bt-sc-fit-notes {
+      margin-top: 16px;
+      padding: 0;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.5;
+      color: #1a1a1a;
+    }
+    .bt-sc-fit-notes[hidden] { display: none !important; }
+
+    /* ── Mobile ── */
+    @media (max-width: 640px) {
+      .bt-sc-overlay {
+        padding: 0;
+        align-items: flex-end;
+      }
+      .bt-sc-modal {
+        max-width: 100%;
+        max-height: 90vh;
+        border-radius: 16px 16px 0 0;
+        padding: 24px 20px 20px;
+      }
+      .bt-sc-header__title { font-size: 16px; }
+      .bt-sc-table { font-size: 13px; }
+      .bt-sc-table th,
+      .bt-sc-table td { padding: 12px 14px; }
+      .bt-sc-trigger { font-size: 13px; }
+    }
+
+    /* ── Print ── */
+    @media print {
+      .bt-sc-backdrop, .bt-sc-close { display: none !important; }
+      .bt-sc-overlay { position: static !important; padding: 0 !important; }
+      .bt-sc-modal { box-shadow: none !important; max-height: none !important; border-radius: 0 !important; padding: 0 !important; }
+    }
+  </style>
+
+  <!-- Size Chart JavaScript -->
+  <script>
+    (function(){
+      'use strict';
+      var jsonEl = document.querySelector('[data-bt-sc-json]');
+      if (!jsonEl) return;
+      var chartData;
+      try { chartData = JSON.parse(jsonEl.textContent); } catch(e) { return; }
+      if (!chartData) return;
+
+      // Move trigger inline with the SIZE label
+      var trigger = document.querySelector('[data-bt-sc-open]');
+      if (trigger) {
+        // Find the SIZE legend element inside variant-picker
+        var legends = document.querySelectorAll('.variant-picker__option-info legend, .variant-picker legend, fieldset legend');
+        var sizeLegend = null;
+        for (var i = 0; i < legends.length; i++) {
+          var text = legends[i].textContent.trim().toLowerCase();
+          if (text === 'size:' || text === 'size' || text.indexOf('size') === 0 || text === 'maat:' || text === 'maat') {
+            sizeLegend = legends[i];
+            break;
+          }
+        }
+        if (sizeLegend) {
+          // Insert trigger into the same parent as the legend (the h-stack div)
+          var hStack = sizeLegend.parentElement;
+          if (hStack) {
+            hStack.appendChild(trigger);
+            trigger.style.display = '';
+          }
+        } else {
+          // Fallback: show trigger in its default position
+          trigger.style.display = '';
+        }
+      }
+
+      // Get tables — prefer regional tables, fall back to base tables
+      var tables = chartData.tables || [];
+      if (chartData.regions) {
+        var region = detectRegion();
+        var regionTables = chartData.regions[region];
+        if (regionTables && regionTables.length) tables = regionTables;
+      }
+
+      if (!tables.length) {
+        var triggers = document.querySelectorAll('[data-bt-sc-open]');
+        for (var i = 0; i < triggers.length; i++) triggers[i].style.display = 'none';
+        return;
+      }
+
+      // Render tables
+      var tablesContainer = document.querySelector('[data-bt-sc-tables]');
+      if (tablesContainer) {
+        var html = '';
+        tables.forEach(function(table) {
+          html += '<div class="bt-sc-table-wrapper">';
+          html += '<div class="bt-sc-table-scroll"><table class="bt-sc-table"><thead><tr>';
+          (table.columns || []).forEach(function(col) {
+            var unitSuffix = '';
+            var unit = col.unit || table.unit;
+            if (unit && unit !== 'none' && !col.isSizeColumn) unitSuffix = ' (' + unit + ')';
+            html += '<th>' + esc(col.label) + esc(unitSuffix) + '</th>';
+          });
+          html += '</tr></thead><tbody>';
+          (table.rows || []).forEach(function(row) {
+            html += '<tr>';
+            (table.columns || []).forEach(function(col) {
+              if (col.isSizeColumn) {
+                html += '<td class="bt-size-label">' + esc(String(row.sizeLabel)) + '</td>';
+              } else {
+                var val = row.values[col.key];
+                var display = val === null || val === undefined ? '\u2014' : String(val);
+                // Append unit to values if present
+                if (val !== null && val !== undefined && col.unit && col.unit !== 'none') {
+                  display = display + ' ' + col.unit;
+                }
+                html += '<td>' + esc(display) + '</td>';
+              }
+            });
+            html += '</tr>';
+          });
+          html += '</tbody></table></div></div>';
+        });
+        tablesContainer.innerHTML = html;
+      }
+
+      // Fit notes
+      var fitNotesEl = document.querySelector('[data-bt-sc-fit-notes]');
+      if (fitNotesEl && chartData.meta && chartData.meta.fitNotes) {
+        fitNotesEl.textContent = chartData.meta.fitNotes;
+        fitNotesEl.hidden = false;
+      }
+
+      // Modal open/close
+      var modal = document.querySelector('[data-bt-sc-modal]');
+      var lastFocusedEl = null;
+      document.querySelectorAll('[data-bt-sc-open]').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          lastFocusedEl = document.activeElement;
+          modal.hidden = false;
+          document.body.style.overflow = 'hidden';
+        });
+      });
+      document.querySelectorAll('[data-bt-sc-close]').forEach(function(btn) {
+        btn.addEventListener('click', closeModal);
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && !modal.hidden) closeModal();
+      });
+
+      function closeModal() {
+        modal.hidden = true;
+        document.body.style.overflow = '';
+        if (lastFocusedEl && lastFocusedEl.focus) lastFocusedEl.focus();
+      }
+
+      function detectRegion() {
+        var locale = (window.Shopify && window.Shopify.locale) || navigator.language || 'en';
+        locale = locale.toLowerCase();
+        if (locale.indexOf('en-us') !== -1) return 'US';
+        if (locale.indexOf('en-gb') !== -1) return 'UK';
+        if (locale.indexOf('en-au') !== -1) return 'AU';
+        if (locale.indexOf('ja') !== -1) return 'JP';
+        if (locale.indexOf('ko') !== -1) return 'KR';
+        if (locale.indexOf('zh') !== -1) return 'CN';
+        if (locale.indexOf('de') !== -1) return 'DE';
+        if (locale.indexOf('fr') !== -1) return 'FR';
+        if (locale.indexOf('nl') !== -1) return 'EU';
+        var euLocales = ['nl','de','fr','es','it','pt','pl','cs','sk','hu','ro','bg'];
+        for (var i = 0; i < euLocales.length; i++) {
+          if (locale.indexOf(euLocales[i]) !== -1) return 'EU';
+        }
+        return 'INTERNATIONAL';
+      }
+
+      function esc(str) {
+        var div = document.createElement('div');
+        div.appendChild(document.createTextNode(str));
+        return div.innerHTML;
+      }
+    })();
+  </script>
+{%- endif -%}

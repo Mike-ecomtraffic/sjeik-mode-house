@@ -1,0 +1,259 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+<div class="custom-faq-right">
+  <div class="custom-faq-section-inner">
+  </div>
+  <div class="swiper swiper-slider swiper-container-horizontal">
+    <div class="swiper-wrapper">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'video' -%}
+          <div
+            class="swiper-slide video-social-card-template--23052069339431__ss_video_grid_socials_2_rNcrkL"
+          >
+            <video
+              src="{{ block.settings.video_url }}"
+              loop=""
+              muted=""
+              playsinline=""
+              poster=""
+              autoplay=""
+              class="mtz-vlc-dkbcc mtz-vlc-mkjjc mtz-vlc-ihack"
+            ></video>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    <span class="swiper-button-prev" tabindex="0" role="button" aria-label="Previous slide"></span>
+    <span class="swiper-button-next" tabindex="0" role="button" aria-label="Next slide"></span>
+    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  const swiper = new Swiper(".swiper-slider", {
+    centeredSlides: true,
+    slidesPerView: 7,
+    spaceBetween: 16,
+    grabCursor: true,
+    freeMode: false,
+    loop: true,
+    mousewheel: false,
+    keyboard: {
+      enabled: true
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      dynamicBullets: false,
+      clickable: true
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev"
+    },
+    breakpoints: {
+      320: {
+        centeredSlides: true,
+        spaceBetween: 16,
+        slidesPerView: 2
+      },
+      768: {
+        centeredSlides: true,
+        spaceBetween: 16,
+        slidesPerView: 2
+      },
+      1024: {
+        centeredSlides: true,
+        spaceBetween: 16,
+        slidesPerView: 3
+      }
+    }
+  });
+
+  document.addEventListener("DOMContentLoaded", function() {
+    const toggleButtons = document.querySelectorAll('.toggle-sound');
+    toggleButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const video = button.previousElementSibling;
+        video.muted = !video.muted;
+        const muteIcon = button.querySelector('.mute-icon');
+        const unmuteIcon = button.querySelector('.unmute-icon');
+        if (video.muted) {
+          muteIcon.style.display = 'block';
+          unmuteIcon.style.display = 'none';
+        } else {
+          muteIcon.style.display = 'none';
+          unmuteIcon.style.display = 'block';
+        }
+      });
+    });
+
+    var swiperSlides = document.querySelectorAll('.swiper-slide');
+
+    function handleAutoplay(slide) {
+      var video = slide.querySelector('video');
+      if (slide.classList.contains('swiper-slide-active')) {
+        video.setAttribute('autoplay', '');
+        video.play();
+      } else {
+        video.removeAttribute('autoplay');
+        video.pause();
+      }
+    }
+
+    swiperSlides.forEach(function(slide) {
+      handleAutoplay(slide);
+    });
+
+    var observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        handleAutoplay(mutation.target);
+      });
+    });
+
+    var config = { attributes: true, attributeFilter: ['class'] };
+
+    swiperSlides.forEach(function(slide) {
+      observer.observe(slide, config);
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Social Proof Videos",
+  "tag": "div",
+  "class": "blank",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title_line1",
+      "label": "Title Line 1",
+      "default": "Frequently asked"
+    },
+    {
+      "type": "text",
+      "id": "title_line2",
+      "label": "Title Line 2",
+      "default": "questions"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "Find out why babes around the globe are obsessed with Coco Gianna’s Tailored Pants"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Social Proof Videos"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Video",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "poster_image",
+          "label": "Poster image"
+        },
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "Video URL"
+        }
+      ]
+    },
+    {
+      "type": "subheading",
+      "name": "Subheading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Subheading"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Heading"
+        },
+        {
+          "type": "checkbox",
+          "id": "decoration",
+          "label": "Decoration Activator",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "label": "Style",
+          "options": [
+            {
+              "value": "h0",
+              "label": "H0"
+            },
+            {
+              "value": "h1",
+              "label": "H1"
+            },
+            {
+              "value": "h2",
+              "label": "H2"
+            },
+            {
+              "value": "h3",
+              "label": "H3"
+            },
+            {
+              "value": "h4",
+              "label": "H4"
+            },
+            {
+              "value": "h5",
+              "label": "H5"
+            },
+            {
+              "value": "h6",
+              "label": "H6"
+            }
+          ],
+          "default": "h1"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text"
+        },
+        {
+          "type": "color_background",
+          "id": "gradient",
+          "label": "Gradient"
+        }
+      ]
+    },
+    {
+      "type": "richtext",
+      "name": "Paragraph",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

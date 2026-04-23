@@ -1,0 +1,215 @@
+<div id="shopify-section-language-topbar" class="shopify-section">
+  <style>
+    /* Your existing CSS styles */
+    #language_selector .icon {
+      transition: transform 0.3s ease;
+    }
+    #language_selector .rotate {
+      transform: rotate(180deg);
+    }
+    #language_selector form {
+      margin: 0px !important;
+    }
+    #language_selector {
+      padding-right: 7px !important;
+      padding-left: 0px !important;
+    }
+    #country_select {
+      overflow-y: auto;
+      max-height: 150px;
+    }
+    .disclosure {
+      display: flex;
+      align-items: center;
+    }
+    .main-topbar {
+      background-color: {{ settings.background_color }};
+    }
+    .main-topbar-link {
+      display: inline-block;
+    }
+    .main-topbar-link a {
+      color: {{ settings.text_color }};
+      text-decoration: none;
+    }
+    @media screen and (max-width: 767px) {
+      #language_selector {
+        padding-right: 7px !important;
+        padding-left: 7px !important;
+      }
+    }
+  </style>
+
+  <div class="main-topbar">
+    <div class="main-topbar-wrapper">
+      {% for block in section.blocks %}
+        {% if block.type == 'link' %}
+          <div class="main-topbar-link">
+            <a href="{{ block.settings.link_url }}" title="{{ block.settings.link_text }}">
+              {{- block.settings.link_text -}}
+            </a>
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      {%- if localization.available_countries.size > 1 -%}
+        {%- assign country_selector = true -%}
+      {%- endif -%}
+
+      {%- if localization.available_languages.size > 1 -%}
+        {%- assign locale_selector = true -%}
+      {%- endif -%}
+
+      <!-- Localization Form -->
+      {%- if country_selector -%}
+        {%- if country_selector or locale_selector or shop.customer_accounts_enabled -%}
+          {%- if country_selector -%}
+            {%- render 'localization-selector-top-bar', type: 'country' -%}
+          {%- endif -%}
+
+          {%- if locale_selector -%}
+            {%- render 'localization-selector-top-bar', type: 'locale' -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endif -%}
+
+      <!-- End of Localization Form -->
+    </div>
+  </div>
+</div>
+
+<script>
+                  class LocalizationForm extends HTMLElement {
+    constructor() {
+      super();
+      this.elements = {
+        input: this.querySelector('input[name="language_code"], input[name="country_code"]'),
+        button: this.querySelector('button'),
+        panel: this.querySelector('ul'),
+      };
+      this.elements.button.addEventListener('click', this.openSelector.bind(this));
+      this.elements.button.addEventListener('focusout', this.closeSelector.bind(this));
+      this.addEventListener('keyup', this.onContainerKeyUp.bind(this));
+
+      this.querySelectorAll('a').forEach(item => item.addEventListener('click', this.onItemClick.bind(this)));
+    }
+
+    hidePanel() {
+      this.elements.button.setAttribute('aria-expanded', 'false');
+      this.elements.panel.setAttribute('hidden', true);
+    }
+
+    onContainerKeyUp(event) {
+      if (event.code.toUpperCase() !== 'ESCAPE') return;
+
+      this.hidePanel();
+      this.elements.button.focus();
+    }
+
+    onItemClick(event) {
+      event.preventDefault();
+      const form = this.querySelector('form');
+      this.elements.input.value = event.currentTarget.dataset.value;
+      if (form) form.submit();
+    }
+
+    openSelector() {
+      this.elements.button.focus();
+      this.elements.panel.toggleAttribute('hidden');
+      this.elements.button.setAttribute('aria-expanded', (this.elements.button.getAttribute('aria-expanded') === 'false').toString());
+    }
+
+    closeSelector(event) {
+      const shouldClose = event.relatedTarget && event.relatedTarget.nodeName === 'BUTTON';
+      if (event.relatedTarget === null || shouldClose) {
+        this.hidePanel();
+      }
+    }
+  }
+
+  customElements.define('localization-form', LocalizationForm);
+</script>
+
+{% schema %}
+{
+  "name": "Language Topbar",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_country_flag",
+      "label": "Show country flag",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_country_name",
+      "label": "Show country name",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link Text"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Language Topbar",
+      "category": "Header",
+      "settings": {
+        "background_color": "#f8f8f8",
+        "text_color": "#333333"
+      },
+      "blocks": [
+        {
+          "type": "link",
+          "settings": {
+            "link_text": "Blog",
+            "link_url": "/blogs/news"
+          }
+        },
+        {
+          "type": "link",
+          "settings": {
+            "link_text": "Support",
+            "link_url": "/pages/support"
+          }
+        },
+        {
+          "type": "link",
+          "settings": {
+            "link_text": "Email Sign Up",
+            "link_url": "/pages/newsletter-signup"
+          }
+        }
+      ]
+    }
+  ],
+  "max_blocks": 5
+}
+{% endschema %}

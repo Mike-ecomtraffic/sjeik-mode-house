@@ -1,0 +1,147 @@
+<div class="text-marquee" style="background-color: {{ section.settings.background_color }}">
+  <div class="text-marquee__group">
+    {%- for block in section.blocks -%}
+      {%- capture block_content -%}
+        {%- case block.type -%}
+          {%- when 'block' -%}
+            {% if block.settings.checkbox %}
+              <svg width="15" height="15" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="10" cy="10" r="10" fill="{{ section.settings.text_color }}"></circle>
+              </svg>
+            {% endif %}
+            {%- if block.settings.text -%}
+              <h1 style="color: {{ section.settings.text_color }};">{{ block.settings.text | escape }}</h1>
+            {%- endif -%}
+        {%- endcase -%}
+      {%- endcapture -%}
+      {{ block_content }}
+    {%- endfor -%}
+  </div>
+  <div class="text-marquee__group">
+    {%- for block in section.blocks -%}
+      {%- capture block_content -%}
+        {%- case block.type -%}
+          {%- when 'block' -%}
+            {% if block.settings.checkbox %}
+              <svg width="15" height="15" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="10" cy="10" r="10" fill="{{ section.settings.text_color }}"></circle>
+              </svg>
+            {% endif %}
+            {%- if block.settings.text -%}
+              <h1 style="color: {{ section.settings.text_color }};">{{ block.settings.text | escape }}</h1>
+            {%- endif -%}
+        {%- endcase -%}
+      {%- endcapture -%}
+      {{ block_content }}
+    {%- endfor -%}
+  </div>
+  <div class="text-marquee__group">
+    {%- for block in section.blocks -%}
+      {%- capture block_content -%}
+        {%- case block.type -%}
+          {%- when 'block' -%}
+            {% if block.settings.checkbox %}
+              <svg width="15" height="15" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="10" cy="10" r="10" fill="{{ section.settings.text_color }}"></circle>
+              </svg>
+            {% endif %}
+            {%- if block.settings.text -%}
+              <h1 style="color: {{ section.settings.text_color }};">{{ block.settings.text | escape }}</h1>
+            {%- endif -%}
+        {%- endcase -%}
+      {%- endcapture -%}
+      {{ block_content }}
+    {%- endfor -%}
+  </div>
+  <div class="text-marquee__group">
+    {%- for block in section.blocks -%}
+      {%- capture block_content -%}
+        {%- case block.type -%}
+          {%- when 'block' -%}
+            {% if block.settings.checkbox %}
+              <svg width="15" height="15" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="10" cy="10" r="10" fill="{{ section.settings.text_color }}"></circle>
+              </svg>
+            {% endif %}
+            {%- if block.settings.text -%}
+              <h1 style="color: {{ section.settings.text_color }};">{{ block.settings.text | escape }}</h1>
+            {%- endif -%}
+        {%- endcase -%}
+      {%- endcapture -%}
+      {{ block_content }}
+    {%- endfor -%}
+  </div>
+  <div class="text-marquee__group">
+    {%- for block in section.blocks -%}
+      {%- capture block_content -%}
+        {%- case block.type -%}
+          {%- when 'block' -%}
+            {% if block.settings.checkbox %}
+              <svg width="15" height="15" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="10" cy="10" r="10" fill="{{ section.settings.text_color }}"></circle>
+              </svg>
+            {% endif %}
+            {%- if block.settings.text -%}
+              <h1 style="color: {{ section.settings.text_color }};">{{ block.settings.text | escape }}</h1>
+            {%- endif -%}
+        {%- endcase -%}
+      {%- endcapture -%}
+      {{ block_content }}
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Marquee",
+  "class": "shopify-section--marquee",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#2A555A"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#FFF"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "block",
+      "name": "Block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "DRESS WITH STYLE"
+        },
+        {
+          "type": "checkbox",
+          "id": "checkbox",
+          "label": "Show the bullet?",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marquee",
+      "blocks": [
+        {
+          "type": "block",
+          "settings": {
+            "text": "Block"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

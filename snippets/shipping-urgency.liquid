@@ -1,0 +1,44 @@
+<div id="crispy_stock">
+  <div class="stock_wrapper">
+    <span class="green-dot"></span>
+    <span class="green-text">{{ block.settings.textarea_stock }}</span>
+  </div>
+</div>
+
+<style>
+  #crispy_stock .green-text {
+  font-weight: 700;
+  color: #2c9814;
+  }
+  
+  #crispy_stock .green-text {
+    text-transform: uppercase !important;
+  }
+
+  #crispy_stock .green-dot {
+    background: #54c63a;
+    height: 10px;
+    width: 10px;
+    border-radius: 20px;
+    animation: greendot 2s linear infinite;
+    transform: scale(1);
+    margin-right: 12px;
+    margin-left: 3px;
+  }
+
+  #crispy_stock .stock_wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    line-height: 1;
+  }
+
+  #crispy_stock {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+  }
+</style>

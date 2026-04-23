@@ -1,0 +1,126 @@
+<div class="donder-doner-dag">
+  <div class="donder-doner-dag__group">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'image' and block.settings.image -%}
+        {{-
+          block.settings.image
+          | image_url: width: '270', height: '400'
+          | image_tag: width: '270', height: 'auto', class: 'donder-doner-dag-slide'
+        -}}
+      {%- endif -%}
+    {%- endfor %}
+  </div>
+  <div class="donder-doner-dag__group">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'image' and block.settings.image -%}
+        {{-
+          block.settings.image
+          | image_url: width: '270', height: '400'
+          | image_tag: width: '270', height: 'auto', class: 'donder-doner-dag-slide'
+        -}}
+      {%- endif -%}
+    {%- endfor %}
+  </div>
+  <div class="donder-doner-dag__group">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'image' and block.settings.image -%}
+        {{-
+          block.settings.image
+          | image_url: width: '270', height: '400'
+          | image_tag: width: '270', height: 'auto', class: 'donder-doner-dag-slide'
+        -}}
+      {%- endif -%}
+    {%- endfor %}
+  </div>
+  <div class="donder-doner-dag__group">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'image' and block.settings.image -%}
+        {{-
+          block.settings.image
+          | image_url: width: '270', height: '400'
+          | image_tag: width: '270', height: 'auto', class: 'donder-doner-dag-slide'
+        -}}
+      {%- endif -%}
+    {%- endfor %}
+  </div>
+</div>
+
+<style>
+  .donder-doner-dag {
+    --duration2: 30s;
+    --gap: 30px;
+    display: flex;
+    overflow: hidden;
+    user-select: none;
+    gap: var(--gap);
+    padding: 0;
+    height: 400px;
+    margin-bottom: 50px;
+  }
+
+  .donder-doner-dag__group {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: var(--gap);
+    min-width: max-content;
+    animation: scroll4 var(--duration2) linear infinite;
+  }
+
+  .donder-doner-dag__group img {
+    min-width: 270px;
+    object-fit: cover;
+    width: 270px;
+  }
+
+  @keyframes scroll4 {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+
+  @media screen and (max-width: 786px) {
+    .donder-doner-dag {
+      height: 300px;
+      margin-bottom: 50px;
+    }
+
+    .donder-doner-dag__group img {
+      min-width: 70vw;
+      width: 70vw;
+    }
+
+    .donder-doner-dag__group {
+      animation: scroll4 30s linear infinite;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Donderdonderdag Marquee",
+  "tag": "div",
+  "class": "blank",
+  "presets": [
+    {
+      "name": "Donder Donder Dag Image Marquee"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

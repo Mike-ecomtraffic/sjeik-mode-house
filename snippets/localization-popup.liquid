@@ -1,0 +1,79 @@
+<!-- language-popup.liquid -->
+
+<div id="mp2" class="mp2">
+  <div class="mp2_wrapper">
+    <!-- Close Button SVG -->
+    <svg class="close_mp2" xmlns="http://www.w3.org/2000/svg" height="16" width="12" viewBox="0 0 384 512">
+      <path d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z"></path>
+    </svg>
+
+    <!-- Localization Form -->
+    <localization-form>
+      <h5>COUNTRY / REGION</h5>
+      <form method="post" action="/localization" accept-charset="UTF-8" class="shopify-localization-form" enctype="multipart/form-data">
+        <input type="hidden" name="form_type" value="localization">
+        <input type="hidden" name="utf8" value="✓">
+        <input type="hidden" name="_method" value="put">
+        <input type="hidden" name="return_to" value="{{ request.path }}">
+        <div class="disclosure">
+          <button type="button" class="disclosure__button trigger_button_1" aria-expanded="false" aria-controls="CountryList">
+            <div>
+              <img src="//cdn.shopify.com/static/images/flags/{{ localization.country.iso_code | downcase }}.svg" style="border-radius:500px; width: 16px; object-fit: cover; height: 16px; margin-right: 7px;margin-top: -2px;">
+              {{ localization.country.name }} ({{ localization.currency.iso_code }} {{ localization.currency.symbol }})
+            </div>
+            <svg style="width: 12px;" aria-hidden="true" focusable="false" role="presentation" class="icon icon-caret animated-icon" viewBox="0 0 10 6">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+              </path>
+            </svg>
+          </button>
+          <ul id="CountryList" role="list" class="disclosure__list" hidden>
+            {% for country in localization.available_countries %}
+            <li class="disclosure__item" tabindex="-1">
+              <a href="#" data-value="{{ country.iso_code }}">
+                <img src="//cdn.shopify.com/static/images/flags/{{ country.iso_code | downcase }}.svg" style="border-radius:500px; width: 16px; object-fit: cover; height: 16px; margin-right: 5px;margin-top: -2px;">
+                {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+          <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
+        </div>
+      </form>
+    </localization-form>
+
+    <localization-form style="margin-top:10px;">
+      <h5>LANGUAGE</h5>
+      <form method="post" action="/localization" accept-charset="UTF-8" class="shopify-localization-form" enctype="multipart/form-data">
+        <input type="hidden" name="form_type" value="localization">
+        <input type="hidden" name="utf8" value="✓">
+        <input type="hidden" name="_method" value="put">
+        <input type="hidden" name="return_to" value="{{ request.path }}">
+        <div class="disclosure">
+          <button type="button" class="disclosure__button trigger_button_2" aria-expanded="false" aria-controls="LanguageList">
+            {{ localization.language.name }}
+            <svg style="width: 12px;" aria-hidden="true" focusable="false" role="presentation" class="icon icon-caret animated-icon" viewBox="0 0 10 6">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+              </path>
+            </svg>
+          </button>
+          <ul id="LanguageList" role="list" class="disclosure__list" hidden>
+            {% for language in localization.available_languages %}
+            <li class="disclosure__item" tabindex="-1">
+              <a href="#" data-value="{{ language.iso_code }}" {% if localization.language.iso_code == language.iso_code %}aria-current="true"{% endif %}>
+                {{ language.name }}
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+          <input type="hidden" name="language_code" value="{{ localization.language.iso_code }}">
+        </div>
+      </form>
+    </localization-form>
+
+    <div class="mp2_button">
+      <a style="width: 100%;" class="btn btn--long uppercase close_mp2_button">
+        CLOSE
+      </a>
+    </div>
+  </div>
+</div>

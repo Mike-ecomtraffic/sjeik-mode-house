@@ -1,0 +1,131 @@
+{% schema %}
+{
+  "name": "Announcement Swiper Bar",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#000000"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "text",
+          "id": "slide_text",
+          "label": "Slide Text",
+          "default": "EASY RETURNS"
+        }
+      ],
+      "limit": 3
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement Swiper Bar",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<div class="announcementswiperbar" style="background-color: {{ section.settings.background_color }};">
+  <div id="AnnouncementSliderSwiper" class="swiper">
+    <div class="swiper-wrapper">
+      {% for block in section.blocks %}
+      <div class="swiper-slide">
+        <div class="icon-w-announcement">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" version="1.1" width="15" height="15" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve"><g><path xmlns="http://www.w3.org/2000/svg" d="m444.175781 0-260.871093 242.011719-110.324219-117.734375-72.980469 68.386718 178.234375 190.207032 333.765625-309.351563zm0 0" fill="#ffffff" data-original="#000000"/></g></svg>
+          <p style="color: {{ section.settings.text_color }};" class="icon-w-announcement-text">{{ block.settings.slide_text }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <!-- Navigation buttons -->
+    <div class="announcement-swiper-button-prev">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" focusable="false"><path d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"></path></svg>
+    </div>
+    <div class="announcement-swiper-button-next">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" focusable="false"><path d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"></path></svg>
+    </div>
+  </div>
+</div>
+
+<style>
+@media (min-width: 768px) {
+  .announcementswiperbar .swiper-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: auto;
+    max-width: 1180px;
+  }
+  .swiper-slide {
+    flex: 1 0 33%; /* Ensure each slide takes up 1/3 of the container */
+    display: block;
+    justify-content: space-between;
+  }
+
+    .announcementswiperbar {
+    padding: unset !important;
+  }
+}
+.announcementswiperbar {
+  overflow: none;
+}
+  
+  #AnnouncementSliderSwiper {
+      padding: 0px 0px !important;
+      align-items: center;
+      display: flex;
+    }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Check if the screen width is less than or equal to 768px
+  if (window.innerWidth <= 768) {
+    var swiper = new Swiper('#AnnouncementSliderSwiper', {
+      slidesPerView: 1,
+      spaceBetween: 10,
+      loop: true,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false
+      },
+      navigation: {
+        nextEl: '.announcement-swiper-button-next',
+        prevEl: '.announcement-swiper-button-prev'
+      }
+    });
+  } else {
+    // On desktop, limit to a maximum of 3 slides without enabling Swiper
+    document.querySelectorAll('#AnnouncementSliderSwiper .swiper-slide').forEach((slide, index) => {
+      if (index > 2) {
+        slide.style.display = 'none'; // Hide slides beyond the third one
+      }
+    });
+  }
+});
+</script>

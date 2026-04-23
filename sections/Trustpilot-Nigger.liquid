@@ -1,0 +1,148 @@
+<!-- Include Swiper.js CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+
+<div class="box" id="aus-tp-slider">
+  <!-- Swiper Container -->
+  <div class="swiper-container aus_review_slider">
+    <!-- Swiper Wrapper -->
+    <div class="swiper-wrapper">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'stroopkoekje' -%}
+          <!-- Swiper Slide -->
+          <div class="swiper-slide us-post">
+            <div class="us-post-info">
+              <div class="str-rating">
+                <div class="aus_t_svg">
+                  <div class="aus_tp_stars">
+                    <div class="aus_five_star">
+                      <svg
+                        role="img"
+                        aria-labelledby="starRating"
+                        viewBox="0 0 251 46"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <!-- SVG content remains the same -->
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="verified-badge-wrapper">
+                    <img
+                      src="https://cdn.shopify.com/s/files/1/0667/6869/9616/files/verified-badge.svg?v=1667239046"
+                      loading="lazy"
+                      alt=""
+                      class="verified-icon"
+                    >
+                    <div class="verified-text">{{ block.settings.review_verified }}</div>
+                  </div>
+                </div>
+                <p>30-04-2024</p>
+              </div>
+              <h3>{{ block.settings.review_title }}</h3>
+              <div class="rev">
+                <p>{{ block.settings.review_text }}</p>
+              </div>
+              <h5>{{ block.settings.reviewer_name }}</h5>
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    <!-- Swiper Pagination -->
+    <div class="swiper-pagination"></div>
+    <!-- Swiper Navigation Buttons -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+</div>
+
+<!-- Include Swiper.js JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const swiper = new Swiper('.aus_review_slider', {
+      loop: true, // Enable continuous loop mode
+      autoplay: {
+        delay: 5000, // 5 seconds autoplay delay
+        disableOnInteraction: false, // Keep autoplay running on user interaction
+      },
+      slidesPerView: 3, // Number of slides visible at the same time
+      spaceBetween: 30, // Space between slides in pixels
+      navigation: {
+        nextEl: '.swiper-button-next', // Navigation button next
+        prevEl: '.swiper-button-prev', // Navigation button previous
+      },
+      pagination: {
+        el: '.swiper-pagination', // Pagination element
+        clickable: true, // Enable clickable pagination
+      },
+      breakpoints: {
+        900: {
+          slidesPerView: 2, // Number of slides visible at 900px or below
+        },
+        600: {
+          slidesPerView: 1, // Number of slides visible at 600px or below
+        }
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Trustpilot Nigger",
+  "class": "shopify-section aus-section",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "trustpilot_title",
+      "label": "Ratings Level",
+      "default": "Excellent"
+    },
+    {
+      "type": "textarea",
+      "id": "trustpilot_based_x_reviews",
+      "label": "Total Reviews Text",
+      "default": "Based on 2200+ reviews"
+    }
+  ],
+  "blocks": [
+        {
+          "type": "stroopkoekje",
+          "name": "Stroopkoekje",
+          "settings": [
+            {
+              "type": "textarea",
+              "id": "review_verified",
+              "label": "Verified Text",
+              "default": "Verified"
+            },
+            {
+              "type": "textarea",
+              "id": "review_title",
+              "label": "Review Title",
+              "default": "Mikey is echt een kanjer. Hij is zo cool, charmant, en echt sexy nigger. Shoutout naar nigger mike stroop"
+            },
+            {
+              "type": "textarea",
+              "id": "review_text",
+              "label": "Review Text",
+              "default": "Echt grote respect naar die beertje"
+            },
+            {
+              "type": "textarea",
+              "id": "reviewer_name",
+              "label": "Review Name",
+              "default": "Mike Stroop 🤤"
+            }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trustpilot Beertje"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,7 @@
+<div class="payment-methods">
+  {% assign enabled_payment_types = section.settings.payments | remove: ' ' | split: ',' %}
+
+  {%- for type in enabled_payment_types -%}
+    {{ type | payment_type_svg_tag: class: 'payment-icon icon--full-color' }}
+  {%- endfor -%}
+</div>

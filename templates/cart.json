@@ -1,0 +1,35 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-cart",
+      "blocks": {
+        "totals": {
+          "type": "totals",
+          "settings": {
+            "show_order_weight": false,
+            "show_shipping_text": false
+          }
+        },
+        "checkout_button": {
+          "type": "checkout_button",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "totals",
+        "checkout_button"
+      ],
+      "custom_css": [
+        "a.bold {text-decoration: none;}",
+        "a.button.button--xl{text-decoration: none;}"
+      ],
+      "settings": {
+        "show_shipping_estimator": false,
+        "show_payment_icons": false
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

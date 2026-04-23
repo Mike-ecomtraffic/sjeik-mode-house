@@ -1,0 +1,378 @@
+{% comment %}
+  Custom FAQ Section
+{% endcomment %}
+
+<style>
+  /* Custom FAQ Section Styles */
+  .custom-faq-section.full-width-container {
+    background-color: {{ section.settings.background_color }};
+  }
+  .full-width-container .custom-faq-inner {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    max-width: 1000px;
+    margin: auto;
+  }
+  .custom-faq-right {
+    width: 100%;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+  }
+  .custom-faq-right span svg {
+    transform: translate(5px, 1px);
+  }
+  .custom-faq-right .button {
+    background-color: {{ section.settings.button_color }} !important;
+    text-transform: uppercase;
+  }
+  .custom-faq {
+    overflow: hidden;
+    width: 100%;
+    padding-bottom: 30px;
+  }
+  .custom-faq-row {
+    padding: 0px 30px;
+    margin-top: 10px;
+    background: #ffffff;
+    box-shadow: 0px -4px 10px 2px rgba(0, 0, 0, 0.04);
+    border-radius: 5px;
+  }
+  .custom-faq-row:last-child {
+    box-shadow: 0px 2px 10px 2px rgba(0, 0, 0, 0.04);
+  }
+  .custom-faq .custom-faq-toggle {
+    display: none;
+  }
+  .custom-faq-question {
+    font-family: "Helvetica";
+    font-weight: 500;
+    background-color: transparent;
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5em 0em;
+    color: black;
+    cursor: pointer;
+    font-size: 15px;
+    letter-spacing: 0px;
+  }
+  .custom-faq-answer {
+    font-family: "Helvetica";
+    font-weight: 400;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.4s;
+    padding: 0 0em;
+    font-size: 13px;
+    color: black;
+    letter-spacing: 0px;
+  }
+  .custom-faq-toggle:checked ~ .custom-faq-question svg {
+    transform: rotate(180deg);
+  }
+  .custom-faq-toggle:checked ~ .custom-faq-answer {
+    max-height: 100vh;
+    padding-bottom: 1.5em;
+    width: 90%;
+  }
+  .custom-faq-section-inner * {
+    color: black;
+  }
+  .custom-faq-section-inner .p {
+    text-align: center;
+    padding-bottom: 20px;
+  }
+  .custom-faq-section-inner .h3 {
+    text-align: center;
+  }
+  .custom-faq-section .custom-faq-question svg {
+    width: 25px;
+    height: auto;
+  }
+  .custom-faq-section .custom-faq-question::after {
+    display: none;
+  }
+  .custom-faq-section input + label.custom-faq-question svg.icon.icon-minus {
+    display: none;
+  }
+  .custom-faq-section input:checked + label.custom-faq-question svg.icon.icon-minus {
+    display: block;
+  }
+  .custom-faq-section input:checked + label.custom-faq-question svg.icon.icon-plus {
+    display: none;
+  }
+  @media screen and (max-width: 1024px) {
+    .custom-faq-toggle:checked ~ .custom-faq-answer {
+      width: 100%;
+    }
+    .full-width-container .page-width {
+      display: flex;
+      flex-direction: column;
+      padding: 30px;
+    }
+    .custom-faq-right {
+      width: 100%;
+      padding: 3em 1.1em 2em 1.1em;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      justify-content: center;
+      order: 1;
+    }
+    .custom-faq {
+      width: 100%;
+      padding: 15px 5px;
+    }
+    .custom-faq-question span {
+      width: 90%;
+    }
+  }
+</style>
+
+<div class="custom-faq-section full-width-container">
+  <div class="custom-faq-inner">
+    <div class="custom-faq-right">
+      <div class="custom-faq-section-inner">
+        {% if section.settings.subtitle != blank %}
+          <p class="p">{{ section.settings.subtitle }}</p>
+        {% endif %}
+
+        <h2 class="h3 outer-div-head hyphenate">
+          <!-- Left SVG -->
+          <svg width="79" height="5" viewBox="0 0 79 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_3_7243)">
+              <path d="M2.42969 2.4997C2.42969 2.40355 2.49671 2.32342 2.61399 2.32342H5.19427L76.688 1.73047H77.8273C78.1792 2.08303 78.5646 2.41957 79.0002 2.72406C78.9332 3.02855 78.6483 3.2529 78.3132 3.30098C78.2965 3.31701 78.2462 3.31701 78.2295 3.31701H78.2127L5.21102 2.70803H2.63075C2.51346 2.69201 2.44644 2.59585 2.44644 2.48367L2.42969 2.4997Z" fill="#27333B"></path>
+              <path d="M0 2.5C0 1.12179 1.17285 0 2.61379 0C4.05472 0 5.22757 1.12179 5.22757 2.5C5.22757 3.87821 4.05472 5 2.61379 5C1.17285 5 0 3.87821 0 2.5Z" fill="#27333B"></path>
+            </g>
+            <defs>
+              <clipPath id="clip0_3_7243">
+                <rect width="79" height="5" fill="white"></rect>
+              </clipPath>
+            </defs>
+          </svg>
+          <div>
+            {% if section.settings.title_line1 != blank %}
+              <p>{{ section.settings.title_line1 }}</p>
+            {% endif %}
+            {% if section.settings.title_line2 != blank %}
+              <p><strong>{{ section.settings.title_line2 }}</strong></p>
+            {% endif %}
+          </div>
+          <!-- Right SVG -->
+          <svg width="79" height="5" viewBox="0 0 79 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_3_7246)">
+              <path d="M76.5703 2.5003C76.5703 2.59645 76.5033 2.67658 76.386 2.67658L73.8057 2.67658L2.312 3.26952L1.17265 3.26952C0.820793 2.91696 0.435425 2.58042 -0.000205907 2.27593C0.0668184 1.97145 0.351654 1.74709 0.686752 1.69901C0.703507 1.68299 0.753777 1.68299 0.770531 1.68299L0.787285 1.68299L73.789 2.29197L76.3693 2.29197C76.4865 2.30799 76.5536 2.40415 76.5536 2.51633L76.5703 2.5003Z" fill="#27333B"></path>
+              <path d="M79 2.5C79 3.87821 77.8271 5 76.3862 5C74.9453 5 73.7724 3.8782 73.7724 2.5C73.7724 1.12179 74.9453 0 76.3862 0C77.8271 0 79 1.12179 79 2.5Z" fill="#27333B"></path>
+            </g>
+            <defs>
+              <clipPath id="clip0_3_7246">
+                <rect width="79" height="5" fill="white" transform="translate(79 5) rotate(-180)"></rect>
+              </clipPath>
+            </defs>
+          </svg>
+        </h2>
+      </div>
+      <div class="custom-faq">
+        {% for block in section.blocks %}
+          {% if block.type == 'faq' %}
+            <div class="custom-faq-row">
+              <input type="checkbox" id="faq-{{ section.id }}-{{ forloop.index }}" class="custom-faq-toggle">
+              <label for="faq-{{ section.id }}-{{ forloop.index }}" class="custom-faq-question">
+                <span>{{ block.settings.question }}</span>
+
+                <!-- Plus icon -->
+                <svg
+                  width="35"
+                  height="35"
+                  class="icon icon-plus"
+                  viewBox="0 0 35 35"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle cx="17.5" cy="17.5" r="17.5" fill="#EBEBEB"></circle>
+                  <path d="M18.0539 10V17.0659H25V17.9641H18.0539V25H16.976V17.9641H10V17.0659H16.976V10H18.0539Z" fill="black"></path>
+                </svg>
+
+                <!-- Minus icon -->
+                <svg
+                  width="35"
+                  height="35"
+                  class="icon icon-minus"
+                  viewBox="0 0 35 35"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle cx="17.5" cy="17.5" r="17.5" fill="#EBEBEB"></circle>
+                  <path d="M22 17V19H13V17H22Z" fill="black"></path>
+                </svg>
+              </label>
+              <div class="custom-faq-answer">
+                <p>{{ block.settings.answer }}</p>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      {% if section.settings.footer_text != blank %}
+        <p class="p">{{ section.settings.footer_text }}</p>
+      {% endif %}
+
+      {% for block in section.blocks %}
+        {% if block.type == 'button' %}
+          <a class="button button--lg" href="{{ block.settings.button_link }}">
+            {{ block.settings.button_text }}
+            <span>
+              <!-- Button SVG Icon -->
+              <svg width="6" height="10" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0.84875L0.970312 0L9 7L0.970312 14L0 13.1556L7.05469 7L0 0.84875Z" fill="currentColor"></path>
+              </svg>
+            </span>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom FAQ Section",
+  "max_blocks": 10,
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "WE ARE HERE TO ANSWER YOUR QUESTIONS"
+    },
+    {
+      "type": "text",
+      "id": "title_line1",
+      "label": "Title Line 1",
+      "default": "Frequently asked"
+    },
+    {
+      "type": "text",
+      "id": "title_line2",
+      "label": "Title Line 2",
+      "default": "questions"
+    },
+    {
+      "type": "text",
+      "id": "footer_text",
+      "label": "Footer Text",
+      "default": "Need more help? Our support team is here for you."
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button Color",
+      "default": "#2A555A"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#F9F7F3"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "SUPPORT"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom FAQ Section",
+      "category": "FAQ",
+      "blocks": [
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Do you ship overseas?",
+            "answer": "Yes, we ship all over the world. We currently ship to 65+ countries. Shipping costs will apply, and will be added at checkout.\n\nCurrently Free Shipping applies on orders over 85$\n\nWe run discounts and promotions all year, so stay tuned for exclusive deals on shipping."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "How long will it take to get my orders?",
+            "answer": "We are currently experiencing a very high order volume, all orders will be dispatched within 24-48 hours, and shipping will take around 5-7 business days depending on your location. We ship to all countries except some Islands.\n\nDelivery details will be provided during checkout & in your confirmation email."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Do you ship to my country?",
+            "answer": "We excluded countries we cannot ship to from checking out. This means if you are able to check out, we can ship to your country."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "What are the return rules?",
+            "answer": "You can return a product for any reason within 14-days guaranteed. No questions asked.\n\nWe do not charge a return or handling fee.\n\nThe customer only has to bear the return label."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Other questions?",
+            "answer": "You can contact us through our contact page! We will be happy to assist you."
+          }
+        },
+        {
+          "type": "button",
+          "settings": {
+            "button_text": "SUPPORT",
+            "button_link": "/pages/get-support"
+          }
+        }
+      ],
+      "settings": {
+        "subtitle": "WE ARE HERE TO ANSWER YOUR QUESTIONS",
+        "title_line1": "Frequently asked",
+        "title_line2": "questions",
+        "footer_text": "Need more help? Our support team is here for you.",
+        "button_color": "#2A555A",
+        "background_color": "#F9F7F3"
+      }
+    }
+  ]
+}
+{% endschema %}
+
