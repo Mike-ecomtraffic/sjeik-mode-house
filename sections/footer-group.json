@@ -130,16 +130,16 @@
           "type": "newsletter",
           "settings": {
             "image_width": 180,
-            "heading_size": "h3",
-            "title": "",
-            "content": "<p>Sign up and find out right away if you've won $100 in shopping credit!</p>"
+            "heading_size": "h4",
+            "title": "JOIN THE CLUB",
+            "content": "<p>Be the first to access new arrivals and receive exclusive offers available only to subscribers.</p>"
           }
         },
         "text_4TEd3A": {
           "type": "text",
           "settings": {
             "title": "Business Information",
-            "content": "<p>Our promise is that you will be satisfied with your purchase!</p><p>With years of experience in the fashion industry since 2015, <strong>Miller Melbourne</strong> has built a reputation for quality and reliability. Join us as we continue to redefine fashion with every piece we create.</p>",
+            "content": "<p>At <strong>Harper & Wells</strong>, we create clothing designed for everyday life.</p><p>Founded in <strong>Boston</strong>, our collections focus on clean design, comfort, and versatility. Each piece is made to be easy to wear, easy to combine, and relevant season after season.</p><p>With a strong focus on quality and simplicity, Harper & Wells offers reliable styles you can feel good in—day after day.</p>",
             "enable_follow_on_shop": false
           }
         },
