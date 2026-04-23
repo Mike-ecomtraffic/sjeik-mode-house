@@ -18,6 +18,11 @@
       fill: {{ section.settings.star_color }} !important;
     }
 
+    #shopify-section-{{ section.id }} .rating__star--empty {
+      color: {{ section.settings.star_color_empty }} !important;
+      fill: {{ section.settings.star_color_empty }} !important;
+    }
+
     @media screen and (min-width: 700px) {
       #shopify-section-{{ section.id }} {
         --testimonial-list-items-per-row: 2;
@@ -206,8 +211,14 @@
     {
       "type": "color",
       "id": "star_color",
-      "label": "Star color",
+      "label": "Star color (filled)",
       "default": "#2eaa7e"
+    },
+    {
+      "type": "color",
+      "id": "star_color_empty",
+      "label": "Star color (empty)",
+      "default": "#d3d3d3"
     },
     {
       "type": "color",
