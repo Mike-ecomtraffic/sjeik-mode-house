@@ -5,13 +5,17 @@
     #shopify-section-{{ section.id }} {
       --testimonial-list-items-per-row: 1;
       --testimonial-list-carousel-item-width: 74vw;
-
       --testimonial-list-grid: {% if section.settings.stack_testimonials %}auto / repeat(var(--testimonial-list-items-per-row), minmax(0, 1fr)){% else %}auto / auto-flow var(--testimonial-list-carousel-item-width){% endif %};
     }
 
     #shopify-section-{{ section.id }} .scrollbar {
       {%- assign controls_color = section.settings.text_color | default: section.settings.heading_color | default: settings.text_color -%}
       --text-color: {{ controls_color.rgb }};
+    }
+
+    #shopify-section-{{ section.id }} .rating__star--full {
+      color: {{ section.settings.star_color }} !important;
+      fill: {{ section.settings.star_color }} !important;
     }
 
     @media screen and (min-width: 700px) {
@@ -198,6 +202,12 @@
       "type": "header",
       "content": "Colors",
       "info": "Gradient replaces solid colors when set."
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star color",
+      "default": "#2eaa7e"
     },
     {
       "type": "color",
