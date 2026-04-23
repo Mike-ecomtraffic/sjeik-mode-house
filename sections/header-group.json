@@ -107,7 +107,8 @@
       "settings": {
         "enable_sticky": true,
         "hide_on_scroll": false,
-        "logo_max_width": 165,
+        "logo": "shopify://shop_images/Scherm_afbeelding_2026-04-23_om_18.35.33.png",
+        "logo_max_width": 110,
         "logo_mobile_max_width": 85,
         "menu": "",
         "sidebar_menu": "",

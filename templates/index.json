@@ -373,6 +373,7 @@
         "image_WrUwjf": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/image_18.webp",
             "media_width": 50,
             "media_position": "start",
             "text_position": "place-self-center text-center",
@@ -633,6 +634,8 @@
         "content": "",
         "link_url": "",
         "link_text": "",
+        "star_color": "#2eaa7e",
+        "star_color_empty": "#d3d3d3",
         "background": "#f9f9f9",
         "background_gradient": "",
         "text_color": "",
