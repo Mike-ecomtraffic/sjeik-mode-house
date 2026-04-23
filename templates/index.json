@@ -28,7 +28,7 @@
         "button_EeMQxN": {
           "type": "button",
           "settings": {
-            "style": "fill",
+            "style": "outline",
             "size": "xl",
             "text": "SHOP NOW",
             "url": "shopify://collections/all",
@@ -47,11 +47,12 @@
         "allow_transparent_header": false,
         "enable_parallax": false,
         "image_size": "auto",
+        "image": "shopify://shop_images/image_24.webp",
         "mobile_text_position": "place-self-center text-center",
         "desktop_text_position": "sm:place-self-center sm:text-center",
         "text_color": "#ffffff",
         "overlay_color": "#000000",
-        "overlay_opacity": 34
+        "overlay_opacity": 35
       }
     },
     "crispy_collection_MGKgxn": {
