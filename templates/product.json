@@ -347,6 +347,40 @@
         "input_text_color": ""
       }
     },
+    "media_with_text_wX88YF": {
+      "type": "media-with-text",
+      "blocks": {
+        "image_dL4Wxg": {
+          "type": "image",
+          "settings": {
+            "media_width": 50,
+            "media_position": "end",
+            "text_position": "place-self-center text-center",
+            "icon": "none",
+            "icon_width": 48,
+            "subheading": "",
+            "title": "30-DAY MONEY-BACK GUARANTEE",
+            "content": "<p>We love our products and are confident that you will too! That’s why we offer a <strong>30-day money-back guarantee</strong>. If the product doesn’t meet your expectations, simply return it for a full refund.</p>",
+            "link_text": "",
+            "link_url": "",
+            "background": "#ffffff",
+            "background_gradient": "",
+            "text_color": "#000000",
+            "text_gradient": "",
+            "button_background": "",
+            "button_text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_dL4Wxg"
+      ],
+      "name": "Media with text",
+      "settings": {
+        "full_width": false,
+        "spacing": "small"
+      }
+    },
     "ss_social_proof_ey83pt": {
       "type": "ss-social-proof",
       "name": "SS - Social proof",
@@ -797,41 +831,6 @@
         "product_card_text_color": ""
       }
     },
-    "media_with_text_wX88YF": {
-      "type": "media-with-text",
-      "blocks": {
-        "image_dL4Wxg": {
-          "type": "image",
-          "settings": {
-            "media_width": 50,
-            "media_position": "end",
-            "text_position": "place-self-center text-center",
-            "icon": "none",
-            "icon_width": 48,
-            "subheading": "",
-            "title": "FAREWELL...",
-            "content": "<p>Hi, I’m Claire, founder of Miller Melbourne.</p><p>For nearly 10 years, this little boutique has been a big part of my life. What started as a small dream slowly grew into something really special.</p><p>But life changes. <strong>My daughter Sarah i</strong>s growing up quickly, and I’ve realised it’s time for me to spend more time with my family.</p><p>Because of that, I’ve decided to close this chapter. Before we do, we’re holding one final <strong>Clearance Sale — up to 70% off</strong> to clear the remaining pieces in our store.</p><p><strong>Thank you so much for all your support over the years. It truly means a lot.</strong></p><p>– Claire Miller</p>",
-            "link_text": "",
-            "link_url": "",
-            "background": "#ffffff",
-            "background_gradient": "",
-            "text_color": "#000000",
-            "text_gradient": "",
-            "button_background": "",
-            "button_text_color": ""
-          }
-        }
-      },
-      "block_order": [
-        "image_dL4Wxg"
-      ],
-      "disabled": true,
-      "name": "Media with text",
-      "settings": {
-        "full_width": false,
-        "spacing": "small"
-      }
-    },
     "media_with_text_azYJJ3": {
       "type": "media-with-text",
       "blocks": {
@@ -875,35 +874,56 @@
           "type": "item",
           "settings": {
             "title": "Do you offer free shipping?",
-            "content": "<p>Yes, we offer free premium shipping because we value you as a customer and want to provide you with the best service.</p>"
+            "content": "<p>Yes, we offer free shipping on all orders. We want to make sure your purchase arrives quickly and safely at no extra cost.</p>"
           }
         },
         "item_KPmxAW": {
           "type": "item",
           "settings": {
-            "title": "Can I return the item(s) if I don’t like them?",
-            "content": "<p>Yes, you can return your order within 30 days of receiving it.</p>"
+            "title": "Can I return an item if it doesn’t fit or if I don’t like it?",
+            "content": "<p>Absolutely! You can return your order within 30 days of receiving it. Items must be unworn, undamaged, and in their original condition. Simply reach out to us through our Contact Page or email us directly at info@harperwells-boston.com, and we’ll guide you through the return process.<br/></p>"
           }
         },
         "item_NYpTag": {
           "type": "item",
           "settings": {
             "title": "How can I track my order?",
-            "content": "<p>You can track your order by entering your Order Number or Email/Phone Number on the \"Track Your Order\" page. Once you’ve entered your information and clicked \"Track,\" you will be able to see the status of your order.</p>"
+            "content": "<p>Once your order has been processed, you will receive a confirmation email with your personal tracking number. You can then track your package anytime through our Order Tracking Page.<br/><br/></p>"
           }
         },
         "item_bbdQPD": {
           "type": "item",
           "settings": {
-            "title": "Will I receive a confirmation email after placing an order?",
-            "content": "<p>Yes, once you've placed your order, a confirmation will be sent to your email inbox. If you don’t see it, feel free to reach out to our customer service team, we’re happy to help you right away.<br/><br/>Email:<a>support@millermelbourne.com</a></p>"
+            "title": "How do I choose the right size?",
+            "content": "<p>Each product includes a detailed size chart to help you pick the best fit. If you’re between two sizes, we recommend going one size up for extra comfort. Still unsure? Our customer support team is happy to assist you.</p>"
           }
         },
         "item_T3x7HU": {
           "type": "item",
           "settings": {
             "title": "What payment methods do you accept?",
-            "content": "<p>You can pay safely and securely with the following payment methods: Credit Card, Visa, Mastercard, American Express, Apple Pay, Google Pay, Maestro, and Shop Pay.</p>"
+            "content": "<p>You can shop safely and securely with the following payment methods:</p><ul><li>Credit Cards (Visa & Mastercard)</li><li>Apple Pay</li><li>Google Pay</li><li>Shop Pay</li></ul>"
+          }
+        },
+        "item_yagwFU": {
+          "type": "item",
+          "settings": {
+            "title": "Is my payment secure?",
+            "content": "<p>Yes, your payment is 100% secure. We use industry-standard SSL encryption to protect your information and ensure a safe checkout process.</p>"
+          }
+        },
+        "item_cNqhrm": {
+          "type": "item",
+          "settings": {
+            "title": "How long does shipping take?",
+            "content": "<p>Orders are typically processed within <strong>1–3 business days</strong>. Delivery times may vary depending on your location and seasonal demand, but you will always receive tracking updates by email.</p>"
+          }
+        },
+        "item_VUGXGh": {
+          "type": "item",
+          "settings": {
+            "title": "How can I contact you if I have questions?",
+            "content": "<p>Our customer support team is always happy to help. You can reach us through the Contact Page or by email at <strong>info@harperwells-boston.com</strong>. We usually reply within <strong>24 hours</strong>.</p>"
           }
         }
       },
@@ -912,7 +932,10 @@
         "item_KPmxAW",
         "item_NYpTag",
         "item_bbdQPD",
-        "item_T3x7HU"
+        "item_T3x7HU",
+        "item_yagwFU",
+        "item_cNqhrm",
+        "item_VUGXGh"
       ],
       "name": "FAQ",
       "settings": {
@@ -923,7 +946,7 @@
         "team_avatar_width": 160,
         "support_hours": "",
         "answer_time": "",
-        "button_text": "Contact Us",
+        "button_text": "",
         "button_url": "shopify://pages/contact",
         "text_position": "center",
         "background": "#ffffff",
@@ -936,11 +959,48 @@
         "accordion_background": "",
         "accordion_text_color": ""
       }
+    },
+    "ss_social_proof_M9DQnk": {
+      "type": "ss-social-proof",
+      "name": "SS - Social proof",
+      "settings": {
+        "coupon_position": "below_title",
+        "image_size": 30,
+        "image_size_mobile": 25,
+        "image_radius": 100,
+        "image_border_thickness": 0,
+        "text": "<p><strong>Davie</strong> ✓, <strong>Mark</strong> ✓ and <strong>1500+</strong> others love our products!</p>",
+        "text_custom": false,
+        "text_font": "josefin_sans_n4",
+        "text_size": 13,
+        "text_size_mobile": 13,
+        "text_height": 150,
+        "text_align": "left",
+        "text_align_mobile": "left",
+        "text_color": "#121212",
+        "icon_color": "#42A5F5",
+        "image_border_color": "#121212",
+        "background_style": "solid",
+        "background_color": "#F3F3F3",
+        "background_gradient": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
+        "border_color": "#121212",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 10,
+        "padding_bottom": 10,
+        "padding_horizontal": 10,
+        "padding_horizontal_mobile": 10,
+        "border_style": "solid",
+        "border_thickness": 0,
+        "section_radius": 0,
+        "lazy": false
+      }
     }
   },
   "order": [
     "breadcrumbs_7CDig8",
     "main",
+    "media_with_text_wX88YF",
     "ss_social_proof_ey83pt",
     "custom_html_FH3pMa",
     "ss_testimonials_42_FgYH4f",
@@ -949,8 +1009,8 @@
     "175404899885d6c853",
     "multiple_images_with_text_YVJ6Qh",
     "featured_collection_Yjy9Jx",
-    "media_with_text_wX88YF",
     "media_with_text_azYJJ3",
-    "faq_8iBrVL"
+    "faq_8iBrVL",
+    "ss_social_proof_M9DQnk"
   ]
 }
