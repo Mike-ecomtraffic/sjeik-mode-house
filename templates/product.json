@@ -381,6 +381,92 @@
         "spacing": "small"
       }
     },
+    "testimonials_EgzxQ6": {
+      "type": "testimonials",
+      "blocks": {
+        "testimonial_6NjV6w": {
+          "type": "testimonial",
+          "settings": {
+            "round_avatar": false,
+            "show_rating": true,
+            "rating": 4,
+            "author": "Ethan M.",
+            "title": "",
+            "content": "<p>There’s something about the way these pieces are cut — they just sit right. Clean lines, masculine silhouette, premium feel. It gives you that quiet confidence.<br/></p>"
+          }
+        },
+        "testimonial_6iCbfT": {
+          "type": "testimonial",
+          "settings": {
+            "round_avatar": true,
+            "show_rating": true,
+            "rating": 5,
+            "author": "Sarah L.",
+            "title": "",
+            "content": "<p>I’ve ordered multiple pieces from Teresa Toronto now, and every time the quality exceeds expectations. The fit is clean, the materials feel premium, and everything looks more expensive than it is. It’s become my go-to brand.</p>"
+          }
+        },
+        "testimonial_wzikB8": {
+          "type": "testimonial",
+          "settings": {
+            "round_avatar": true,
+            "show_rating": true,
+            "rating": 4,
+            "author": "Emily A.",
+            "title": "",
+            "content": "<p>You can tell this brand pays attention to detail. The stitching, the fabric, the overall structure — it just feels well-made. I’ve gotten compliments at work and even from strangers.</p>"
+          }
+        },
+        "testimonial_ztmbxx": {
+          "type": "testimonial",
+          "settings": {
+            "round_avatar": true,
+            "show_rating": true,
+            "rating": 4,
+            "author": "Michael R.",
+            "title": "",
+            "content": "<p>Bought this as a gift and ended up ordering again. The sizing was accurate and everything looked even better in real life. Definitely worth it.</p>"
+          }
+        },
+        "testimonial_PNB7jm": {
+          "type": "testimonial",
+          "settings": {
+            "round_avatar": true,
+            "show_rating": true,
+            "rating": 4,
+            "author": "Daniel P.",
+            "title": "",
+            "content": "<p>I was hesitant at first ordering online, but this brand delivered. Everything fits true to size and feels comfortable all day. I’ve already placed my second order.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_6NjV6w",
+        "testimonial_6iCbfT",
+        "testimonial_wzikB8",
+        "testimonial_ztmbxx",
+        "testimonial_PNB7jm"
+      ],
+      "name": "Testimonials",
+      "settings": {
+        "full_width": true,
+        "stack_testimonials": false,
+        "subheading": "",
+        "title": "",
+        "content": "",
+        "link_url": "",
+        "link_text": "",
+        "star_color": "#2eaa7e",
+        "star_color_empty": "#d3d3d3",
+        "background": "#f9f9f9",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "testimonial_card_background": "#ffffff",
+        "testimonial_card_text_color": ""
+      }
+    },
     "ss_social_proof_ey83pt": {
       "type": "ss-social-proof",
       "name": "SS - Social proof",
@@ -1001,6 +1087,7 @@
     "breadcrumbs_7CDig8",
     "main",
     "media_with_text_wX88YF",
+    "testimonials_EgzxQ6",
     "ss_social_proof_ey83pt",
     "custom_html_FH3pMa",
     "ss_testimonials_42_FgYH4f",
