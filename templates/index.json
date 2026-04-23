@@ -635,33 +635,6 @@
         "product_card_text_color": ""
       }
     },
-    "featured_collection_BeUxTY": {
-      "type": "featured-collection",
-      "disabled": true,
-      "name": "Featured collection",
-      "settings": {
-        "collection": "sunglasses",
-        "products": [],
-        "full_width": true,
-        "stack_products": false,
-        "show_progress_bar": true,
-        "products_count": 8,
-        "products_per_row_mobile": "2",
-        "products_per_row_desktop": 4,
-        "subheading": "",
-        "title": "SUNGLASSES",
-        "content": "",
-        "link_url": "",
-        "link_text": "VIEW ALL",
-        "background": "",
-        "background_gradient": "",
-        "text_color": "",
-        "heading_color": "",
-        "heading_gradient": "",
-        "product_card_background": "",
-        "product_card_text_color": ""
-      }
-    },
     "rich_text_Mg4Mqa": {
       "type": "rich-text",
       "blocks": {
@@ -1049,7 +1022,6 @@
     "featured_collection_xdEdBz",
     "collection_list_jDp63h",
     "featured_collection_nDATxJ",
-    "featured_collection_BeUxTY",
     "rich_text_Mg4Mqa",
     "featured_collection_8xzBU6",
     "image_with_text_overlay_qdmQG6",

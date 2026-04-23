@@ -1,1 +1,196 @@
-{"type":"footer","name":"Footer group","sections":{"media_with_text_9Cebfr":{"type":"media-with-text","blocks":{"image_feYKe3":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/Gemini_Generated_Image_g8tmzeg8tmzeg8tm.png","media_width":40,"media_position":"end","text_position":"place-self-center text-center","icon":"none","icon_width":48,"subheading":"","title":"FAREWELL...","content":"<p><\/p><p>Hi, I’m Claire Miller. I’m a single mother to a wonderful daughter, <strong>Sarah<\/strong>.<br\/><br\/>I’m the founder of Miller Melbourne and have run it for nearly 10 years. This boutique meant everything to me and was our path to a better future.<\/p><p>But earlier this year, <strong>Sarah<\/strong> was diagnosed with a serious health condition. <strong>She<\/strong> needs more care, more time, and more of me.<br\/><br\/>With a heavy heart, I’m holding one <strong>final Clearance Sale<\/strong> - up to <strong>80% off,<\/strong> to clear everything out before we close our doors for good.<\/p><p><strong>From the bottom of my heart, thank you for supporting me!<\/strong><\/p>","link_text":"","link_url":"","background":"#ffffff","background_gradient":"","text_color":"#000000","text_gradient":"","button_background":"","button_text_color":""}}},"block_order":["image_feYKe3"],"disabled":true,"name":"Media with text","settings":{"full_width":false,"spacing":"small"}},"text-with-icons":{"type":"text-with-icons","blocks":{"free-shipping":{"type":"item","settings":{"icon":"picto-box","mobile_icon_width":36,"icon_width":44,"icon_background_type":"none","icon_background":"","icon_color":"","title":"","content":"<p><strong>Free Shipping<br\/><\/strong>Enjoy free shipping across Australia on all orders. No minimum spend, no surprises at checkout.<\/p>"}},"item_HJX7xT":{"type":"item","settings":{"icon":"picto-return","mobile_icon_width":36,"icon_width":44,"icon_background_type":"none","icon_background":"","icon_color":"","title":"","content":"<p><strong>30-Day Easy Returns<\/strong><br\/>Changed your mind? No problem. You can return your order within 30 days of delivery<\/p>"}},"item_48hc3G":{"type":"item","settings":{"icon":"picto-customer-support","mobile_icon_width":36,"icon_width":44,"icon_background_type":"none","icon_background":"","icon_color":"","title":"","content":"<p><strong>Friendly Customer Support<br\/><\/strong>Our team is here to help. Available Monday to Friday, 9:00am – 5:00pm (AEST)<\/p>"}}},"block_order":["free-shipping","item_HJX7xT","item_48hc3G"],"custom_css":["a {text-decoration: underline;}"],"settings":{"full_width":true,"stack_on_mobile":false,"title":"","heading_tag":"h5","text_alignment":"center","icon_spacing":"small","background":"#f9f7f3","background_gradient":"","text_color":""}},"footer":{"type":"footer","blocks":{"newsletter_WNTePQ":{"type":"newsletter","settings":{"image_width":180,"heading_size":"h3","title":"","content":"<p>Sign up and find out right away if you've won $100 in shopping credit!<\/p>"}},"text_4TEd3A":{"type":"text","settings":{"title":"Business Information","content":"<p>Our promise is that you will be satisfied with your purchase!<\/p><p>With years of experience in the fashion industry since 2015, <strong>Miller Melbourne<\/strong> has built a reputation for quality and reliability. Join us as we continue to redefine fashion with every piece we create.<\/p>","enable_follow_on_shop":false}},"links":{"type":"links","settings":{"menu":"customer-service","show_menu_title":true}},"links_TEemBG":{"type":"links","settings":{"menu":"information","show_menu_title":true}},"text":{"type":"text","settings":{"title":"Contact Information","content":"<p>Mon-Fri: 9:00 AM - 6:00 PM<\/p><p>Sat-Sun: 12:00 PM - 5:00 PM<\/p><p><strong>Support@millermelbourne.com<\/strong><\/p><p><a href=\"tel:+61485991303\" title=\"tel:+61485991303\"><strong>+61485991303<\/strong><\/a><\/p>","enable_follow_on_shop":false}}},"block_order":["newsletter_WNTePQ","text_4TEd3A","links","links_TEemBG","text"],"custom_css":["ul.v-stack a {text-decoration: none;}","a {text-decoration: underline;}"],"settings":{"show_social_media":false,"show_payment_icons":true,"show_country_selector":false,"show_country_flag":false,"show_country_name":false,"show_locale_selector":false,"footer_text":"Miller Melbourne"}}},"order":["media_with_text_9Cebfr","text-with-icons","footer"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "media_with_text_9Cebfr": {
+      "type": "media-with-text",
+      "blocks": {
+        "image_feYKe3": {
+          "type": "image",
+          "settings": {
+            "media_width": 40,
+            "media_position": "end",
+            "text_position": "place-self-center text-center",
+            "icon": "none",
+            "icon_width": 48,
+            "subheading": "",
+            "title": "FAREWELL...",
+            "content": "<p></p><p>Hi, I’m Claire Miller. I’m a single mother to a wonderful daughter, <strong>Sarah</strong>.<br/><br/>I’m the founder of Miller Melbourne and have run it for nearly 10 years. This boutique meant everything to me and was our path to a better future.</p><p>But earlier this year, <strong>Sarah</strong> was diagnosed with a serious health condition. <strong>She</strong> needs more care, more time, and more of me.<br/><br/>With a heavy heart, I’m holding one <strong>final Clearance Sale</strong> - up to <strong>80% off,</strong> to clear everything out before we close our doors for good.</p><p><strong>From the bottom of my heart, thank you for supporting me!</strong></p>",
+            "link_text": "",
+            "link_url": "",
+            "background": "#ffffff",
+            "background_gradient": "",
+            "text_color": "#000000",
+            "text_gradient": "",
+            "button_background": "",
+            "button_text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_feYKe3"
+      ],
+      "disabled": true,
+      "name": "Media with text",
+      "settings": {
+        "full_width": false,
+        "spacing": "small"
+      }
+    },
+    "text-with-icons": {
+      "type": "text-with-icons",
+      "blocks": {
+        "free-shipping": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-box",
+            "mobile_icon_width": 36,
+            "icon_width": 44,
+            "icon_background_type": "none",
+            "icon_background": "",
+            "icon_color": "",
+            "title": "",
+            "content": "<p><strong>FREE SHIPPING<br/></strong>Enjoy free shipping on every order — fast, reliable, and with no hidden fees.</p>"
+          }
+        },
+        "item_HJX7xT": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-return",
+            "mobile_icon_width": 36,
+            "icon_width": 44,
+            "icon_background_type": "none",
+            "icon_background": "",
+            "icon_color": "",
+            "title": "",
+            "content": "<p><strong>EASY RETURNS<br/></strong>Shop with confidence. If it’s not the right fit, our hassle-free returns make it simple to send it back.</p>"
+          }
+        },
+        "item_48hc3G": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-customer-support",
+            "mobile_icon_width": 36,
+            "icon_width": 44,
+            "icon_background_type": "none",
+            "icon_background": "",
+            "icon_color": "",
+            "title": "",
+            "content": "<p><strong>SECURE PAYMENT<br/></strong>Your security is our priority. Every payment is fully encrypted and 100% protected.</p>"
+          }
+        },
+        "item_Jr74DY": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-coupon",
+            "mobile_icon_width": 24,
+            "icon_width": 32,
+            "icon_background_type": "circle",
+            "icon_background": "",
+            "icon_color": "",
+            "title": "",
+            "content": "<p><strong>CUSTOMER SERVICE<br/></strong>Real people, ready to help. Reach out anytime at <strong>info@harperwells-boston.com</strong>— we’re here to make your experience effortless.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "free-shipping",
+        "item_HJX7xT",
+        "item_48hc3G",
+        "item_Jr74DY"
+      ],
+      "custom_css": [
+        "a {text-decoration: underline;}"
+      ],
+      "settings": {
+        "full_width": true,
+        "stack_on_mobile": false,
+        "title": "",
+        "heading_tag": "h5",
+        "text_alignment": "center",
+        "icon_spacing": "small",
+        "background": "#faf9f8",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "newsletter_WNTePQ": {
+          "type": "newsletter",
+          "settings": {
+            "image_width": 180,
+            "heading_size": "h3",
+            "title": "",
+            "content": "<p>Sign up and find out right away if you've won $100 in shopping credit!</p>"
+          }
+        },
+        "text_4TEd3A": {
+          "type": "text",
+          "settings": {
+            "title": "Business Information",
+            "content": "<p>Our promise is that you will be satisfied with your purchase!</p><p>With years of experience in the fashion industry since 2015, <strong>Miller Melbourne</strong> has built a reputation for quality and reliability. Join us as we continue to redefine fashion with every piece we create.</p>",
+            "enable_follow_on_shop": false
+          }
+        },
+        "links": {
+          "type": "links",
+          "settings": {
+            "menu": "",
+            "show_menu_title": true
+          }
+        },
+        "links_TEemBG": {
+          "type": "links",
+          "settings": {
+            "menu": "",
+            "show_menu_title": true
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "title": "Contact Information",
+            "content": "<p>Mon-Fri: 9:00 AM - 6:00 PM</p><p>Sat-Sun: 12:00 PM - 5:00 PM</p><p><strong>Support@millermelbourne.com</strong></p><p><a href=\"tel:+61485991303\" title=\"tel:+61485991303\"><strong>+61485991303</strong></a></p>",
+            "enable_follow_on_shop": false
+          }
+        }
+      },
+      "block_order": [
+        "newsletter_WNTePQ",
+        "text_4TEd3A",
+        "links",
+        "links_TEemBG",
+        "text"
+      ],
+      "custom_css": [
+        "ul.v-stack a {text-decoration: none;}",
+        "a {text-decoration: underline;}"
+      ],
+      "settings": {
+        "show_social_media": false,
+        "show_payment_icons": true,
+        "show_country_selector": false,
+        "show_country_flag": false,
+        "show_country_name": false,
+        "show_locale_selector": false,
+        "footer_text": "Miller Melbourne"
+      }
+    }
+  },
+  "order": [
+    "media_with_text_9Cebfr",
+    "text-with-icons",
+    "footer"
+  ]
+}
