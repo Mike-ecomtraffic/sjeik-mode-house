@@ -273,16 +273,24 @@
         "collapsible_text_6fGm9q": {
           "type": "collapsible_text",
           "settings": {
-            "title": "30-DAY RETURN POLICY",
-            "content": "<p>Not sure if it’s right for you? We get it. While we can tell you all about it, the best way to know is by trying it for yourself. That’s why we offer a <strong>30-day money-back guarantee</strong> on every order. If you’re not completely satisfied, just return the product, and we’ll issue a full refund!</p>",
+            "title": "FREE SHIPPING",
+            "content": "<p><strong>Enjoy Free Shipping.</strong></p><p>Every order is delivered with <strong>premium care and full tracking</strong> at no extra cost. We make sure your items arrive securely and reliably.</p>",
             "open_by_default": false
           }
         },
         "collapsible_text_xfEff8": {
           "type": "collapsible_text",
           "settings": {
-            "title": "Shipping information",
-            "content": "<p><strong>Free Shipping Across Australia</strong></p><p>Every package from us includes a handy Track & Trace code, so you can follow your order’s journey every step of the way! You'll receive your code via email within 24-72 hours after placing your order. Stay in the loop and get excited for your delivery!</p>",
+            "title": "30-DAY MONEY-BACK GUARANTEE",
+            "content": "<p><strong>Shop with confidence.</strong></p><p>Not 100% satisfied with your purchase? No worries. You have <strong>30 days after delivery</strong> to return your item and receive your money back.</p><p>We believe in our quality, and we want you to experience it risk-free.</p>",
+            "open_by_default": false
+          }
+        },
+        "collapsible_text_JaMQ9G": {
+          "type": "collapsible_text",
+          "settings": {
+            "title": "24/7 CUSTOMER SERVICE",
+            "content": "<p><strong>Our customer service is available 24/7 to answer all your questions and comments.</strong> </p><p>Whether you need advice on a product or help with an order, we are here to support you.</p><p>Don’t hesitate to contact us; we’re happy to help!</p><p>Please contact us at info@harperwells-boston.com</p>",
             "open_by_default": false
           }
         }
@@ -313,7 +321,8 @@
         "associated_products_V3a3bm",
         "description_jKkRne",
         "collapsible_text_6fGm9q",
-        "collapsible_text_xfEff8"
+        "collapsible_text_xfEff8",
+        "collapsible_text_JaMQ9G"
       ],
       "custom_css": [
         ".text-with-icon {gap: 6px;}",
