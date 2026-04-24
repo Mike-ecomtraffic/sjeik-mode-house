@@ -46,6 +46,113 @@
         "spacing": "small"
       }
     },
+    "ss_feature_1_rnTMdc": {
+      "type": "ss-feature-1",
+      "blocks": {
+        "image_Nx8rbr": {
+          "type": "image",
+          "settings": {
+            "feature_title": "Free Shipping",
+            "feature_text": "<p>Order today, receive tomorrow</p>",
+            "icon_type": "default",
+            "icon": "box",
+            "feature_url": ""
+          }
+        },
+        "image_qzxKgK": {
+          "type": "image",
+          "settings": {
+            "feature_title": "Price-match guarantee",
+            "feature_text": "<p>Safe money when ordering with us</p>",
+            "icon_type": "default",
+            "icon": "shield_check",
+            "feature_url": ""
+          }
+        },
+        "image_iN4CDY": {
+          "type": "image",
+          "settings": {
+            "feature_title": "Hassle-free exchange",
+            "feature_text": "<p>Receive a slip for exchanges</p>",
+            "icon_type": "default",
+            "icon": "shield_check",
+            "feature_url": ""
+          }
+        },
+        "image_jjerWH": {
+          "type": "image",
+          "settings": {
+            "feature_title": "5.0 Google Reviews",
+            "feature_text": "<p>Customer satisfaction #1 priority</p>",
+            "icon_type": "default",
+            "icon": "shield_check",
+            "feature_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_Nx8rbr",
+        "image_qzxKgK",
+        "image_iN4CDY",
+        "image_jjerWH"
+      ],
+      "disabled": true,
+      "name": "SS - Feature #1",
+      "settings": {
+        "feature_title_custom": false,
+        "feature_title_font": "josefin_sans_n4",
+        "feature_title_size": 14,
+        "feature_title_size_mobile": 12,
+        "feature_title_advanced": false,
+        "feature_title_height": 130,
+        "feature_title_mt": 8,
+        "feature_title_mt_mobile": 8,
+        "feature_text_custom": false,
+        "feature_text_font": "josefin_sans_n4",
+        "feature_text_size": 12,
+        "feature_text_size_mobile": 12,
+        "feature_text_advanced": false,
+        "feature_text_height": 150,
+        "feature_text_mt": 4,
+        "feature_text_mt_mobile": 4,
+        "feature_icon_size": 42,
+        "feature_icon_size_mobile": 42,
+        "feature_row": 4,
+        "feature_row_mobile": 1,
+        "feature_gap": 20,
+        "feature_gap_mobile": 20,
+        "feature_background": false,
+        "feature_bg": "#F5F5F5",
+        "feature_padding_horizontal": 24,
+        "feature_padding_horizontal_mobile": 16,
+        "feature_padding_vertical": 32,
+        "feature_padding_vertical_mobile": 24,
+        "feature_radius": 16,
+        "feature_border_thickness": 0,
+        "feature_border_color": "#DFDFDF",
+        "feature_shadow": false,
+        "feature_shadow_color": "#000000",
+        "feature_title_color": "#121212",
+        "feature_text_color": "#121212",
+        "feature_icon_color": "#121212",
+        "background_style": "solid",
+        "background_color": "#FFFFFF",
+        "background_gradient": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
+        "border_color": "#DFDFDF",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "width": "page",
+        "content_width": 1200,
+        "border_thickness": 0,
+        "section_radius": 0
+      }
+    },
     "text-with-icons": {
       "type": "text-with-icons",
       "blocks": {
@@ -108,16 +215,14 @@
         "item_48hc3G",
         "item_KdUHpr"
       ],
-      "custom_css": [
-        "a {text-decoration: underline;}"
-      ],
+      "custom_css": [],
       "settings": {
         "full_width": true,
         "stack_on_mobile": false,
         "title": "",
         "heading_tag": "h5",
         "text_alignment": "center",
-        "icon_spacing": "small",
+        "icon_spacing": "medium",
         "background": "#faf9f8",
         "background_gradient": "",
         "text_color": ""
@@ -190,6 +295,7 @@
   },
   "order": [
     "media_with_text_9Cebfr",
+    "ss_feature_1_rnTMdc",
     "text-with-icons",
     "footer"
   ]
