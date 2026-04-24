@@ -47,12 +47,12 @@
         "allow_transparent_header": false,
         "enable_parallax": false,
         "image_size": "auto",
-        "image": "shopify://shop_images/image_24.webp",
+        "image": "shopify://shop_images/Blog_NatrelPond-4-1800x1200.jpg",
         "mobile_text_position": "place-self-center text-center",
         "desktop_text_position": "sm:place-self-center sm:text-center",
         "text_color": "#ffffff",
         "overlay_color": "#000000",
-        "overlay_opacity": 35
+        "overlay_opacity": 32
       }
     },
     "crispy_collection_MGKgxn": {
@@ -319,7 +319,7 @@
         "products_per_row_mobile": "2",
         "products_per_row_desktop": 4,
         "subheading": "",
-        "title": "OUR FAVORITE CARDIGANS & SWEATER",
+        "title": "MEN'S BESTSELLERS",
         "content": "",
         "link_url": "shopify://collections/cardigan-sweaters",
         "link_text": "VIEW ALL",
@@ -355,7 +355,7 @@
         "products_per_row_mobile": "2",
         "products_per_row_desktop": 4,
         "subheading": "",
-        "title": "OUR FAVORITE EASY SLIP-ON SHOES",
+        "title": "WOMEN'S BESTSELLERS",
         "content": "",
         "link_url": "shopify://collections/orthopedic-slip-on-shoes",
         "link_text": "VIEW ALL",
