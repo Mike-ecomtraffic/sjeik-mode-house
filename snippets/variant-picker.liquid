@@ -196,7 +196,7 @@
       {%- capture input_label -%}{{ 'product.general.variant' | t }}{%- endcapture -%}
       {%- capture select_options -%}
         {%- for variant in product.variants -%}
-          <option {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %} {% unless variant.available %}disabled="disabled"{% endunless %} value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
+          <option {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %} value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
         {%- endfor -%}
       {%- endcapture -%}
 
@@ -208,6 +208,48 @@
     <input type="hidden" name="id" form="{{ form_id }}" value="{{ product.selected_or_first_available_variant.id }}">
   </noscript>
 {%- endunless -%}
+
+<script>
+  // Force all variants to be purchasable (unlimited stock)
+  (function() {
+    function forceAllVariantsAvailable() {
+      // Remove is-disabled from all swatches
+      document.querySelectorAll('.is-disabled').forEach(function(el) {
+        el.classList.remove('is-disabled');
+      });
+
+      // Enable all disabled inputs/buttons in variant pickers
+      document.querySelectorAll('variant-picker [disabled], variant-picker :disabled').forEach(function(el) {
+        el.disabled = false;
+        el.removeAttribute('disabled');
+      });
+
+      // Enable buy buttons - never show sold out
+      document.querySelectorAll('buy-buttons button[disabled], buy-buttons .button[disabled]').forEach(function(el) {
+        el.disabled = false;
+        el.removeAttribute('disabled');
+      });
+
+      // Remove line-through from popover options
+      document.querySelectorAll('.popover-listbox__option.is-disabled').forEach(function(el) {
+        el.classList.remove('is-disabled');
+      });
+    }
+
+    // Run on page load
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', forceAllVariantsAvailable);
+    } else {
+      forceAllVariantsAvailable();
+    }
+
+    // Watch for dynamic changes (variant picker updates)
+    var observer = new MutationObserver(function() {
+      forceAllVariantsAvailable();
+    });
+    observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['class', 'disabled'] });
+  })();
+</script>
 
 
 <script>
