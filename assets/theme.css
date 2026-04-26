@@ -1151,7 +1151,7 @@ scroll-carousel {
 }
 
 .popover-listbox__option.is-disabled {
-  text-decoration: line-through;
+  text-decoration: none;
 }
 
 .popover-listbox__option[aria-selected="true"], .popover-listbox__option:hover {
@@ -3549,7 +3549,7 @@ tfoot td {
 }
 
 :disabled + .color-swatch, .color-swatch.is-disabled {
-  background: linear-gradient(to bottom right, transparent calc(50% - 1px), rgb(var(--background)) calc(50% - 1px) calc(50% + 1px), transparent calc(50% + 1px)), var(--swatch-background) center / cover;
+  background: var(--swatch-background) center / cover;
 }
 
 .color-swatch:before {
@@ -3641,13 +3641,7 @@ tfoot td {
 }
 
 .media-swatch.is-disabled:after {
-  content: "";
-  background-image: linear-gradient(to bottom right, transparent calc(50% - 1px), rgb(var(--text-color) / .5) calc(50% - 1px) calc(50% + 1px), transparent calc(50% + 1px));
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  display: none;
 }
 
 .media-swatch > img {
@@ -3693,8 +3687,7 @@ tfoot td {
 }
 
 .block-swatch.is-disabled {
-  color: rgb(var(--text-color) / .5);
-  background-image: linear-gradient(to bottom right, #0000 50%, currentColor 50% calc(50% + 2px), #0000 calc(50% + 2px));
+  color: rgb(var(--text-color));
 }
 
 .block-swatch:before {
@@ -3712,7 +3705,7 @@ tfoot td {
 }
 
 :checked + .block-swatch.is-disabled {
-  background-image: linear-gradient(to bottom right, transparent 50%, rgb(var(--text-color)) 50% calc(50% + 2px), transparent calc(50% + 2px));
+  background-image: none;
 }
 
 :checked + .block-swatch:before, .block-swatch.is-selected:before {
