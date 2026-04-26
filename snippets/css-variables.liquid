@@ -184,8 +184,8 @@
 
       /* Product colors */
       --on-sale-text: {{ settings.product_on_sale_accent.rgb }};
-      --on-sale-badge-background: {{ settings.product_on_sale_accent }};
-      --on-sale-badge-text: {{ settings.product_on_sale_accent_text_color }};
+      --on-sale-badge-background: {{ settings.product_on_sale_accent.rgb }};
+      --on-sale-badge-text: {{ settings.product_on_sale_accent_text_color.rgb }};
       --sold-out-badge-background: {{ settings.product_sold_out_badge_background.rgb }};
       --sold-out-badge-text: {% if product_sold_out_badge_brightness < 150 %}255 255 255{% else %}0 0 0{% endif %};
       --primary-badge-background: {{ settings.product_primary_badge_background.rgb }};

@@ -28,15 +28,10 @@ Supported variables
   {%- assign button_disabled = false -%}
   {%- assign button_size = button_size | default: 'xl' -%}
 
-  {%- if product.selected_or_first_available_variant.available -%}
-    {%- if product.template_suffix contains 'pre-order' -%}
-      {%- capture button_content -%}{{ 'product.general.pre_order_button' | t }}{%- endcapture -%}
-    {%- else -%}
-      {%- capture button_content -%}{{ 'product.general.add_to_cart_button' | t }}{%- endcapture -%}
-    {%- endif -%}
+  {%- if product.template_suffix contains 'pre-order' -%}
+    {%- capture button_content -%}{{ 'product.general.pre_order_button' | t }}{%- endcapture -%}
   {%- else -%}
-    {%- capture button_content -%}{{ 'product.general.sold_out_button' | t }}{%- endcapture -%}
-    {%- assign button_disabled = true -%}
+    {%- capture button_content -%}{{ 'product.general.add_to_cart_button' | t }}{%- endcapture -%}
   {%- endif -%}
 
   <div class="v-stack gap-4">

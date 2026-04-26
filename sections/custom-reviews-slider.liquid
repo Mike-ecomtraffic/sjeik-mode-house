@@ -1,446 +1,409 @@
 {% comment %}
-  This is the 'reviews-swiper.liquid' section.
-
-  It renders a SwiperJS slider of reviews, with adjustable content via the Shopify customizer.
-
-  Updates:
-
-  - Padding of the section is now customizable for both desktop and mobile via theme settings.
-  - Included the actual SVG codes for the navigation arrows.
-
-  Requirements:
-
-  - SwiperJS settings:
-      - 3 slides on desktop
-      - 2 slides on tablet
-      - 1.1 slides on mobile
-      - 3 slides per group on desktop
-      - 2 slides per group on tablet
-      - 1 slide per group on mobile
-      - loop: false
-      - centeredSlides: true
-      - slidesPerView: variable (depends on viewport)
-      - spaceBetween: 16px
-  - The content should be editable via the customizer.
-  - The reviewer image is replaced with a fixed SVG icon.
-  - Padding of the section is customizable.
+  Reviews Slider Section
+  Clean, minimal review cards with green stars, italic text, and dot pagination.
+  Each review is a customizer block — easy to add, edit, and reorder.
 {% endcomment %}
 
-<!-- Include SwiperJS styles -->
+<!-- SwiperJS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
 
 <style>
-    /* Custom padding based on theme settings */
-    .glorified-reviews-section {
-        padding-top: {{ section.settings.padding_top_desktop }}px;
-        padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
-    }
-
-    @media (max-width: 767px) {
-        .glorified-reviews-section {
-            padding-top: {{ section.settings.padding_top_mobile }}px;
-            padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
-        }
-    }
-
-    .custom-align-center {
-      text-align: center;
+  .reviews-section {
+    padding-top: {{ section.settings.padding_top_desktop }}px;
+    padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+    background-color: {{ section.settings.background_color }};
+    overflow: hidden;
   }
 
   @media (max-width: 767px) {
-      .reviews-swiper-header.custom-align-center {
-          justify-content: center;
-          width: 100%;
-        align-items: center;
-      }
+    .reviews-section {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+  }
 
-      .custom-trustpilot-h1.custom-align-center {
-          text-align: center;
-      }
+  .reviews-section__header {
+    text-align: {{ section.settings.header_alignment }};
+    max-width: 1200px;
+    margin: 0 auto 32px;
+    padding: 0 32px;
+  }
+
+  .reviews-section__title {
+    font-family: var(--heading-font-family);
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0 0 8px;
+    color: {{ section.settings.heading_color }};
+  }
+
+  .reviews-section__subtitle {
+    font-size: 15px;
+    color: rgba(0, 0, 0, 0.55);
+    margin: 0;
+  }
+
+  @media (min-width: 768px) {
+    .reviews-section__title {
+      font-size: 32px;
+    }
+  }
+
+  /* Swiper container */
+  .reviews-section__slider {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative;
+  }
+
+  .reviews-section__slider .swiper {
+    overflow: visible;
+    padding-bottom: 48px;
+  }
+
+  /* Review card */
+  .review-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 28px 24px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06), 0 2px 12px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: 100%;
+    transition: box-shadow 0.25s ease;
+  }
+
+  .review-card:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 4px 20px rgba(0, 0, 0, 0.06);
+  }
+
+  /* Stars */
+  .review-card__stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  .review-card__star {
+    width: 18px;
+    height: 18px;
+    color: {{ section.settings.star_color }};
+  }
+
+  /* Review text */
+  .review-card__text {
+    font-size: 14px;
+    line-height: 1.65;
+    color: #333;
+    font-style: italic;
+    flex: 1;
+    margin: 0;
+  }
+
+  /* Reviewer info */
+  .review-card__author {
+    margin-top: auto;
+  }
+
+  .review-card__name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+  }
+
+  .review-card__location {
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.5);
+    margin: 2px 0 0;
+  }
+
+  /* Pagination dots */
+  .reviews-section__slider .swiper-pagination {
+    bottom: 0 !important;
+    position: absolute;
+  }
+
+  .reviews-section__slider .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background: #ccc;
+    opacity: 1;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .reviews-section__slider .swiper-pagination-bullet-active {
+    background: #000;
+    transform: scale(1.15);
+  }
+
+  /* Mobile tweaks */
+  @media (max-width: 767px) {
+    .reviews-section__slider {
+      padding: 0 16px;
+    }
+
+    .reviews-section__header {
+      padding: 0 16px;
+      margin-bottom: 24px;
+    }
+
+    .review-card {
+      padding: 24px 20px;
+    }
+
+    .review-card__text {
+      font-size: 13px;
+    }
   }
 </style>
 
-<div class="glorified-reviews-section">
-  <div
-    class="custom-page-padding"
-    style="
-      padding-left: {{ section.settings.padding_left }}px;
-      padding-right: {{ section.settings.padding_right }}px;
-    "
-  >
-    <div class="custom-container">
-      <div class="reviews-swiper-header-container {% if section.settings.header_alignment == 'center' %}custom-align-center{% endif %}">
-        <div class="reviews-swiper-header {% if section.settings.header_alignment == 'center' %}custom-align-center{% endif %}">
-          {% if section.settings.rating_text != blank %}
-            <div class="custom-trustpilot-rating-overall-block">
-              <!-- Trustpilot icon -->
-              <div class="trustpilot-icon-reviews w-embed">
-                <!-- Trustpilot SVG Icon -->
-                <svg width="auto" height="100%" viewBox="0 0 88 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g clip-path="url(#clip0_41_1280)">
-                  <g clip-path="url(#clip1_41_1280)">
-                  <path d="M0 18.1148H16.1306V2H0V18.1148Z" fill="#00A341"></path>
-                  <path d="M13.7512 8.85607L4.60207 15.4958L5.9371 11.3922L2.44238 8.85607H6.76203L8.09678 4.7522L9.43153 8.85607H13.7512ZM8.09711 12.9599L10.5958 12.4349L11.5913 15.4958L8.09711 12.9599Z" fill="white"></path>
-                  <path d="M17.8257 18.1148H33.9563V2H17.8257V18.1148Z" fill="#00A341"></path>
-                  <path d="M17.8257 18.1148H25.891V2H17.8257V18.1148Z" fill="#00A341"></path>
-                  <path d="M26.0842 12.8975L28.2268 12.4349L29.2178 15.5653L25.8577 13.06L22.3666 15.5653L23.7216 11.4468L20.1743 8.90149H24.5589L25.9133 4.78271L27.2683 8.90149H31.6526L26.0842 12.8975Z" fill="white"></path>
-                  <path d="M35.6636 18.1148H51.7942V2H35.6636V18.1148Z" fill="#00A341"></path>
-                  <path d="M35.6636 18.1148H43.7289V2H35.6636V18.1148Z" fill="#00A341"></path>
-                  <path d="M49.4148 8.85607L40.2656 15.4958L41.6007 11.3922L38.106 8.85607H42.4256L43.7604 4.7522L45.0951 8.85607L49.4148 8.85607ZM43.7607 12.9599L46.2593 12.4349L47.2548 15.4958L43.7607 12.9599Z" fill="white"></path>
-                  <path d="M53.501 18.1148H69.6316V2H53.501V18.1148Z" fill="#00A341"></path>
-                  <path d="M53.501 18.1148H61.5663V2H53.501V18.1148Z" fill="#00A341"></path>
-                  <path d="M67.2517 8.85607L58.1028 15.4958L59.4376 11.3922L55.9429 8.85607H60.2625L61.5973 4.7522L62.932 8.85607L67.2517 8.85607ZM61.5976 12.9599L64.0962 12.4349L65.0918 15.4958L61.5976 12.9599Z" fill="white"></path>
-                  <path d="M71.3267 18.1148H87.4573V2H71.3267V18.1148Z" fill="#00A341"></path>
-                  <path d="M71.3267 18.1148H79.392V2H71.3267V18.1148Z" fill="#00A341"></path>
-                  <path d="M85.0773 8.85607L75.9285 15.4958L77.2633 11.3922L73.7686 8.85607H78.0882L79.4229 4.7522L80.7577 8.85607H85.0773ZM79.4233 12.9599L81.9219 12.4349L82.9174 15.4958L79.4233 12.9599Z" fill="white"></path>
-                  </g>
-                  </g>
-                  <defs>
-                  <clipPath id="clip0_41_1280">
-                  <rect width="87.3043" height="20" fill="white"></rect>
-                  </clipPath>
-                  <clipPath id="clip1_41_1280">
-                  <rect width="87.3043" height="16" fill="white" transform="translate(0 2)"></rect>
-                  </clipPath>
-                  </defs>
-                </svg>
-              </div>
-              <div>
-                {{ section.settings.rating_text }}
-              </div>
-            </div>
-          {% endif %}
-          {% if section.settings.header_text != blank %}
-            <h1 class="custom-trustpilot-h1 {% if section.settings.header_alignment == 'center' %}custom-align-center{% endif %}">
-              {{ section.settings.header_text }}
-            </h1>
-          {% endif %}
-        </div>
-        <div class="reviews-swiper-navigation-wrapper">
-          <div class="swiper-review-nav-arrow review-button-prev">
-            <div class="arrow w-embed">
-              <!-- Left arrow SVG -->
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path d="M28.5 16c0 .398-.158.779-.439 1.061-.282.281-.663.439-1.061.439H8.625l6.44 6.439c.282.282.44.664.44 1.062s-.158.78-.44 1.062c-.282.282-.664.44-1.062.44-.398 0-.78-.158-1.062-.44l-9-9c-.14-.14-.251-.305-.327-.488-.076-.182-.115-.378-.115-.575s.039-.393.115-.576c.076-.182.187-.348.327-.487l9-9c.14-.14.305-.251.487-.327.183-.076.379-.115.576-.115s.393.039.576.115c.182.076.347.187.487.327.14.14.251.305.327.488.076.182.115.378.115.575s-.039.393-.115.576c-.076.182-.187.348-.327.487L8.625 14.5h18.875c.398 0 .78.158 1.061.439.281.281.439.663.439 1.061z"></path>
-              </svg>
-            </div>
-          </div>
-          <div class="swiper-review-nav-arrow review-button-next">
-            <div class="arrow w-embed">
-              <!-- Right arrow SVG -->
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path d="M28.061 17.061l-9 9c-.282.282-.664.44-1.062.44s-.78-.158-1.062-.44c-.282-.282-.44-.664-.44-1.062s.158-.78.44-1.062l6.438-6.438H5c-.398 0-.78-.158-1.061-.439C3.658 17.779 3.5 17.398 3.5 17s.158-.779.439-1.061C4.22 15.658 4.602 15.5 5 15.5h18.375l-6.436-6.44c-.282-.282-.44-.664-.44-1.062s.158-.78.44-1.062c.282-.282.664-.44 1.062-.44s.78.158 1.062.44l9 9c.14.14.251.305.327.488.076.182.115.378.115.575s-.039.393-.115.576c-.076.182-.187.348-.327.487z"></path>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="ReviewsSwiper" class="reviews-swiper-slider">
-        <div class="swiper">
-          <div class="swiper-wrapper">
-            {% for block in section.blocks %}
-              {% if block.type == 'review' %}
-                <div class="swiper-slide">
-                  <div class="reasons-outer-wrapper">
-                    <div class="reviews-swipe-inner">
-                      <div class="reviews-swiper-inner">
-                        <!-- Trustpilot icon -->
-                        <div class="trustpilot-icon-reviews w-embed">
-                          <!-- Trustpilot SVG Icon -->
-                          <svg
-                            width="auto"
-                            height="100%"
-                            viewBox="0 0 88 20"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <g clip-path="url(#clip0_41_1280)">
-                            <g clip-path="url(#clip1_41_1280)">
-                            <path d="M0 18.1148H16.1306V2H0V18.1148Z" fill="#00A341"></path>
-                            <path d="M13.7512 8.85607L4.60207 15.4958L5.9371 11.3922L2.44238 8.85607H6.76203L8.09678 4.7522L9.43153 8.85607H13.7512ZM8.09711 12.9599L10.5958 12.4349L11.5913 15.4958L8.09711 12.9599Z" fill="white"></path>
-                            <path d="M17.8257 18.1148H33.9563V2H17.8257V18.1148Z" fill="#00A341"></path>
-                            <path d="M17.8257 18.1148H25.891V2H17.8257V18.1148Z" fill="#00A341"></path>
-                            <path d="M26.0842 12.8975L28.2268 12.4349L29.2178 15.5653L25.8577 13.06L22.3666 15.5653L23.7216 11.4468L20.1743 8.90149H24.5589L25.9133 4.78271L27.2683 8.90149H31.6526L26.0842 12.8975Z" fill="white"></path>
-                            <path d="M35.6636 18.1148H51.7942V2H35.6636V18.1148Z" fill="#00A341"></path>
-                            <path d="M35.6636 18.1148H43.7289V2H35.6636V18.1148Z" fill="#00A341"></path>
-                            <path d="M49.4148 8.85607L40.2656 15.4958L41.6007 11.3922L38.106 8.85607H42.4256L43.7604 4.7522L45.0951 8.85607L49.4148 8.85607ZM43.7607 12.9599L46.2593 12.4349L47.2548 15.4958L43.7607 12.9599Z" fill="white"></path>
-                            <path d="M53.501 18.1148H69.6316V2H53.501V18.1148Z" fill="#00A341"></path>
-                            <path d="M53.501 18.1148H61.5663V2H53.501V18.1148Z" fill="#00A341"></path>
-                            <path d="M67.2517 8.85607L58.1028 15.4958L59.4376 11.3922L55.9429 8.85607H60.2625L61.5973 4.7522L62.932 8.85607L67.2517 8.85607ZM61.5976 12.9599L64.0962 12.4349L65.0918 15.4958L61.5976 12.9599Z" fill="white"></path>
-                            <path d="M71.3267 18.1148H87.4573V2H71.3267V18.1148Z" fill="#00A341"></path>
-                            <path d="M71.3267 18.1148H79.392V2H71.3267V18.1148Z" fill="#00A341"></path>
-                            <path d="M85.0773 8.85607L75.9285 15.4958L77.2633 11.3922L73.7686 8.85607H78.0882L79.4229 4.7522L80.7577 8.85607H85.0773ZM79.4233 12.9599L81.9219 12.4349L82.9174 15.4958L79.4233 12.9599Z" fill="white"></path>
-                            </g>
-                            </g>
-                            <defs>
-                            <clipPath id="clip0_41_1280">
-                            <rect width="87.3043" height="20" fill="white"></rect>
-                            </clipPath>
-                            <clipPath id="clip1_41_1280">
-                            <rect width="87.3043" height="16" fill="white" transform="translate(0 2)"></rect>
-                            </clipPath>
-                            </defs>
-                          </svg>
-                        </div>
-                        <!-- Review image -->
-                        {% if block.settings.review_image != blank %}
-                          <img
-                            src="{{ block.settings.review_image | img_url: 'medium' }}"
-                            loading="lazy"
-                            alt="{{ block.settings.review_title }}"
-                            class="review-image"
-                          >
-                        {% endif %}
-                        <div class="review-content-container">
-                          <div class="review-swiper-title">
-                            {{ block.settings.review_title }}
-                          </div>
-                          <div>
-                            {{ block.settings.review_text }}
-                          </div>
-                        </div>
-                        <div class="review-verified-custom-glorified">
-                          <div class="inner-review-verified-glorified">
-                            <!-- Reviewer SVG Icon -->
-                            <svg
-                              width="16"
-                              height="17"
-                              viewBox="0 0 16 17"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path d="M14.1187 6.925C13.8812 6.68125 13.6375 6.425 13.5437 6.20625C13.45 5.9875 13.4562 5.6625 13.45 5.33125C13.4437 4.725 13.4312 4.03125 12.95 3.55C12.4687 3.06875 11.775 3.05625 11.1687 3.05C10.8375 3.04375 10.5 3.0375 10.2937 2.95625C10.0875 2.875 9.81875 2.61875 9.575 2.38125C9.14375 1.96875 8.65 1.5 8 1.5C7.35 1.5 6.85625 1.96875 6.425 2.38125C6.18125 2.61875 5.925 2.8625 5.70625 2.95625C5.4875 3.05 5.1625 3.04375 4.83125 3.05C4.225 3.05625 3.53125 3.06875 3.05 3.55C2.56875 4.03125 2.55625 4.725 2.55 5.33125C2.54375 5.6625 2.5375 6 2.45625 6.20625C2.375 6.4125 2.11875 6.68125 1.88125 6.925C1.46875 7.35625 1 7.85 1 8.5C1 9.15 1.46875 9.64375 1.88125 10.075C2.11875 10.3187 2.3625 10.575 2.45625 10.7937C2.55 11.0125 2.54375 11.3375 2.55 11.6687C2.55625 12.275 2.56875 12.9687 3.05 13.45C3.53125 13.9312 4.225 13.9437 4.83125 13.95C5.1625 13.9562 5.5 13.9625 5.70625 14.0437C5.9125 14.125 6.18125 14.3812 6.425 14.6187C6.85625 15.0312 7.35 15.5 8 15.5C8.65 15.5 9.14375 15.0312 9.575 14.6187C9.81875 14.3812 10.075 14.1375 10.2937 14.0437C10.5125 13.95 10.8375 13.9562 11.1687 13.95C11.775 13.9437 12.4687 13.9312 12.95 13.45C13.4312 12.9687 13.4437 12.275 13.45 11.6687C13.4562 11.3375 13.4625 11 13.5437 10.7937C13.625 10.5875 13.8812 10.3187 14.1187 10.075C14.5312 9.64375 15 9.15 15 8.5C15 7.85 14.5312 7.35625 14.1187 6.925ZM11.0938 7.3625L7.43125 10.8625C7.33656 10.9516 7.21124 11.0008 7.08125 11C6.95317 11.0005 6.82991 10.9512 6.7375 10.8625L4.90625 9.1125C4.85546 9.06819 4.81415 9.01406 4.78481 8.95337C4.75547 8.89269 4.7387 8.8267 4.73552 8.75937C4.73233 8.69204 4.74279 8.62476 4.76627 8.56157C4.78975 8.49839 4.82577 8.4406 4.87215 8.39169C4.91853 8.34278 4.97432 8.30375 5.03617 8.27695C5.09802 8.25015 5.16465 8.23614 5.23205 8.23574C5.29946 8.23535 5.36625 8.2486 5.4284 8.27467C5.49056 8.30075 5.5468 8.33913 5.59375 8.3875L7.08125 9.80625L10.4062 6.6375C10.5035 6.55268 10.6297 6.50872 10.7586 6.51482C10.8875 6.52092 11.009 6.5766 11.0978 6.67022C11.1865 6.76384 11.2357 6.88815 11.235 7.01717C11.2342 7.14618 11.1836 7.26992 11.0938 7.3625Z" fill="#01ABE7"/>
-                            </svg>
-                            <div>{{ block.settings.reviewer_name }}</div>
-                          </div>
-                          <div class="verified-text-glorified">{{ block.settings.verified_text }}</div>
-                        </div>
-                      </div>
-                      <div class="recommended-items-slide">
-                        <div class="custom-profile-pic">
-                          {% if block.settings.product_image != blank %}
-                            <img
-                              src="{{ block.settings.product_image | img_url: 'medium' }}"
-                              loading="lazy"
-                              alt="{{ block.settings.product_name }}"
-                              class="maximize-image-glorified"
-                            >
-                          {% endif %}
-                        </div>
-                        <div>{{ block.settings.product_name }}</div>
-                        {% if block.settings.product_link != blank %}
-                          <div class="review-glorified-shop-button">
-                            <a href="{{ block.settings.product_link }}" class="shop-button-link">
-                              {{- block.settings.shop_button_text -}}
-                            </a>
-                          </div>
-                        {% endif %}
-                      </div>
-                    </div>
-                  </div>
+<div class="reviews-section">
+  {% if section.settings.heading != blank or section.settings.subheading != blank %}
+    <div class="reviews-section__header">
+      {% if section.settings.heading != blank %}
+        <h2 class="reviews-section__title">{{ section.settings.heading }}</h2>
+      {% endif %}
+      {% if section.settings.subheading != blank %}
+        <p class="reviews-section__subtitle">{{ section.settings.subheading }}</p>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div class="reviews-section__slider">
+    <div class="swiper reviews-swiper-instance">
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+          {% if block.type == 'review' %}
+            <div class="swiper-slide" {{ block.shopify_attributes }}>
+              <div class="review-card">
+                <!-- Stars -->
+                <div class="review-card__stars">
+                  {% assign star_count = block.settings.stars | default: 5 %}
+                  {% for i in (1..star_count) %}
+                    <svg class="review-card__star" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                  {% endfor %}
                 </div>
-              {% endif %}
-            {% endfor %}
-          </div>
-        </div>
+
+                <!-- Review text -->
+                {% if block.settings.review_text != blank %}
+                  <p class="review-card__text">{{ block.settings.review_text }}</p>
+                {% endif %}
+
+                <!-- Author -->
+                <div class="review-card__author">
+                  {% if block.settings.reviewer_name != blank %}
+                    <p class="review-card__name">{{ block.settings.reviewer_name }}</p>
+                  {% endif %}
+                  {% if block.settings.reviewer_location != blank %}
+                    <p class="review-card__location">{{ block.settings.reviewer_location }}</p>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
       </div>
+      <div class="swiper-pagination"></div>
     </div>
   </div>
 </div>
 
-<!-- Include SwiperJS script -->
+<!-- SwiperJS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
-
-<!-- Initialize SwiperJS -->
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-      var swiper = new Swiper('#ReviewsSwiper .swiper', {
+    new Swiper('.reviews-swiper-instance', {
+      slidesPerView: 1.15,
+      spaceBetween: 16,
+      centeredSlides: true,
+      grabCursor: true,
+      loop: false,
+      pagination: {
+        el: '.reviews-section__slider .swiper-pagination',
+        clickable: true
+      },
+      breakpoints: {
+        480: {
+          slidesPerView: 1.3,
+          spaceBetween: 16
+        },
+        768: {
+          slidesPerView: 2.2,
+          spaceBetween: 20,
+          centeredSlides: false
+        },
+        1024: {
           slidesPerView: 3,
-          spaceBetween: 16,
-          centeredSlides: true,
-          loop: false,
-          centeredSlidesBounds: true,
-          navigation: {
-              nextEl: '.review-button-next',
-              prevEl: '.review-button-prev',
-          },
-          breakpoints: {
-              320: {
-                  slidesPerView: 1.1,
-                  slidesPerGroup: 1,
-              },
-              768: {
-                  slidesPerView: 2,
-                  slidesPerGroup: 2,
-              },
-              1024: {
-                  slidesPerView: 3,
-                  slidesPerGroup: 3,
-              }
-          },
-      });
+          spaceBetween: 24,
+          centeredSlides: true
+        }
+      }
+    });
   });
 </script>
 
-<!-- Section Schema -->
 {% schema %}
 {
-    "name": "Reviews Swiper",
-    "settings": [
-        {
-            "type": "text",
-            "id": "rating_text",
-            "label": "Rating Text",
-            "default": "Rated <strong>4.4/5</strong> based on <strong>+1475 reviews</strong>"
-        },
-        {
-            "type": "text",
-            "id": "header_text",
-            "label": "Header Text",
-            "default": "Our customers speak for themselves."
-        },
-        {
-            "type": "range",
-            "id": "padding_top_desktop",
-            "label": "Padding Top (Desktop)",
-            "default": 32,
-            "min": 0,
-            "max": 64,
-            "step": 4,
-            "unit": "px"
-        },
-        {
-            "type": "range",
-            "id": "padding_bottom_desktop",
-            "label": "Padding Bottom (Desktop)",
-            "default": 32,
-            "min": 0,
-            "max": 64,
-            "step": 4,
-            "unit": "px"
-        },
-        {
-            "type": "range",
-            "id": "padding_top_mobile",
-            "label": "Padding Top (Mobile)",
-            "default": 32,
-            "min": 0,
-            "max": 124,
-            "step": 4,
-            "unit": "px"
-        },
-        {
-            "type": "range",
-            "id": "padding_bottom_mobile",
-            "label": "Padding Bottom (Mobile)",
-            "default": 32,
-            "min": 0,
-            "max": 124,
-            "step": 4,
-            "unit": "px"
-        },
-        {
+  "name": "Reviews Slider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our customers speak for themselves."
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#f7f7f7"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star Color",
+      "default": "#00a341"
+    },
+    {
+      "type": "select",
+      "id": "header_alignment",
+      "label": "Header Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ],
+      "default": "center"
+    },
+    {
       "type": "range",
-      "id": "padding_left",
-      "label": "Padding Left",
+      "id": "padding_top_desktop",
+      "label": "Padding Top (Desktop)",
+      "default": 48,
       "min": 0,
-      "max": 32,
-      "step": 1,
-      "default": 32,
+      "max": 100,
+      "step": 4,
       "unit": "px"
     },
     {
       "type": "range",
-      "id": "padding_right",
-      "label": "Padding Right",
+      "id": "padding_bottom_desktop",
+      "label": "Padding Bottom (Desktop)",
+      "default": 48,
       "min": 0,
-      "max": 32,
-      "step": 1,
-      "default": 32,
+      "max": 100,
+      "step": 4,
       "unit": "px"
     },
-{
-    "type": "select",
-    "id": "header_alignment",
-    "label": "Header Alignment",
-    "options": [
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Padding Top (Mobile)",
+      "default": 32,
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Padding Bottom (Mobile)",
+      "default": 32,
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
         {
-            "value": "left",
-            "label": "Left"
+          "type": "range",
+          "id": "stars",
+          "label": "Star Rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
         },
         {
-            "value": "center",
-            "label": "Center"
-        }
-    ],
-    "default": "left"
-}
-
-    ],
-    "blocks": [
+          "type": "textarea",
+          "id": "review_text",
+          "label": "Review Text",
+          "default": "You can tell this brand pays attention to detail. The stitching, the fabric, the overall structure — it just feels well-made. I've gotten compliments at work and even from strangers. That doesn't happen often."
+        },
         {
-            "type": "review",
-            "name": "Review",
-            "settings": [
-                {
-                    "type": "image_picker",
-                    "id": "review_image",
-                    "label": "Review Image"
-                },
-                {
-                    "type": "text",
-                    "id": "review_title",
-                    "label": "Review Title",
-                    "default": "My Wardrobe Essential"
-                },
-                {
-                    "type": "textarea",
-                    "id": "review_text",
-                    "label": "Review Text",
-                    "default": "I bought a size L short. I’m 180 pounds which I carry mostly around my hips. I love the material. It looks long lasting. Actually it’s high rise so it’s super cute with the even the shortest of crop tops."
-                },
-                {
-                    "type": "text",
-                    "id": "reviewer_name",
-                    "label": "Reviewer Name",
-                    "default": "Sarah, 42"
-                },
-                {
-                    "type": "text",
-                    "id": "verified_text",
-                    "label": "Verified Text",
-                    "default": "Verified Buyer"
-                },
-                {
-                    "type": "image_picker",
-                    "id": "product_image",
-                    "label": "Product Image"
-                },
-                {
-                    "type": "text",
-                    "id": "product_name",
-                    "label": "Product Name",
-                    "default": "Beige Wide Leg Tailored Pants"
-                },
-                {
-                    "type": "url",
-                    "id": "product_link",
-                    "label": "Product Link"
-                },
-                {
-                    "type": "text",
-                    "id": "shop_button_text",
-                    "label": "Shop Button Text",
-                    "default": "SHOP"
-                }
-            ]
-        }
-    ],
-    "presets": [
+          "type": "text",
+          "id": "reviewer_name",
+          "label": "Reviewer Name",
+          "default": "David S."
+        },
         {
-            "name": "Custom Reviews Swiper",
-            "category": "Custom"
+          "type": "text",
+          "id": "reviewer_location",
+          "label": "Location",
+          "default": "Denver"
         }
-    ]
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reviews Slider",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "review",
+          "settings": {
+            "review_text": "I've ordered multiple pieces from Harper & Wells now, and every time the quality exceeds expectations. The fit is clean, the materials feel premium, and everything looks more expensive than it is. It's become my go-to brand.",
+            "reviewer_name": "Robert K.",
+            "reviewer_location": "Boston"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "review_text": "You can tell this brand pays attention to detail. The stitching, the fabric, the overall structure — it just feels well-made. I've gotten compliments at work and even from strangers. That doesn't happen often.",
+            "reviewer_name": "David S.",
+            "reviewer_location": "Denver"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "review_text": "What I like most is the balance. It's modern without being flashy. Refined without trying too hard. Harper & Wells has that effortless, confident look that works anywhere.",
+            "reviewer_name": "Mark L.",
+            "reviewer_location": "Charlotte"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "review_text": "Finally found a brand that gets menswear right. The pants fit perfectly, the shirts are tailored just enough, and the fabric quality is genuinely impressive for the price.",
+            "reviewer_name": "James T.",
+            "reviewer_location": "Austin"
+          }
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}

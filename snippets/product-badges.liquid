@@ -32,13 +32,7 @@ Supported variables
         {%- endfor -%}
 
       {%- when 'sold_out' -%}
-        {%- if settings.show_sold_out_badge -%}
-          {%- if variant.available == false or form_id != blank -%}
-            <sold-out-badge {% if variant.available %}hidden{% endif %} {% if form_id != blank %}form="{{ form_id }}"{% endif %} class="badge badge--sold-out">
-              {{- 'product.general.sold_out_badge' | t -}}
-            </sold-out-badge>
-          {%- endif -%}
-        {%- endif -%}
+        {%- comment -%}Sold out badges disabled — items are never out of stock{%- endcomment -%}
 
       {%- when 'discount' -%}
         {%- if settings.show_discount -%}

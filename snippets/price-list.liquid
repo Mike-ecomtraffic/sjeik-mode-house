@@ -47,20 +47,6 @@
       --------------------------------------------------------------------------------------------------------------------
     {%- endcomment -%}
 
-    <sale-price
-      {% if form_id %}
-        form="{{ form_id }}"
-      {% endif %}
-      class="{% if variant.compare_at_price > variant.price %}{{ on_sale_price_classes }}{% else %}{{ regular_price_classes }}{% endif %}"
-    >
-      <span class="sr-only">{{ 'product.price.sale_price' | t }}</span>
-
-      {%- if settings.currency_code_enabled -%}
-        {{- variant.price | money_with_currency -}}
-      {%- else -%}
-        {{- variant.price | money -}}
-      {%- endif -%}
-    </sale-price>
     <compare-at-price
       {% if form_id %}
         form="{{ form_id }}"
@@ -68,7 +54,7 @@
       {% unless variant.compare_at_price > variant.price %}
         hidden
       {% endunless %}
-      class="{{ compare_at_price_classes }}"
+      class="pdp-compare-price {{ compare_at_price_classes }}"
     >
       <span class="sr-only">{{ 'product.price.regular_price' | t }}</span>
 
@@ -78,6 +64,23 @@
         {{- variant.compare_at_price | money -}}
       {%- endif -%}
     </compare-at-price>
+    <sale-price
+      {% if form_id %}
+        form="{{ form_id }}"
+      {% endif %}
+      class="pdp-sale-price {% if variant.compare_at_price > variant.price %}{{ on_sale_price_classes }}{% else %}{{ regular_price_classes }}{% endif %}"
+    >
+      <span class="sr-only">{{ 'product.price.sale_price' | t }}</span>
+
+      {%- if settings.currency_code_enabled -%}
+        {{- variant.price | money_with_currency -}}
+      {%- else -%}
+        {{- variant.price | money -}}
+      {%- endif -%}
+    </sale-price>
+    {%- if variant.compare_at_price > variant.price -%}
+      <span class="pdp-clearance-label">CLEARANCE SALE!</span>
+    {%- endif -%}
   {%- elsif line_item != blank -%}
     {%- comment -%}
       --------------------------------------------------------------------------------------------------------------------
