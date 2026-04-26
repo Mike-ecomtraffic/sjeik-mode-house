@@ -68,7 +68,7 @@ only way to do it on Shopify right now.
           {%- capture pdp_savings -%}{{ pdp_variant.compare_at_price | minus: pdp_variant.price | money }}{%- endcapture -%}
         {%- endif -%}
         <div style="position: absolute; top: 12px; right: 12px; z-index: 10; pointer-events: none;">
-          <span style="background-color: {{ settings.product_on_sale_accent }}; color: {{ settings.product_on_sale_accent_text_color }}; display: inline-flex; padding: 5px 12px; font-size: 13px; font-weight: 700; border-radius: 4px; line-height: 1.3;">
+          <span style="background-color: #000000; color: #ffffff; display: inline-flex; padding: 5px 12px; font-size: 13px; font-weight: 700; border-radius: 4px; line-height: 1.3;">
             {{- 'product.general.discount_badge_html' | t: savings: pdp_savings -}}
           </span>
         </div>

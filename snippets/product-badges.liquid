@@ -49,7 +49,7 @@ Supported variables
               {%- capture savings -%}{{ variant.compare_at_price | minus: variant.price | money }}{%- endcapture -%}
             {%- endif -%}
 
-            <span class="badge badge--on-sale" style="background-color: {{ settings.product_on_sale_accent }}; color: {{ settings.product_on_sale_accent_text_color }}; display: inline-flex; padding: 3px 8px; font-size: 11px; font-weight: 700; border-radius: 4px; line-height: 1.2;">
+            <span class="badge badge--on-sale" style="background-color: #000000; color: #ffffff; display: inline-flex; padding: 3px 8px; font-size: 11px; font-weight: 700; border-radius: 4px; line-height: 1.2;">
               {%- if form_id == blank and product.price_varies -%}
                 {{- 'product.general.on_sale_badge' | t -}}
               {%- else -%}
