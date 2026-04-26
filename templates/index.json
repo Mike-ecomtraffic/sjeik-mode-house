@@ -310,7 +310,7 @@
     "featured_collection_8GeqRJ": {
       "type": "featured-collection",
       "settings": {
-        "collection": "cardigan-sweaters",
+        "collection": "men",
         "products": [],
         "full_width": true,
         "stack_products": false,
@@ -336,7 +336,7 @@
       "type": "featured-collection",
       "name": "Featured collection",
       "settings": {
-        "collection": "orthopedic-slip-on-shoes",
+        "collection": "women",
         "products": [
           "bonnie",
           "carry-orthopaedic-slip-on-shoes",
