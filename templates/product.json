@@ -921,10 +921,9 @@
     },
     "featured_collection_Yjy9Jx": {
       "type": "featured-collection",
-      "disabled": true,
       "name": "Featured collection",
       "settings": {
-        "collection": "",
+        "collection": "women",
         "products": [
           "cassandra-full-zip-womens-jacket",
           "casual-textured-button-v-neck-long-sleeve-top",
