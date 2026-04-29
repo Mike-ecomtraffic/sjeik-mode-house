@@ -266,7 +266,7 @@
           "type": "text",
           "settings": {
             "title": "Contact Information",
-            "content": "<p>Mon-Fri: 9:00 AM - 6:00 PM</p><p>Sat-Sun: 12:00 PM - 5:00 PM</p><p><strong>Support@Teresa-Toronto.com</strong></p><p><a href=\"tel:+61485991303\" title=\"tel:+61485991303\"><strong>+61485991303</strong></a></p>",
+            "content": "<p>Mon-Fri: 9:00 AM - 6:00 PM</p><p>Sat-Sun: 12:00 PM - 5:00 PM</p><p><strong>Support@Teresa-Toronto.com</strong></p><p><strong>+1 (416) 728-5931</strong></p>",
             "enable_follow_on_shop": false
           }
         }
