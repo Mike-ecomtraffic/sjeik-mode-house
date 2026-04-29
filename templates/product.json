@@ -921,6 +921,7 @@
     },
     "featured_collection_Yjy9Jx": {
       "type": "featured-collection",
+      "disabled": true,
       "name": "Featured collection",
       "settings": {
         "collection": "women",
