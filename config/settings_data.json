@@ -63,7 +63,7 @@
     "show_product_rating": false,
     "product_rating_mode": "count",
     "show_discount": true,
-    "discount_mode": "percentage",
+    "discount_mode": "saving",
     "product_color_display": "hide",
     "product_image_aspect_ratio": "tall_crop",
     "product_info_alignment": "center",
