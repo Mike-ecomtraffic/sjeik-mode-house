@@ -62,7 +62,7 @@
     "heading_apparition": "split_fade",
     "show_product_rating": false,
     "product_rating_mode": "count",
-    "show_discount": true,
+    "show_discount": false,
     "product_color_display": "hide",
     "product_image_aspect_ratio": "tall_crop",
     "product_info_alignment": "center",
