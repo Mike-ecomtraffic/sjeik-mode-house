@@ -1061,7 +1061,7 @@
       ],
       "name": "FAQ",
       "settings": {
-        "full_width": true,
+        "full_width": false,
         "subheading": "",
         "title": "Frequently Asked Questions",
         "content": "",
