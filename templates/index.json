@@ -311,13 +311,19 @@
       "type": "featured-collection",
       "settings": {
         "collection": "men",
-        "products": [],
+        "products": [
+          "nathan-shorts",
+          "wesley-pants",
+          "caleb-shirt",
+          "austin",
+          "spencer-shirt"
+        ],
         "full_width": true,
         "stack_products": false,
         "show_progress_bar": true,
-        "products_count": 8,
+        "products_count": 5,
         "products_per_row_mobile": "2",
-        "products_per_row_desktop": 4,
+        "products_per_row_desktop": 5,
         "subheading": "",
         "title": "MEN'S BESTSELLERS",
         "content": "",
