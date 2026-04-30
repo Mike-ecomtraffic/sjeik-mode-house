@@ -185,7 +185,7 @@
         "item_48hc3G": {
           "type": "item",
           "settings": {
-            "icon": "picto-customer-support",
+            "icon": "picto-lock",
             "mobile_icon_width": 36,
             "icon_width": 44,
             "icon_background_type": "none",
