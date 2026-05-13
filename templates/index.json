@@ -47,12 +47,12 @@
         "allow_transparent_header": false,
         "enable_parallax": false,
         "image_size": "auto",
-        "image": "shopify://shop_images/image_25.webp",
+        "image": "shopify://shop_images/Henrico_Klem_teresa_Toronto.jpg",
         "mobile_text_position": "place-self-center text-center",
         "desktop_text_position": "sm:place-self-center sm:text-center",
         "text_color": "#ffffff",
         "overlay_color": "#000000",
-        "overlay_opacity": 32
+        "overlay_opacity": 24
       }
     },
     "crispy_collection_MGKgxn": {
