@@ -240,25 +240,17 @@
             "content": "<p>Be the first to access new arrivals and receive exclusive offers available only to subscribers.</p>"
           }
         },
-        "text_4TEd3A": {
-          "type": "text",
-          "settings": {
-            "title": "Business Information",
-            "content": "<p>At <strong>Teresa Toronto</strong>, we create clothing designed for everyday life.</p><p>Founded in <strong>Toronto</strong>, our collections focus on clean design, comfort, and versatility. Each piece is made to be easy to wear, easy to combine, and relevant season after season.</p><p>With a strong focus on quality and simplicity, Harper & Wells offers reliable styles you can feel good in—day after day.</p>",
-            "enable_follow_on_shop": false
-          }
-        },
         "links": {
           "type": "links",
           "settings": {
-            "menu": "",
+            "menu": "footer-1",
             "show_menu_title": true
           }
         },
         "links_TEemBG": {
           "type": "links",
           "settings": {
-            "menu": "",
+            "menu": "menu",
             "show_menu_title": true
           }
         },
@@ -269,14 +261,22 @@
             "content": "<p>Mon-Fri: 9:00 AM - 6:00 PM</p><p>Sat-Sun: 12:00 PM - 5:00 PM</p><p><strong>Support@Teresa-Toronto.com</strong></p><p><strong>+1 (416) 728-5931</strong></p>",
             "enable_follow_on_shop": false
           }
+        },
+        "text_4TEd3A": {
+          "type": "text",
+          "settings": {
+            "title": "Business Information",
+            "content": "<p>At <strong>Teresa Toronto</strong>, we create clothing designed for everyday life.</p><p>Founded in <strong>Toronto</strong>, our collections focus on clean design, comfort, and versatility. Each piece is made to be easy to wear, easy to combine, and relevant season after season.</p><p>With a strong focus on quality and simplicity, Teresa & Toronro offers reliable styles you can feel good in—day after day.</p>",
+            "enable_follow_on_shop": false
+          }
         }
       },
       "block_order": [
         "newsletter_WNTePQ",
-        "text_4TEd3A",
         "links",
         "links_TEemBG",
-        "text"
+        "text",
+        "text_4TEd3A"
       ],
       "custom_css": [
         "ul.v-stack a {text-decoration: none;}",
