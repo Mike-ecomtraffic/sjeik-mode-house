@@ -17,18 +17,6 @@
       }
     {%- endif -%}
 
-    @media screen and (min-width: 1150px) {
-      #shopify-section-{{ section.id }} {
-        --text-with-icons-gap: {% if section.settings.icon_spacing == 'small' %}3rem{% elsif section.settings.icon_spacing == 'medium' %}5rem{% else %}7rem{% endif %};
-      }
-    }
-
-    @media screen and (min-width: 1500px) {
-      #shopify-section-{{ section.id }} {
-        --text-with-icons-gap: {% if section.settings.icon_spacing == 'small' %}4rem{% elsif section.settings.icon_spacing == 'medium' %}6rem{% else %}9rem{% endif %};
-      }
-    }
-
     {%- if section.blocks.size <= 3 -%}
       @media screen and (min-width: 1000px) {
         #shopify-section-{{ section.id }} {
@@ -61,6 +49,34 @@
     #shopify-section-{{ section.id }} .text-with-icons__item::after {
       display: none !important;
       content: none !important;
+    }
+
+    /* EcomTraffic: force horizontal spacing between USP blocks */
+    @media screen and (min-width: 1000px) {
+      #shopify-section-{{ section.id }} .text-with-icons__list {
+        column-gap: 6rem !important;
+        gap: 6rem !important;
+      }
+
+      #shopify-section-{{ section.id }} .text-with-icons__item {
+        padding-inline: 1.5rem;
+      }
+
+      #shopify-section-{{ section.id }} .text-with-icons__text-wrapper {
+        max-width: 240px;
+        margin-inline: auto;
+      }
+    }
+
+    @media screen and (min-width: 1500px) {
+      #shopify-section-{{ section.id }} .text-with-icons__list {
+        column-gap: 8rem !important;
+        gap: 8rem !important;
+      }
+
+      #shopify-section-{{ section.id }} .text-with-icons__text-wrapper {
+        max-width: 260px;
+      }
     }
   </style>
 
