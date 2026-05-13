@@ -55,8 +55,8 @@
         "full_width": true,
         "allow_transparent_header": false,
         "enable_parallax": false,
-        "image_size": "sm",
-        "image": "shopify://shop_images/image_25.webp",
+        "image_size": "md",
+        "image": "shopify://shop_images/Henrico_Klem_teresa_Toronto.jpg",
         "mobile_text_position": "place-self-center text-center",
         "desktop_text_position": "sm:place-self-center sm:text-center",
         "text_color": "#ffffff",
@@ -82,13 +82,13 @@
         "richtext_7eyzPR": {
           "type": "richtext",
           "settings": {
-            "content": "<p></p><p></p><p><strong>Why Choose Teresa toronto?</strong></p><p>At Miller Melbourne, we believe it's crucial that our customers feel well-supported and leave our webshop with a positive impression. That's why we offer:</p><ul><li><strong>A 5-star* customer service</strong> - Our customer service is always at your disposal and ready to assist. Should you have any questions or comments about our products or services, please don't hesitate to get in touch. We are committed to addressing your queries swiftly and efficiently.<br/></li><li><strong>Reliable and high-quality products</strong> - At Miller Melbourne , we only select top-quality products that meet our stringent standards. We stand behind the reliability and durability of our products, hence we also provide a warranty on them.<br/></li><li><strong>Secure payment</strong> - At Miller Melbourne, we aim to offer our customers the safest and most reliable payment methods. We therefore only work with reputable payment providers such credit cards. This ensures you can make your payments with peace of mind, without worrying about the security of your information.</li></ul>"
+            "content": "<p></p><p></p><p><strong>Why Choose Teresa toronto?</strong></p><p>At Teresa Toronto, we believe it's crucial that our customers feel well-supported and leave our webshop with a positive impression. That's why we offer:</p><ul><li><strong>A 5-star* customer service</strong> - Our customer service is always at your disposal and ready to assist. Should you have any questions or comments about our products or services, please don't hesitate to get in touch. We are committed to addressing your queries swiftly and efficiently.<br/></li><li><strong>Reliable and high-quality products</strong> - At Teresa Toronto , we only select top-quality products that meet our stringent standards. We stand behind the reliability and durability of our products, hence we also provide a warranty on them.<br/></li><li><strong>Secure payment</strong> - At Teresa Toronto,  we aim to offer our customers the safest and most reliable payment methods. We therefore only work with reputable payment providers such credit cards. This ensures you can make your payments with peace of mind, without worrying about the security of your information.</li></ul>"
           }
         },
         "richtext_fUC7gr": {
           "type": "richtext",
           "settings": {
-            "content": "<p>At Miller Melbourne, we aim to provide you with an unforgettable shopping experience where you feel valued as a customer. We only select high-quality products that we know will meet your expectations. Our goal is to exceed your expectations and surprise you with our range. We warmly invite you to browse our selection and discover what we can do for you.</p>"
+            "content": "<p>At Teresa Toronto, we aim to provide you with an unforgettable shopping experience where you feel valued as a customer. We only select high-quality products that we know will meet your expectations. Our goal is to exceed your expectations and surprise you with our range. We warmly invite you to browse our selection and discover what we can do for you.</p>"
           }
         }
       },
