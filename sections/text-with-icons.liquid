@@ -19,7 +19,7 @@
 
     @media screen and (min-width: 1150px) {
       #shopify-section-{{ section.id }} {
-        --text-with-icons-gap: {% if section.settings.icon_spacing == 'small' %}var(--spacing-5){% elsif section.settings.icon_spacing == 'medium' %}var(--spacing-6){% else %}var(--spacing-8){% endif %};
+        --text-with-icons-gap: {% if section.settings.icon_spacing == 'small' %}var(--spacing-6){% elsif section.settings.icon_spacing == 'medium' %}var(--spacing-8){% else %}4rem{% endif %};
       }
     }
 
@@ -40,6 +40,22 @@
         }
       }
     {%- endif -%}
+
+    /* EcomTraffic: remove vertical dividers between USP items */
+    #shopify-section-{{ section.id }} .text-with-icons__item {
+      border-inline-start: none !important;
+      border-inline-end: none !important;
+      border-left: none !important;
+      border-right: none !important;
+      border-top: none !important;
+      border-bottom: none !important;
+    }
+
+    #shopify-section-{{ section.id }} .text-with-icons__item::before,
+    #shopify-section-{{ section.id }} .text-with-icons__item::after {
+      display: none !important;
+      content: none !important;
+    }
   </style>
 
   <div {% render 'section-properties' %}>
@@ -146,387 +162,97 @@
           "id": "icon",
           "label": "Icon",
           "options": [
-            {
-              "value": "picto-coupon",
-              "label": "Coupon",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-percent",
-              "label": "Percent",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-gift",
-              "label": "Gift",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-star",
-              "label": "Star",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-like",
-              "label": "Like",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-building",
-              "label": "Building",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-love",
-              "label": "Love",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-award-gift",
-              "label": "Award gift",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-happy",
-              "label": "Happy",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-box",
-              "label": "Box",
-              "group": "Shipping"
-            },
-            {
-              "value": "picto-pin",
-              "label": "Pin",
-              "group": "Shipping"
-            },
-            {
-              "value": "picto-timer",
-              "label": "Timer",
-              "group": "Shipping"
-            },
-            {
-              "value": "picto-validation",
-              "label": "Validation",
-              "group": "Shipping"
-            },
-            {
-              "value": "picto-truck",
-              "label": "Truck",
-              "group": "Shipping"
-            },
-            {
-              "value": "picto-return",
-              "label": "Return",
-              "group": "Shipping"
-            },
-            {
-              "value": "picto-earth",
-              "label": "Earth",
-              "group": "Shipping"
-            },
-            {
-              "value": "picto-plane",
-              "label": "Plane",
-              "group": "Shipping"
-            },
-            {
-              "value": "picto-credit-card",
-              "label": "Credit card",
-              "group": "Payment & Security"
-            },
-            {
-              "value": "picto-lock",
-              "label": "Lock",
-              "group": "Payment & Security"
-            },
-            {
-              "value": "picto-shield",
-              "label": "Shield",
-              "group": "Payment & Security"
-            },
-            {
-              "value": "picto-secure-profile",
-              "label": "Secure profile",
-              "group": "Payment & Security"
-            },
-            {
-              "value": "picto-money",
-              "label": "Money",
-              "group": "Payment & Security"
-            },
-            {
-              "value": "picto-recycle",
-              "label": "Recycle",
-              "group": "Ecology"
-            },
-            {
-              "value": "picto-leaf",
-              "label": "Leaf",
-              "group": "Ecology"
-            },
-            {
-              "value": "picto-tree",
-              "label": "Tree",
-              "group": "Ecology"
-            },
-            {
-              "value": "picto-mobile-phone",
-              "label": "Mobile phone",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-phone",
-              "label": "Phone",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-chat",
-              "label": "Chat",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-customer-support",
-              "label": "Customer support",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-operator",
-              "label": "Operator",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-mailbox",
-              "label": "Mailbox",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-envelope",
-              "label": "Envelope",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-comment",
-              "label": "Comment",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-question",
-              "label": "Question",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-send",
-              "label": "Send",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-at-sign",
-              "label": "At sign",
-              "group": "Tech"
-            },
-            {
-              "value": "picto-camera",
-              "label": "Camera",
-              "group": "Tech"
-            },
-            {
-              "value": "picto-wifi",
-              "label": "WiFi",
-              "group": "Tech"
-            },
-            {
-              "value": "picto-bluetooth",
-              "label": "Bluetooth",
-              "group": "Tech"
-            },
-            {
-              "value": "picto-printer",
-              "label": "Printer",
-              "group": "Tech"
-            },
-            {
-              "value": "picto-smart-watch",
-              "label": "Smart watch",
-              "group": "Tech"
-            },
-            {
-              "value": "picto-coffee",
-              "label": "Coffee",
-              "group": "Food & Drink"
-            },
-            {
-              "value": "picto-burger",
-              "label": "Burger",
-              "group": "Food & Drink"
-            },
-            {
-              "value": "picto-beer",
-              "label": "Beer",
-              "group": "Food & Drink"
-            },
-            {
-              "value": "picto-target",
-              "label": "Target",
-              "group": "Other"
-            },
-            {
-              "value": "picto-document",
-              "label": "Document",
-              "group": "Other"
-            },
-            {
-              "value": "picto-jewelry",
-              "label": "Jewelry",
-              "group": "Other"
-            },
-            {
-              "value": "picto-music",
-              "label": "Music",
-              "group": "Other"
-            },
-            {
-              "value": "picto-file",
-              "label": "File",
-              "group": "Other"
-            },
-            {
-              "value": "picto-mask",
-              "label": "Mask",
-              "group": "Other"
-            },
-            {
-              "value": "picto-stop",
-              "label": "Stop",
-              "group": "Other"
-            }
+            { "value": "picto-coupon", "label": "Coupon", "group": "Shop" },
+            { "value": "picto-percent", "label": "Percent", "group": "Shop" },
+            { "value": "picto-gift", "label": "Gift", "group": "Shop" },
+            { "value": "picto-star", "label": "Star", "group": "Shop" },
+            { "value": "picto-like", "label": "Like", "group": "Shop" },
+            { "value": "picto-building", "label": "Building", "group": "Shop" },
+            { "value": "picto-love", "label": "Love", "group": "Shop" },
+            { "value": "picto-award-gift", "label": "Award gift", "group": "Shop" },
+            { "value": "picto-happy", "label": "Happy", "group": "Shop" },
+            { "value": "picto-box", "label": "Box", "group": "Shipping" },
+            { "value": "picto-pin", "label": "Pin", "group": "Shipping" },
+            { "value": "picto-timer", "label": "Timer", "group": "Shipping" },
+            { "value": "picto-validation", "label": "Validation", "group": "Shipping" },
+            { "value": "picto-truck", "label": "Truck", "group": "Shipping" },
+            { "value": "picto-return", "label": "Return", "group": "Shipping" },
+            { "value": "picto-earth", "label": "Earth", "group": "Shipping" },
+            { "value": "picto-plane", "label": "Plane", "group": "Shipping" },
+            { "value": "picto-credit-card", "label": "Credit card", "group": "Payment & Security" },
+            { "value": "picto-lock", "label": "Lock", "group": "Payment & Security" },
+            { "value": "picto-shield", "label": "Shield", "group": "Payment & Security" },
+            { "value": "picto-secure-profile", "label": "Secure profile", "group": "Payment & Security" },
+            { "value": "picto-money", "label": "Money", "group": "Payment & Security" },
+            { "value": "picto-recycle", "label": "Recycle", "group": "Ecology" },
+            { "value": "picto-leaf", "label": "Leaf", "group": "Ecology" },
+            { "value": "picto-tree", "label": "Tree", "group": "Ecology" },
+            { "value": "picto-mobile-phone", "label": "Mobile phone", "group": "Communication" },
+            { "value": "picto-phone", "label": "Phone", "group": "Communication" },
+            { "value": "picto-chat", "label": "Chat", "group": "Communication" },
+            { "value": "picto-customer-support", "label": "Customer support", "group": "Communication" },
+            { "value": "picto-operator", "label": "Operator", "group": "Communication" },
+            { "value": "picto-mailbox", "label": "Mailbox", "group": "Communication" },
+            { "value": "picto-envelope", "label": "Envelope", "group": "Communication" },
+            { "value": "picto-comment", "label": "Comment", "group": "Communication" },
+            { "value": "picto-question", "label": "Question", "group": "Communication" },
+            { "value": "picto-send", "label": "Send", "group": "Communication" },
+            { "value": "picto-at-sign", "label": "At sign", "group": "Tech" },
+            { "value": "picto-camera", "label": "Camera", "group": "Tech" },
+            { "value": "picto-wifi", "label": "WiFi", "group": "Tech" },
+            { "value": "picto-bluetooth", "label": "Bluetooth", "group": "Tech" },
+            { "value": "picto-printer", "label": "Printer", "group": "Tech" },
+            { "value": "picto-smart-watch", "label": "Smart watch", "group": "Tech" },
+            { "value": "picto-coffee", "label": "Coffee", "group": "Food & Drink" },
+            { "value": "picto-burger", "label": "Burger", "group": "Food & Drink" },
+            { "value": "picto-beer", "label": "Beer", "group": "Food & Drink" },
+            { "value": "picto-target", "label": "Target", "group": "Other" },
+            { "value": "picto-document", "label": "Document", "group": "Other" },
+            { "value": "picto-jewelry", "label": "Jewelry", "group": "Other" },
+            { "value": "picto-music", "label": "Music", "group": "Other" },
+            { "value": "picto-file", "label": "File", "group": "Other" },
+            { "value": "picto-mask", "label": "Mask", "group": "Other" },
+            { "value": "picto-stop", "label": "Stop", "group": "Other" }
           ],
           "default": "picto-coupon"
         },
-        {
-          "type": "image_picker",
-          "id": "custom_icon",
-          "label": "Custom icon",
-          "info": "240 x 240px .png recommended"
-        },
-        {
-          "type": "range",
-          "id": "mobile_icon_width",
-          "min": 24,
-          "max": 120,
-          "step": 4,
-          "unit": "px",
-          "label": "Mobile icon width",
-          "default": 24
-        },
-        {
-          "type": "range",
-          "id": "icon_width",
-          "min": 24,
-          "max": 120,
-          "step": 4,
-          "unit": "px",
-          "label": "Icon width",
-          "default": 32
-        },
+        { "type": "image_picker", "id": "custom_icon", "label": "Custom icon", "info": "240 x 240px .png recommended" },
+        { "type": "range", "id": "mobile_icon_width", "min": 24, "max": 120, "step": 4, "unit": "px", "label": "Mobile icon width", "default": 24 },
+        { "type": "range", "id": "icon_width", "min": 24, "max": 120, "step": 4, "unit": "px", "label": "Icon width", "default": 32 },
         {
           "type": "select",
           "id": "icon_background_type",
           "label": "Icon background type",
           "options": [
-            {
-              "value": "none",
-              "label": "None"
-            },
-            {
-              "value": "square",
-              "label": "Square"
-            },
-            {
-              "value": "circle",
-              "label": "Circle"
-            }
+            { "value": "none", "label": "None" },
+            { "value": "square", "label": "Square" },
+            { "value": "circle", "label": "Circle" }
           ],
           "default": "circle"
         },
-        {
-          "type": "color",
-          "id": "icon_background",
-          "label": "Icon background"
-        },
-        {
-          "type": "color",
-          "id": "icon_color",
-          "label": "Icon color",
-          "info": "Do not have effect when using custom icon."
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Heading",
-          "default": "Heading"
-        },
-        {
-          "type": "richtext",
-          "id": "content",
-          "label": "Content",
-          "default": "<p>Short content about your store</p>"
-        }
+        { "type": "color", "id": "icon_background", "label": "Icon background" },
+        { "type": "color", "id": "icon_color", "label": "Icon color", "info": "Do not have effect when using custom icon." },
+        { "type": "text", "id": "title", "label": "Heading", "default": "Heading" },
+        { "type": "richtext", "id": "content", "label": "Content", "default": "<p>Short content about your store</p>" }
       ]
     }
   ],
   "settings": [
-    {
-      "type": "checkbox",
-      "id": "full_width",
-      "label": "Full width",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "stack_on_mobile",
-      "label": "Stack on mobile",
-      "default": false
-    },
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Heading"
-    },
-    {
-      "type": "header",
-      "content": "Item"
-    },
+    { "type": "checkbox", "id": "full_width", "label": "Full width", "default": true },
+    { "type": "checkbox", "id": "stack_on_mobile", "label": "Stack on mobile", "default": false },
+    { "type": "text", "id": "title", "label": "Heading" },
+    { "type": "header", "content": "Item" },
     {
       "type": "select",
       "id": "heading_tag",
       "label": "Heading size",
       "options": [
-        {
-          "value": "h1",
-          "label": "H1"
-        },
-        {
-          "value": "h2",
-          "label": "H2"
-        },
-        {
-          "value": "h3",
-          "label": "H3"
-        },
-        {
-          "value": "h4",
-          "label": "H4"
-        },
-        {
-          "value": "h5",
-          "label": "H5"
-        },
-        {
-          "value": "h6",
-          "label": "H6"
-        }
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
       ],
       "default": "h5"
     },
@@ -535,14 +261,8 @@
       "id": "text_alignment",
       "label": "Text alignment (desktop)",
       "options": [
-        {
-          "value": "start",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        }
+        { "value": "start", "label": "Left" },
+        { "value": "center", "label": "Center" }
       ],
       "default": "center"
     },
@@ -551,67 +271,24 @@
       "id": "icon_spacing",
       "label": "Icon spacing",
       "options": [
-        {
-          "value": "small",
-          "label": "Small"
-        },
-        {
-          "value": "medium",
-          "label": "Medium"
-        },
-        {
-          "value": "large",
-          "label": "Large"
-        }
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" }
       ],
       "default": "medium"
     },
-    {
-      "type": "header",
-      "content": "Colors",
-      "info": "Gradient replaces solid colors when set."
-    },
-    {
-      "type": "color",
-      "id": "background",
-      "label": "Background"
-    },
-    {
-      "type": "color_background",
-      "id": "background_gradient",
-      "label": "Background gradient"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text"
-    }
+    { "type": "header", "content": "Colors", "info": "Gradient replaces solid colors when set." },
+    { "type": "color", "id": "background", "label": "Background" },
+    { "type": "color_background", "id": "background_gradient", "label": "Background gradient" },
+    { "type": "color", "id": "text_color", "label": "Text" }
   ],
   "presets": [
     {
       "name": "Text with icons",
       "blocks": [
-        {
-          "type": "item",
-          "settings": {
-            "title": "Free shipping",
-            "content": "<p>Free worldwide shipping and returns - customs and duties taxes included</p>"
-          }
-        },
-        {
-          "type": "item",
-          "settings": {
-            "title": "Customer service",
-            "content": "<p>We are available from monday to friday to answer your questions.</p>"
-          }
-        },
-        {
-          "type": "item",
-          "settings": {
-            "title": "Secure payment",
-            "content": "<p>Your payment information is processed securely.</p>"
-          }
-        }
+        { "type": "item", "settings": { "title": "Free shipping", "content": "<p>Free worldwide shipping and returns - customs and duties taxes included</p>" } },
+        { "type": "item", "settings": { "title": "Customer service", "content": "<p>We are available from monday to friday to answer your questions.</p>" } },
+        { "type": "item", "settings": { "title": "Secure payment", "content": "<p>Your payment information is processed securely.</p>" } }
       ]
     }
   ]
