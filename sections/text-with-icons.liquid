@@ -19,7 +19,13 @@
 
     @media screen and (min-width: 1150px) {
       #shopify-section-{{ section.id }} {
-        --text-with-icons-gap: {% if section.settings.icon_spacing == 'small' %}var(--spacing-6){% elsif section.settings.icon_spacing == 'medium' %}var(--spacing-8){% else %}4rem{% endif %};
+        --text-with-icons-gap: {% if section.settings.icon_spacing == 'small' %}3rem{% elsif section.settings.icon_spacing == 'medium' %}5rem{% else %}7rem{% endif %};
+      }
+    }
+
+    @media screen and (min-width: 1500px) {
+      #shopify-section-{{ section.id }} {
+        --text-with-icons-gap: {% if section.settings.icon_spacing == 'small' %}4rem{% elsif section.settings.icon_spacing == 'medium' %}6rem{% else %}9rem{% endif %};
       }
     }
 
