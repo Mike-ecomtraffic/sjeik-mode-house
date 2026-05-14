@@ -71,6 +71,7 @@
     "cart_empty_button_link": "shopify://collections",
     "cart_show_free_shipping_threshold": false,
     "cart_free_shipping_threshold": 0,
+    "favicon": "shopify://shop_images/Scherm_afbeelding_2026-05-14_om_10.18.22.png",
     "checkout_accent_color": "#f0c417",
     "checkout_button_color": "#1a1a1a",
     "content_for_index": [],
