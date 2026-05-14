@@ -171,6 +171,14 @@
             "kiwi_sizing_id": ""
           }
         },
+        "kiwi_size_chart_recommender_kiwi_sizing_FNyBWC": {
+          "type": "shopify://apps/kiwi-size-chart-recommender/blocks/kiwiSizing/b7369922-bf15-44ce-a121-a22a8fcbc4b0",
+          "settings": {
+            "fallbackToBlockPosition": false,
+            "waitForElementSelector": "",
+            "waitForElementDelay": 5
+          }
+        },
         "bt_size_chart": {
           "type": "liquid",
           "settings": {
@@ -309,6 +317,7 @@
         "bulletpoints_RMQq7U",
         "liquid_ndiUpD",
         "variant_picker",
+        "kiwi_size_chart_recommender_kiwi_sizing_FNyBWC",
         "bt_size_chart",
         "shipping_info_n63KyA",
         "liquid_RPQiLg",
