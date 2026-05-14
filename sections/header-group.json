@@ -53,8 +53,32 @@
     "header": {
       "type": "header",
       "blocks": {
+        "mega_menu_UUQf79": {
+          "type": "mega_menu",
+          "settings": {
+            "menu_item": "",
+            "layout": "horizontal",
+            "submenu_style": "bold_heading",
+            "image_heading_1": "",
+            "image_link_1": "",
+            "image_text_color_1": "#ffffff",
+            "image_heading_2": "",
+            "image_link_2": "",
+            "image_text_color_2": "#ffffff",
+            "image_heading_3": "",
+            "image_link_3": "",
+            "image_text_color_3": "#ffffff",
+            "product": "",
+            "product_card_background": "",
+            "product_card_text_color": "",
+            "promo_content_layout": "grid",
+            "stretch_promo": false,
+            "drawer_link_image": "hide"
+          }
+        },
         "mega_menu_Dwzhhe": {
           "type": "mega_menu",
+          "disabled": true,
           "settings": {
             "menu_item": "SHOP MEN",
             "layout": "horizontal",
@@ -78,6 +102,7 @@
         },
         "mega_menu_hm6Qed": {
           "type": "mega_menu",
+          "disabled": true,
           "settings": {
             "menu_item": "SHOP WOMEN",
             "layout": "horizontal",
@@ -101,6 +126,7 @@
         }
       },
       "block_order": [
+        "mega_menu_UUQf79",
         "mega_menu_Dwzhhe",
         "mega_menu_hm6Qed"
       ],
@@ -110,12 +136,12 @@
         "logo": "shopify://shop_images/Scherm_afbeelding_2026-04-23_om_18.57.34.png",
         "logo_max_width": 130,
         "logo_mobile_max_width": 85,
-        "menu": "",
-        "sidebar_menu": "",
+        "menu": "menu",
+        "sidebar_menu": "menu",
         "secondary_menu": "",
         "menu_open_trigger": "click",
         "opening_from": "bottom",
-        "layout": "logo_center_navigation_inline",
+        "layout": "logo_left_navigation_center",
         "show_social_media": false,
         "show_locale_selector": false,
         "show_country_selector": false,
